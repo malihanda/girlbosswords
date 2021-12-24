@@ -1,0 +1,746 @@
+<!doctype html>
+
+<title>girlbosswords</title>
+
+<link rel="icon" href="data/puzzle_images/02-19.png">
+
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@malisolves" />
+<meta name="twitter:title" content="girlbosswords (xoxo)" />
+<meta name="twitter:image" content="https://www.7xwords.com/data/puzzle_images/themeless-10.png" />
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-family: monospace;
+  font-size: 30px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.button {
+  background-color: #CCCCCC;
+  border: none;
+  color: white;
+  padding: 6px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-family: monospace;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.button:hover {
+  background-color: #941919;
+  color: white;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0 10px;
+}
+
+.container {
+  position: relative;
+  height: 160px;
+  width: 160px;
+  margin: 6px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  width: 160px;
+  opacity: 0;
+  background-color: white;
+}
+
+.container:hover .overlay {
+  outline: #941919 solid 4px;
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.7)
+}
+
+.text {
+  color: #941919;
+  font-size: 18px;
+  font-family: monospace;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: inherit;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+img {
+    height: 160px;
+    width: 160px;
+    outline: #333 solid 2px;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 980px) {
+  img {
+    width: 140px;
+    height: 140px;
+  }
+  .container {
+    width: 140px;
+    height: 140px;
+  }
+  .overlay {
+    width: 140px;
+    height: 140px;
+  }
+  .text {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .header {
+    font-size: 30px;
+  }
+  .button {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 493px) {
+  img {
+    width: 110px;
+    height: 110px;
+  }
+  .container {
+    width: 110px;
+    height: 110px;
+  }
+  .overlay {
+    width: 110px;
+    height: 110px;
+  }
+  .text {
+    font-size: 12px;
+  }
+  .header {
+    font-size: 25px;
+  }
+  .button {
+    font-size: 12px;
+    padding: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 402px) {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  .container {
+    width: 100px;
+    height: 100px;
+  }
+  .overlay {
+    width: 100px;
+    height: 100px;
+  }
+  .text {
+    font-size: 12px;
+  }
+  .header {
+    font-size: 25px;
+  }
+  .button {
+    font-size: 12px;
+    padding: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  img {
+    width: 140px;
+    height: 140px;
+  }
+  .container {
+    width: 140px;
+    height: 140px;
+  }
+  .overlay {
+    width: 140px;
+    height: 140px;
+  }
+  .text {
+    font-size: 15px;
+  }
+  .header {
+    font-size: 25px;
+  }
+  .button {
+    font-size: 12px;
+    padding: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .header {
+    font-size: 20px;
+  }
+  .button {
+    font-size: 11px;
+    padding: 3px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  img {
+    width: 200px;
+    height: 200px;
+  }
+  .container {
+    width: 200px;
+    height: 200px;
+  }
+  .overlay {
+    width: 200px;
+    height: 200px;
+  }
+  .text {
+    font-size: 18px;
+  }
+  .header {
+    font-size: 20px;
+  }
+  .button {
+    font-size: 11px;
+    padding: 3px;
+  }
+}
+
+</style>
+</head>
+
+<body style="background-color:#B3B3B3;">
+
+<div class="header">
+  girlbosswords by malaika handa
+  <button class="button" onclick="location.href='https://groups.google.com/g/girlbosswords'">email notifs</button>
+  <button class="button" onclick="location.href='https://www.7xwords.com/'">7xwords</button>
+</div>
+
+<div class="row">
+
+  <div class="container">
+    <img src="data/puzzle_images/geometry-final.png">
+    <a href="https://drive.google.com/drive/folders/1Lz8mTJgBFbOOhGJXXWe_L__K8J4C5s69?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Geometry Final, with Brooke (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/odds-and-ends.png">
+    <a href="https://drive.google.com/drive/folders/1ZBRgsbFry3HFDT953ciyz4Ij-QQ1oyCI?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Odds & Ends (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/disney-princess-beginnings.png">
+    <a href="https://drive.google.com/drive/folders/1TTo_FFdwObHgpK6_V6xOSxf8euvVWAMJ?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Disney Princess Beginnings (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-15-bears.png">
+    <a href="all/themeless-15-bears.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 15: bears (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/powerpuff-girls.png">
+    <a href="https://drive.google.com/drive/folders/1OgugUrLY1ESmUln09P6iRBgW-1ugnjUV?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">The Powerpuff Girls (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-14-time-loop.png">
+    <a href="all/themeless-14-time-loop.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 14: time loop (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/to-a-t.png">
+    <a href="all/to-a-t.html" target="_blank">
+      <div class="overlay">
+      <div class="text">to a T! (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-13-stackd.png">
+    <a href="all/themeless-13-stackd.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 13: stackd, with Brian (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/laughing-on-the-inside.png">
+    <a href="https://drive.google.com/drive/folders/1VaZj_GTMCxRVXBSS0uXiLIT4pk8r9e5F?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Laughing on the Inside, with Rachel (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/volleyball-finals.png">
+    <a href="https://drive.google.com/drive/folders/1Ih2cvzXCJbHCMTJ11KwTR_W5PhNmbFL4?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Volleyball Finals (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+    <div class="container">
+    <img src="data/puzzle_images/themeless-12-copycat.png">
+    <a href="all/themeless-12-copycat.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 12: copycat (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/splitting-hairs.png">
+    <a href="https://drive.google.com/drive/folders/1r0ktK51ceOPj-KiLAHZ9Plhvat9hGbDz?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Splitting Hairs (Universal) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/bowled-over.png">
+    <a href="https://drive.google.com/drive/folders/1FVUTzYKO-cFtV8OKjCfYWAp7KMX8PaQq?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Bowled Over (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-11-check.png">
+    <a href="all/themeless-11-check.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 11: check yourself (13x14)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/give-this-puzzle-a-shot.png">
+    <a href="https://drive.google.com/drive/folders/1cAHvt1qv-cMXo26Xtrh9pkk8UD04_Q5i?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">Give This Puzzle A Shot, with Ross (Universal) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/self-contained.png">
+    <a href="https://www.boswords.org/" target="_blank">
+      <div class="overlay">
+      <div class="text">Self Contained, Boswords summer 2021 (15x17)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-block-party.png">
+    <a href="http://blog.bewilderinglypuzzles.com/2021/07/puzzle-142-themeless-block-party-by.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless: block party, on bewilderingly (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-sweats.png">
+    <a href="https://amandarafkin.blogspot.com/2021/07/guest-themeless-by-malaika-handa.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless: *sweats*, on Brain Candy (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/seeing-double.png">
+    <a href="https://xwordcontest.com/2021/07/mgwcc-685-saturday-july-17th-2021-get-out-your-wite-out.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Seeing Double, on MGWCC (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/rafaelmusa-themeless-1.png">
+    <a href="all/rafaelmusa-themeless-1.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Themeless 1, by Rafa (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/pj-party.png">
+    <a href="https://drive.google.com/drive/folders/119o_oLiQJ--q0ZKTStKGmlyQLc_abTmr?usp=sharing" target="_blank">
+      <div class="overlay">
+      <div class="text">PJ Party, with Matthew (USA Today) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-10.png">
+    <a href="all/themeless-10-for-mary.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 10: for mary (11x11)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-9-lines.png">
+    <a href="all/themeless-9-lines.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 9: lines (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/parting-company.png">
+    <a href="https://avxwords.com/buy-individual-puzzles/" target="_blank">
+      <div class="overlay">
+      <div class="text">Parting Company (AVCX) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-8-sparkles.png">
+    <a href="all/themeless-8-sparkles.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 8: sparkles (13x12)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-7.png">
+    <a href="all/themeless-7.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 7: ! (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-6.png">
+    <a href="all/themeless-6.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 6: ???? (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/sad-honk-remix.png">
+    <a href="https://gridsthesedays.blogspot.com/2021/03/puzzle-86-sad-honk-remix-with-malaika.html" target="_blank">
+      <div class="overlay">
+      <div class="text">*sad honk* (remix), with Paolo (13x9)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/sad-honk.png">
+    <a href="all/sad-honk.html" target="_blank">
+      <div class="overlay">
+      <div class="text">*sad honk*, with Paolo (15x14)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/i-fold.png">
+    <a href="all/i-fold.html" target="_blank">
+      <div class="overlay">
+      <div class="text">I Fold</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/timeshare.png">
+    <a href="https://crosshare.org/crosswords/pzJZOSRweYEPka4xBMcT" target="_blank">
+      <div class="overlay">
+      <div class="text">Timeshare (Pandora's Blocks) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/cards.png">
+    <a href="all/cards.html" target="_blank">
+      <div class="overlay">
+      <div class="text">If you play your cards right... (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-5-yang.png">
+    <a href="all/themeless-5-yang.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 5: yang (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/ideal-bartender.png">
+    <a href="all/ideal-bartender.html" target="_blank">
+      <div class="overlay">
+      <div class="text">The Ideal Bartender (11x10)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/bamboozled.png">
+    <a href="all/bamboozled.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Bamboozled (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/mixed-chicks.png">
+    <a href="all/mixed-chicks.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Mixed Chicks (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-4-hot-in-herre.png">
+    <a href="all/themeless-4-hot-in-herre.html" target="_blank">
+      <div class="overlay">
+      <div class="text">themeless 4: hot in herre (11x10)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/scouts-honor.png">
+    <a href="https://avidpuzzler.blogspot.com/2020/12/themed-crossword-4-scouts-honor-with.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Scout's Honor! with David (Avid Puzzler) (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/crosswords-of-aff.png">
+    <a href="all/crosswords-of-aff.html" target="_blank">
+      <div class="overlay">
+      <div class="text">Crossword(s) of Affirmation (17x17)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/malaikas-midi.png">
+    <a href="http://gridsthesedays.blogspot.com/2020/12/puzzle-80-malaikas-midi-by-malaika-handa.html#more" target="_blank">
+      <div class="overlay">
+      <div class="text">Malaika's Midi (Grids These Days) (13x14)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/change-of-pace.png">
+    <a href="all/change-of-pace.html">
+      <div class="overlay">
+      <div class="text">Change of Pace (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-3-evermore.png">
+    <a href="all/themeless-3-evermore.html">
+      <div class="overlay">
+      <div class="text">themeless 3: evermore (11x11)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-2-spikes.png">
+    <a href="all/themeless-2-spikes.html">
+      <div class="overlay">
+      <div class="text">themeless 2: spikes (13x13)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/whats-up-doc.png">
+    <a href="all/whats-up-doc.html">
+      <div class="overlay">
+      <div class="text">What's up, D.O.C.? (13x13)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/x-word.png">
+    <a href="all/x-word.html">
+      <div class="overlay">
+      <div class="text">X-Word (11x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/please-look-after-this.png">
+    <a href="all/please-look-after-this.html">
+      <div class="overlay">
+      <div class="text">Please look after this-- (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/rhyme-time.png">
+    <a href="all/rhyme-time.html">
+      <div class="overlay">
+      <div class="text">Rhyme Time! (11x11)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/peggy-ann-freeman.png">
+    <a href="all/peggy-ann-freeman.html">
+      <div class="overlay">
+      <div class="text">Peggy Ann Freeman (7x7)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/rabbits.png">
+    <a href="https://www.happylittlepuzzles.com/post/rabbits-by-malaika-handa" target="_blank">
+      <div class="overlay">
+      <div class="text">Rabbits (Happy Little Puzzles) (9x9)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/art-class.png">
+    <a href="all/art-class.html">
+      <div class="overlay">
+      <div class="text">art class (9x9)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/lights.png">
+    <a href="all/lights.html">
+      <div class="overlay">
+      <div class="text">lights (11x11)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/msnbc.png">
+    <a href="all/msnbc.html">
+      <div class="overlay">
+      <div class="text">MSNBC (8x8)</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="container">
+    <img src="data/puzzle_images/themeless-1-fad-bracelet.png">
+    <a href="all/themeless-1-fad-bracelet.html">
+      <div class="overlay">
+      <div class="text">themeless 1: fad bracelet (15x15)</div>
+      </div>
+    </a>
+  </div>
+
+<!--   <div class="container">
+    <img src="data/puzzle_images/wink.png">
+    <a href="all/wink.html">
+      <div class="overlay">
+      <div class="text">;) (4x6)</div>
+      </div>
+    </a>
+  </div> -->
+
+</div>
+
+</body>
