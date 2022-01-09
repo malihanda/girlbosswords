@@ -136,7 +136,7 @@ def center_puzzle(p):
 
 if __name__ == "__main__":
     FILE_PATH = sys.argv[1]
-    PUZ_FILE = "puz_files/other-puzzles/{}.puz".format(FILE_PATH)
+    PUZ_FILE = "puz_files/{}.puz".format(FILE_PATH)
     IMAGE_FILE = "puzzle_images/{}.png".format(FILE_PATH)
     PUZZLE = puz.read(PUZ_FILE)
     CIRCLED_SQUARES = PUZZLE.markup().get_markup_squares()
