@@ -1,265 +1,324 @@
--   title: "themeless 17: swoops, with Mollie (15x15)"
-    link: puzzle/themeless-17-swoops.html
-    image: data/puzzle_images/themeless-17-swoops.png
-    date: 2022-02-10 13:19:00
-    girlboss: true
--   title: First Half (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1SlSACpONgN5DKxXuEg3GDnkv5rnb4jTO?usp=sharing
-    image: data/puzzle_images/first-half.png
-    girlboss: false
--   title: guest themeless (brian) (15x15)
-    link: puzzle/guest-brianthomas-1.html
-    image: data/puzzle_images/guest-brianthomas-1.png
-    date: 2022-01-20 00:00:00
-    girlboss: true
--   title: Dealer's Choice (Fireball) (15x16)
-    link: https://fireballcrosswords.com/subscribe.htm
-    image: data/puzzle_images/dealers-choice.png
-    girlboss: false
--   title: untitled, with Matthew (Atlantic) (15x15)
-    link: https://drive.google.com/drive/folders/1K8xFtsQXgX8nnKakb6bg9oj5RqS8632a?usp=sharing
-    image: data/puzzle_images/crossfit.png
-    girlboss: false
--   title: Cast Aside, with David (Universal) (15x15)
-    link: https://drive.google.com/drive/u/1/folders/1B138ZkIq_j9XJmHy9wbPbxYSk0N3m7Lr
-    image: data/puzzle_images/cast-aside.png
-    girlboss: false
--   title: 'themeless 16: colonnades, with Rafa (15x15)'
-    link: puzzle/themeless-16-colonnades.html
-    image: data/puzzle_images/themeless-16-colonnades.png
-    date: 2021-12-29 00:00:00
-    girlboss: true
--   title: Geometry Final, with Brooke (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1Lz8mTJgBFbOOhGJXXWe_L__K8J4C5s69?usp=sharing
-    image: data/puzzle_images/geometry-final.png
-    girlboss: false
--   title: Odds & Ends (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1ZBRgsbFry3HFDT953ciyz4Ij-QQ1oyCI?usp=sharing
-    image: data/puzzle_images/odds-and-ends.png
-    girlboss: false
--   title: Disney Princess Beginnings (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1TTo_FFdwObHgpK6_V6xOSxf8euvVWAMJ?usp=sharing
-    image: data/puzzle_images/disney-princess-beginnings.png
-    girlboss: false
--   title: 'themeless 15: bears (15x15)'
-    link: puzzle/themeless-15-bears.html
-    image: data/puzzle_images/themeless-15-bears.png
-    date: 2021-11-21 00:00:00
-    girlboss: true
--   title: The Powerpuff Girls (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1OgugUrLY1ESmUln09P6iRBgW-1ugnjUV?usp=sharing
-    image: data/puzzle_images/powerpuff-girls.png
-    girlboss: false
--   title: 'themeless 14: time loop (15x15)'
-    link: puzzle/themeless-14-time-loop.html
-    image: data/puzzle_images/themeless-14-time-loop.png
-    date: 2021-10-28 00:00:00
-    girlboss: true
--   title: to a T! (15x15)
-    link: puzzle/to-a-t.html
-    image: data/puzzle_images/to-a-t.png
-    date: 2021-10-24 00:00:00
-    girlboss: true
--   title: 'themeless 13: stackd, with Brian (15x15)'
-    link: puzzle/themeless-13-stackd.html
-    image: data/puzzle_images/themeless-13-stackd.png
-    date: 2021-10-03 00:00:00
-    girlboss: true
--   title: Laughing on the Inside, with Rachel (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1VaZj_GTMCxRVXBSS0uXiLIT4pk8r9e5F?usp=sharing
-    image: data/puzzle_images/laughing-on-the-inside.png
-    girlboss: false
--   title: Volleyball Finals (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1Ih2cvzXCJbHCMTJ11KwTR_W5PhNmbFL4?usp=sharing
-    image: data/puzzle_images/volleyball-finals.png
-    girlboss: false
--   title: 'themeless 12: copycat (15x15)'
-    link: puzzle/themeless-12-copycat.html
-    image: data/puzzle_images/themeless-12-copycat.png
-    date: 2021-09-09 00:00:00
-    girlboss: true
--   title: Splitting Hairs (Universal) (15x15)
-    link: https://drive.google.com/drive/folders/1r0ktK51ceOPj-KiLAHZ9Plhvat9hGbDz?usp=sharing
-    image: data/puzzle_images/splitting-hairs.png
-    girlboss: false
--   title: Bowled Over (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/1FVUTzYKO-cFtV8OKjCfYWAp7KMX8PaQq?usp=sharing
-    image: data/puzzle_images/bowled-over.png
-    girlboss: false
--   title: 'themeless 11: check yourself (13x14)'
-    link: puzzle/themeless-11-check.html
-    image: data/puzzle_images/themeless-11-check.png
-    date: 2021-08-13 00:00:00
-    girlboss: true
--   title: Give This Puzzle A Shot, with Ross (Universal) (15x15)
-    link: https://drive.google.com/drive/folders/1cAHvt1qv-cMXo26Xtrh9pkk8UD04_Q5i?usp=sharing
-    image: data/puzzle_images/give-this-puzzle-a-shot.png
-    girlboss: false
--   title: Self Contained, Boswords summer 2021 (15x17)
-    link: https://www.boswords.org/
-    image: data/puzzle_images/self-contained.png
-    girlboss: false
--   title: 'themeless: block party, on bewilderingly (15x15)'
-    link: http://blog.bewilderinglypuzzles.com/2021/07/puzzle-142-themeless-block-party-by.html
-    image: data/puzzle_images/themeless-block-party.png
-    girlboss: false
--   title: 'themeless: *sweats*, on Brain Candy (15x15)'
-    link: https://amandarafkin.blogspot.com/2021/07/guest-themeless-by-malaika-handa.html
-    image: data/puzzle_images/themeless-sweats.png
-    girlboss: false
--   title: Seeing Double, on MGWCC (15x15)
-    link: https://xwordcontest.com/2021/07/mgwcc-685-saturday-july-17th-2021-get-out-your-wite-out.html
-    image: data/puzzle_images/seeing-double.png
-    girlboss: false
--   title: guest themeless (rafa) (15x15)
-    link: puzzle/guest-rafamusa-1.html
-    image: data/puzzle_images/guest-rafamusa-1.png
-    date: 2021-06-25 00:00:00
-    girlboss: true
--   title: PJ Party, with Matthew (USA Today) (15x15)
-    link: https://drive.google.com/drive/folders/119o_oLiQJ--q0ZKTStKGmlyQLc_abTmr?usp=sharing
-    image: data/puzzle_images/pj-party.png
-    girlboss: false
--   title: 'themeless 10: for mary (11x11)'
-    link: puzzle/themeless-10-for-mary.html
-    image: data/puzzle_images/themeless-10.png
-    date: 2021-06-17 00:00:00
-    girlboss: true
--   title: 'themeless 9: lines (15x15)'
-    link: puzzle/themeless-9-lines.html
-    image: data/puzzle_images/themeless-9-lines.png
-    date: 2021-05-25 00:00:00
-    girlboss: true
--   title: Parting Company (AVCX) (15x15)
-    link: https://avxwords.com/buy-individual-puzzles/
-    image: data/puzzle_images/parting-company.png
-    girlboss: false
--   title: 'themeless 8: sparkles (13x12)'
-    link: puzzle/themeless-8-sparkles.html
-    image: data/puzzle_images/themeless-8-sparkles.png
-    date: 2021-04-26 00:00:00
-    girlboss: true
--   title: 'themeless 7: ! (15x15)'
-    link: puzzle/themeless-7.html
-    image: data/puzzle_images/themeless-7.png
-    date: 2021-04-04 00:00:00
-    girlboss: true
--   title: 'themeless 6: ???? (15x15)'
-    link: puzzle/themeless-6.html
-    image: data/puzzle_images/themeless-6.png
-    date: 2021-03-20 00:00:00
-    girlboss: true
--   title: '*sad honk* (remix), with Paolo (13x9)'
-    link: https://gridsthesedays.blogspot.com/2021/03/puzzle-86-sad-honk-remix-with-malaika.html
-    image: data/puzzle_images/sad-honk-remix.png
-    girlboss: false
--   title: '*sad honk*, with Paolo (15x14)'
-    link: puzzle/sad-honk.html
-    image: data/puzzle_images/sad-honk.png
-    date: 2021-03-14 00:00:00
-    girlboss: true
--   title: I Fold
-    link: puzzle/i-fold.html
-    image: data/puzzle_images/i-fold.png
-    date: 2021-03-05 00:00:00
-    girlboss: true
--   title: Timeshare (Pandora's Blocks) (15x15)
-    link: https://crosshare.org/crosswords/pzJZOSRweYEPka4xBMcT
-    image: data/puzzle_images/timeshare.png
-    girlboss: false
--   title: If you play your cards right... (15x15)
-    link: puzzle/cards.html
-    image: data/puzzle_images/cards.png
-    girlboss: true
--   title: 'themeless 5: yang (15x15)'
-    link: puzzle/themeless-5-yang.html
-    image: data/puzzle_images/themeless-5-yang.png
-    girlboss: true
--   title: The Ideal Bartender (11x10)
-    link: puzzle/ideal-bartender.html
-    image: data/puzzle_images/ideal-bartender.png
-    date: 2021-02-03 00:00:00
-    girlboss: true
--   title: Bamboozled (15x15)
-    link: puzzle/bamboozled.html
-    image: data/puzzle_images/bamboozled.png
-    date: 2021-01-24 00:00:00
-    girlboss: true
--   title: Mixed Chicks (15x15)
-    link: puzzle/mixed-chicks.html
-    image: data/puzzle_images/mixed-chicks.png
-    date: 2021-01-20 00:00:00
-    girlboss: true
--   title: 'themeless 4: hot in herre (11x10)'
-    link: puzzle/themeless-4-hot-in-herre.html
-    image: data/puzzle_images/themeless-4-hot-in-herre.png
-    girlboss: true
--   title: Scout's Honor! with David (Avid Puzzler) (15x15)
-    link: https://avidpuzzler.blogspot.com/2020/12/themed-crossword-4-scouts-honor-with.html
-    image: data/puzzle_images/scouts-honor.png
-    girlboss: false
--   title: Crossword(s) of Affirmation (17x17)
-    link: puzzle/crosswords-of-aff.html
-    image: data/puzzle_images/crosswords-of-aff.png
-    date: 2020-12-23 00:00:00
-    girlboss: true
--   title: Malaika's Midi (Grids These Days) (13x14)
-    link: http://gridsthesedays.blogspot.com/2020/12/puzzle-80-malaikas-midi-by-malaika-handa.html#more
-    image: data/puzzle_images/malaikas-midi.png
-    girlboss: false
--   title: Change of Pace (15x15)
-    link: puzzle/change-of-pace.html
-    image: data/puzzle_images/change-of-pace.png
-    date: 2020-12-17 00:00:00
-    girlboss: true
--   title: 'themeless 3: evermore (11x11)'
-    link: puzzle/themeless-3-evermore.html
-    image: data/puzzle_images/themeless-3-evermore.png
-    girlboss: true
--   title: 'themeless 2: spikes (13x13)'
-    link: puzzle/themeless-2-spikes.html
-    image: data/puzzle_images/themeless-2-spikes.png
-    girlboss: true
--   title: What's up, D.O.C.? (13x13)
-    link: puzzle/whats-up-doc.html
-    image: data/puzzle_images/whats-up-doc.png
-    girlboss: true
--   title: X-Word (11x15)
-    link: puzzle/x-word.html
-    image: data/puzzle_images/x-word.png
-    girlboss: true
--   title: Please look after this-- (15x15)
-    link: puzzle/please-look-after-this.html
-    image: data/puzzle_images/please-look-after-this.png
-    girlboss: true
--   title: Rhyme Time! (11x11)
-    link: puzzle/rhyme-time.html
-    image: data/puzzle_images/rhyme-time.png
-    girlboss: true
--   title: Peggy Ann Freeman (7x7)
-    link: puzzle/peggy-ann-freeman.html
-    image: data/puzzle_images/peggy-ann-freeman.png
-    girlboss: true
--   title: Rabbits (Happy Little Puzzles) (9x9)
-    link: https://www.happylittlepuzzles.com/post/rabbits-by-malaika-handa
-    image: data/puzzle_images/rabbits.png
-    girlboss: false
--   title: art class (9x9)
-    link: puzzle/art-class.html
-    image: data/puzzle_images/art-class.png
-    date: 2020-11-15 00:00:00
-    girlboss: true
--   title: lights (11x11)
-    link: puzzle/lights.html
-    image: data/puzzle_images/lights.png
-    date: 2020-11-14 00:00:00
-    girlboss: true
--   title: MSNBC (8x8)
-    link: puzzle/msnbc.html
-    image: data/puzzle_images/msnbc.png
-    date: 2020-11-10 00:00:00
-    girlboss: true
--   title: 'themeless 1: fad bracelet (15x15)'
-    link: puzzle/themeless-1-fad-bracelet.html
-    image: data/puzzle_images/themeless-1-fad-bracelet.png
-    girlboss: true
+title: 'themeless 17: swoops, with Mollie (15x15)'
+link: puzzle/themeless-17-swoops.html
+image: data/puzzle_images/themeless-17-swoops.png
+date: 2022-02-10 13:19:00
+girlboss: true
+---
+title: First Half (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1SlSACpONgN5DKxXuEg3GDnkv5rnb4jTO?usp=sharing
+image: data/puzzle_images/first-half.png
+girlboss: false
+---
+title: guest themeless (brian) (15x15)
+link: puzzle/guest-brianthomas-1.html
+image: data/puzzle_images/guest-brianthomas-1.png
+date: 2022-01-20 00:00:00
+girlboss: true
+---
+title: Dealer's Choice (Fireball) (15x16)
+link: https://fireballcrosswords.com/subscribe.htm
+image: data/puzzle_images/dealers-choice.png
+girlboss: false
+---
+title: untitled, with Matthew (Atlantic) (15x15)
+link: https://drive.google.com/drive/folders/1K8xFtsQXgX8nnKakb6bg9oj5RqS8632a?usp=sharing
+image: data/puzzle_images/crossfit.png
+girlboss: false
+---
+title: Cast Aside, with David (Universal) (15x15)
+link: https://drive.google.com/drive/u/1/folders/1B138ZkIq_j9XJmHy9wbPbxYSk0N3m7Lr
+image: data/puzzle_images/cast-aside.png
+girlboss: false
+---
+title: 'themeless 16: colonnades, with Rafa (15x15)'
+link: puzzle/themeless-16-colonnades.html
+image: data/puzzle_images/themeless-16-colonnades.png
+date: 2021-12-29 00:00:00
+girlboss: true
+---
+title: Geometry Final, with Brooke (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1Lz8mTJgBFbOOhGJXXWe_L__K8J4C5s69?usp=sharing
+image: data/puzzle_images/geometry-final.png
+girlboss: false
+---
+title: Odds & Ends (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1ZBRgsbFry3HFDT953ciyz4Ij-QQ1oyCI?usp=sharing
+image: data/puzzle_images/odds-and-ends.png
+girlboss: false
+---
+title: Disney Princess Beginnings (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1TTo_FFdwObHgpK6_V6xOSxf8euvVWAMJ?usp=sharing
+image: data/puzzle_images/disney-princess-beginnings.png
+girlboss: false
+---
+title: 'themeless 15: bears (15x15)'
+link: puzzle/themeless-15-bears.html
+image: data/puzzle_images/themeless-15-bears.png
+date: 2021-11-21 00:00:00
+girlboss: true
+---
+title: The Powerpuff Girls (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1OgugUrLY1ESmUln09P6iRBgW-1ugnjUV?usp=sharing
+image: data/puzzle_images/powerpuff-girls.png
+girlboss: false
+---
+title: 'themeless 14: time loop (15x15)'
+link: puzzle/themeless-14-time-loop.html
+image: data/puzzle_images/themeless-14-time-loop.png
+date: 2021-10-28 00:00:00
+girlboss: true
+---
+title: to a T! (15x15)
+link: puzzle/to-a-t.html
+image: data/puzzle_images/to-a-t.png
+date: 2021-10-24 00:00:00
+girlboss: true
+---
+title: 'themeless 13: stackd, with Brian (15x15)'
+link: puzzle/themeless-13-stackd.html
+image: data/puzzle_images/themeless-13-stackd.png
+date: 2021-10-03 00:00:00
+girlboss: true
+---
+title: Laughing on the Inside, with Rachel (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1VaZj_GTMCxRVXBSS0uXiLIT4pk8r9e5F?usp=sharing
+image: data/puzzle_images/laughing-on-the-inside.png
+girlboss: false
+---
+title: Volleyball Finals (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1Ih2cvzXCJbHCMTJ11KwTR_W5PhNmbFL4?usp=sharing
+image: data/puzzle_images/volleyball-finals.png
+girlboss: false
+---
+title: 'themeless 12: copycat (15x15)'
+link: puzzle/themeless-12-copycat.html
+image: data/puzzle_images/themeless-12-copycat.png
+date: 2021-09-09 00:00:00
+girlboss: true
+---
+title: Splitting Hairs (Universal) (15x15)
+link: https://drive.google.com/drive/folders/1r0ktK51ceOPj-KiLAHZ9Plhvat9hGbDz?usp=sharing
+image: data/puzzle_images/splitting-hairs.png
+girlboss: false
+---
+title: Bowled Over (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/1FVUTzYKO-cFtV8OKjCfYWAp7KMX8PaQq?usp=sharing
+image: data/puzzle_images/bowled-over.png
+girlboss: false
+---
+title: 'themeless 11: check yourself (13x14)'
+link: puzzle/themeless-11-check.html
+image: data/puzzle_images/themeless-11-check.png
+date: 2021-08-13 00:00:00
+girlboss: true
+---
+title: Give This Puzzle A Shot, with Ross (Universal) (15x15)
+link: https://drive.google.com/drive/folders/1cAHvt1qv-cMXo26Xtrh9pkk8UD04_Q5i?usp=sharing
+image: data/puzzle_images/give-this-puzzle-a-shot.png
+girlboss: false
+---
+title: Self Contained, Boswords summer 2021 (15x17)
+link: https://www.boswords.org/
+image: data/puzzle_images/self-contained.png
+girlboss: false
+---
+title: 'themeless: block party, on bewilderingly (15x15)'
+link: http://blog.bewilderinglypuzzles.com/2021/07/puzzle-142-themeless-block-party-by.html
+image: data/puzzle_images/themeless-block-party.png
+girlboss: false
+---
+title: 'themeless: *sweats*, on Brain Candy (15x15)'
+link: https://amandarafkin.blogspot.com/2021/07/guest-themeless-by-malaika-handa.html
+image: data/puzzle_images/themeless-sweats.png
+girlboss: false
+---
+title: Seeing Double, on MGWCC (15x15)
+link: https://xwordcontest.com/2021/07/mgwcc-685-saturday-july-17th-2021-get-out-your-wite-out.html
+image: data/puzzle_images/seeing-double.png
+girlboss: false
+---
+title: guest themeless (rafa) (15x15)
+link: puzzle/guest-rafamusa-1.html
+image: data/puzzle_images/guest-rafamusa-1.png
+date: 2021-06-25 00:00:00
+girlboss: true
+---
+title: PJ Party, with Matthew (USA Today) (15x15)
+link: https://drive.google.com/drive/folders/119o_oLiQJ--q0ZKTStKGmlyQLc_abTmr?usp=sharing
+image: data/puzzle_images/pj-party.png
+girlboss: false
+---
+title: 'themeless 10: for mary (11x11)'
+link: puzzle/themeless-10-for-mary.html
+image: data/puzzle_images/themeless-10.png
+date: 2021-06-17 00:00:00
+girlboss: true
+---
+title: 'themeless 9: lines (15x15)'
+link: puzzle/themeless-9-lines.html
+image: data/puzzle_images/themeless-9-lines.png
+date: 2021-05-25 00:00:00
+girlboss: true
+---
+title: Parting Company (AVCX) (15x15)
+link: https://avxwords.com/buy-individual-puzzles/
+image: data/puzzle_images/parting-company.png
+girlboss: false
+---
+title: 'themeless 8: sparkles (13x12)'
+link: puzzle/themeless-8-sparkles.html
+image: data/puzzle_images/themeless-8-sparkles.png
+date: 2021-04-26 00:00:00
+girlboss: true
+---
+title: 'themeless 7: ! (15x15)'
+link: puzzle/themeless-7.html
+image: data/puzzle_images/themeless-7.png
+date: 2021-04-04 00:00:00
+girlboss: true
+---
+title: 'themeless 6: ???? (15x15)'
+link: puzzle/themeless-6.html
+image: data/puzzle_images/themeless-6.png
+date: 2021-03-20 00:00:00
+girlboss: true
+---
+title: '*sad honk* (remix), with Paolo (13x9)'
+link: https://gridsthesedays.blogspot.com/2021/03/puzzle-86-sad-honk-remix-with-malaika.html
+image: data/puzzle_images/sad-honk-remix.png
+girlboss: false
+---
+title: '*sad honk*, with Paolo (15x14)'
+link: puzzle/sad-honk.html
+image: data/puzzle_images/sad-honk.png
+date: 2021-03-14 00:00:00
+girlboss: true
+---
+title: I Fold
+link: puzzle/i-fold.html
+image: data/puzzle_images/i-fold.png
+date: 2021-03-05 00:00:00
+girlboss: true
+---
+title: Timeshare (Pandora's Blocks) (15x15)
+link: https://crosshare.org/crosswords/pzJZOSRweYEPka4xBMcT
+image: data/puzzle_images/timeshare.png
+girlboss: false
+---
+title: If you play your cards right... (15x15)
+link: puzzle/cards.html
+image: data/puzzle_images/cards.png
+girlboss: true
+---
+title: 'themeless 5: yang (15x15)'
+link: puzzle/themeless-5-yang.html
+image: data/puzzle_images/themeless-5-yang.png
+girlboss: true
+---
+title: The Ideal Bartender (11x10)
+link: puzzle/ideal-bartender.html
+image: data/puzzle_images/ideal-bartender.png
+date: 2021-02-03 00:00:00
+girlboss: true
+---
+title: Bamboozled (15x15)
+link: puzzle/bamboozled.html
+image: data/puzzle_images/bamboozled.png
+date: 2021-01-24 00:00:00
+girlboss: true
+---
+title: Mixed Chicks (15x15)
+link: puzzle/mixed-chicks.html
+image: data/puzzle_images/mixed-chicks.png
+date: 2021-01-20 00:00:00
+girlboss: true
+---
+title: 'themeless 4: hot in herre (11x10)'
+link: puzzle/themeless-4-hot-in-herre.html
+image: data/puzzle_images/themeless-4-hot-in-herre.png
+girlboss: true
+---
+title: Scout's Honor! with David (Avid Puzzler) (15x15)
+link: https://avidpuzzler.blogspot.com/2020/12/themed-crossword-4-scouts-honor-with.html
+image: data/puzzle_images/scouts-honor.png
+girlboss: false
+---
+title: Crossword(s) of Affirmation (17x17)
+link: puzzle/crosswords-of-aff.html
+image: data/puzzle_images/crosswords-of-aff.png
+date: 2020-12-23 00:00:00
+girlboss: true
+---
+title: Malaika's Midi (Grids These Days) (13x14)
+link: http://gridsthesedays.blogspot.com/2020/12/puzzle-80-malaikas-midi-by-malaika-handa.html#more
+image: data/puzzle_images/malaikas-midi.png
+girlboss: false
+---
+title: Change of Pace (15x15)
+link: puzzle/change-of-pace.html
+image: data/puzzle_images/change-of-pace.png
+date: 2020-12-17 00:00:00
+girlboss: true
+---
+title: 'themeless 3: evermore (11x11)'
+link: puzzle/themeless-3-evermore.html
+image: data/puzzle_images/themeless-3-evermore.png
+girlboss: true
+---
+title: 'themeless 2: spikes (13x13)'
+link: puzzle/themeless-2-spikes.html
+image: data/puzzle_images/themeless-2-spikes.png
+girlboss: true
+---
+title: What's up, D.O.C.? (13x13)
+link: puzzle/whats-up-doc.html
+image: data/puzzle_images/whats-up-doc.png
+girlboss: true
+---
+title: X-Word (11x15)
+link: puzzle/x-word.html
+image: data/puzzle_images/x-word.png
+girlboss: true
+---
+title: Please look after this-- (15x15)
+link: puzzle/please-look-after-this.html
+image: data/puzzle_images/please-look-after-this.png
+girlboss: true
+---
+title: Rhyme Time! (11x11)
+link: puzzle/rhyme-time.html
+image: data/puzzle_images/rhyme-time.png
+girlboss: true
+---
+title: Peggy Ann Freeman (7x7)
+link: puzzle/peggy-ann-freeman.html
+image: data/puzzle_images/peggy-ann-freeman.png
+girlboss: true
+---
+title: Rabbits (Happy Little Puzzles) (9x9)
+link: https://www.happylittlepuzzles.com/post/rabbits-by-malaika-handa
+image: data/puzzle_images/rabbits.png
+girlboss: false
+---
+title: art class (9x9)
+link: puzzle/art-class.html
+image: data/puzzle_images/art-class.png
+date: 2020-11-15 00:00:00
+girlboss: true
+---
+title: lights (11x11)
+link: puzzle/lights.html
+image: data/puzzle_images/lights.png
+date: 2020-11-14 00:00:00
+girlboss: true
+---
+title: MSNBC (8x8)
+link: puzzle/msnbc.html
+image: data/puzzle_images/msnbc.png
+date: 2020-11-10 00:00:00
+girlboss: true
+---
+title: 'themeless 1: fad bracelet (15x15)'
+link: puzzle/themeless-1-fad-bracelet.html
+image: data/puzzle_images/themeless-1-fad-bracelet.png
+girlboss: true

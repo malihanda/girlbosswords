@@ -17,7 +17,7 @@ def main():
     fg.author(name='malaika handa')
 
     with open('entries.yaml') as f:
-        entries = yaml.safe_load(f)
+        entries = list(yaml.safe_load_all(f))
 
     for e in reversed(entries):
         if e['girlboss']:
