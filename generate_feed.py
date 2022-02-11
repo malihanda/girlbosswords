@@ -13,7 +13,7 @@ def main():
     fg.title('girlbosswords')
     fg.link(href=home, rel='alternate')
     fg.link(href=urljoin(home, 'atom.xml'), rel='self')
-    fg.logo('data/favicon.png')
+    fg.logo(urljoin(home, 'data/favicon.png'))
     fg.author(name='malaika handa')
 
     with open('entries.yaml') as f:
@@ -28,7 +28,6 @@ def main():
             fe.title(e['title'])
             date = e.get('date', datetime(1970,1,1))
             fe.updated(date.astimezone(tz.tzlocal()))
-            fe.content('Solve this puzzle at {}'.format(link))
             fe.link(href=link, rel='alternate')
 
     fg.atom_file('atom.xml', pretty=True) 
