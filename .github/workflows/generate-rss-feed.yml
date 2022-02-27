@@ -1,6 +1,7 @@
 name: Generate RSS feed
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'entries.yaml'
