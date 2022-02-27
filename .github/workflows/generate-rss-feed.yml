@@ -11,9 +11,10 @@ jobs:
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: Install Python
         uses: actions/setup-python@v2
-      - run: python -m pip install dateutil feedgen PyYAML
+      - name: Install dependencies
+        run: python -m pip install dateutil feedgen PyYAML
       - name: Generate RSS feed based on new entries file
         run: python generate_feed.py
       - name: Commit and push changes
