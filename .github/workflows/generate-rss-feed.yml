@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         uses: actions/setup-python@v2
-        run: python -m pip install dateutil feedgen PyYAML
+      - run: python -m pip install dateutil feedgen PyYAML
       - name: Generate RSS feed based on new entries file
         run: python generate_feed.py
       - name: Commit and push changes
