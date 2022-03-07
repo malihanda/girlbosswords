@@ -27,7 +27,7 @@ def main():
             fe.id(link)
             fe.title(e['title'])
             date = e.get('date', datetime(1970,1,1))
-            fe.updated(date.astimezone(tz.tzlocal()))
+            fe.published(date.astimezone(tz.tzlocal()))
             fe.link(href=link, rel='alternate')
 
     fg.atom_file('atom.xml', pretty=True) 
