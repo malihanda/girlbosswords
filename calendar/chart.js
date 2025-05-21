@@ -1,9 +1,114 @@
+// Move these functions before handleUrlHash
+function showDetailsPanel(date, publications) {
+    const panel = document.getElementById('details-panel');
+    const header = panel.querySelector('.details-panel-header');
+    const content = panel.querySelector('.details-panel-content');
+
+    // Only update URL if it's different from current hash
+    if (window.location.hash !== `#${date}`) {
+        window.history.pushState(null, '', `#${date}`);
+    }
+    
+    // Parse the date string (YYYY-MM-DD) into components
+    const [year, month, day] = date.split('-').map(num => parseInt(num, 10));
+    
+    // Create date parts for display (using 0-based months)
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    // Calculate day of week (use UTC to avoid timezone shifts)
+    const utcDate = new Date(Date.UTC(year, month - 1, day));
+    const weekday = weekdays[utcDate.getUTCDay()];
+    
+    // Format date string
+    const formattedDate = `${weekday}, ${months[month - 1]} ${day}, ${year}`;
+
+    // Update header
+    header.textContent = formattedDate;
+
+    // Clear existing content
+    content.innerHTML = '';
+
+    // Add publication details
+    if (publications && publications.length > 0) {
+        publications.forEach(pub => {
+            const pubDiv = document.createElement('div');
+            pubDiv.className = 'publication-item';
+            
+            // Create title element (as link if URL exists)
+            const titleHtml = pub.url 
+                ? `<a href="${pub.url}" target="_blank">${pub.title}</a>`
+                : pub.title;
+
+            // Build the HTML content
+            let contentHtml = `
+                <strong>${pub.publication}</strong><br>
+                ${titleHtml}
+                ${pub.collaborator ? `with ${pub.collaborator}<br>` : ''}
+                <div class="publication-meta">
+                    <em>${pub.size}, ${pub.style}</em>
+                </div>
+            `;
+            pubDiv.innerHTML = contentHtml;
+            content.appendChild(pubDiv);
+        });
+    } else {
+        content.innerHTML = '<p>No publications on this date.</p>';
+    }
+
+    panel.classList.add('visible');
+}
+
+function hideDetailsPanel() {
+    const panel = document.getElementById('details-panel');
+    panel.classList.remove('visible');
+    
+    // Remove hash if it exists
+    if (window.location.hash) {
+        window.history.pushState(null, '', window.location.pathname);
+    }
+}
+
+function handleUrlHash(data) {
+    const hash = window.location.hash.slice(1);
+    if (!hash || !/^\d{4}-\d{2}-\d{2}$/.test(hash)) {
+        hideDetailsPanel();
+        return;
+    }
+
+    const year = hash.slice(0, 4);
+    const yearData = data[year];
+    
+    if (!yearData || !Array.isArray(yearData)) {
+        hideDetailsPanel();
+        return;
+    }
+
+    const dayData = yearData.find(d => d && d.date === hash);
+    if (dayData && dayData.publications) {
+        showDetailsPanel(dayData.date, dayData.publications);
+    } else {
+        hideDetailsPanel();
+    }
+}
+
 async function loadChartData() {
     try {
         const response = await fetch('data.json');
         const publications = await response.json();
+        
+        // Process the data and store globally
         const data = processPublications(publications);
+        window.chartData = data;
+        
         renderChart(data);
+        
+        // Set up hash change handling
+        window.addEventListener('popstate', () => handleUrlHash(data));
+        
+        // Check hash on initial load
+        handleUrlHash(data);
     } catch (error) {
         console.error('Error loading chart data:', error);
     }
@@ -91,8 +196,8 @@ function renderChart(data) {
     // Function to show tooltip
     function showTooltip(event, content) {
         const rect = event.target.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
         
         tooltip.innerHTML = content;
         tooltip.style.visibility = 'visible';
@@ -196,13 +301,16 @@ function renderChart(data) {
                 
                 // Only add tooltip for days with publications
                 if (date.publications.length > 0) {
-                    const tooltipContent = `<span class="tooltip-date">${date.date}</span>` + 
-                        date.publications.map(pub => 
-                            `${pub.publication}: ${pub.title} (${pub.size})`
-                        ).join('\n');
+                    const tooltipContent = `<strong>${date.date}</strong>\n${date.publications.map(pub =>
+                        `<strong>${pub.publication}</strong>: ${pub.title}${ pub.collaborator ? ` with ${pub.collaborator}` : ''} (${pub.size}, ${pub.style})`
+                    ).join('\n')}`;
                     
                     cell.addEventListener('mouseover', (e) => showTooltip(e, tooltipContent));
                     cell.addEventListener('mouseout', hideTooltip);
+                    cell.addEventListener('click', () => showDetailsPanel(date.date, date.publications));
+                } else {
+                    // Hide panel when clicking on a cell with no publications
+                    cell.addEventListener('click', hideDetailsPanel);
                 }
             }
             
@@ -215,8 +323,22 @@ function renderChart(data) {
         container.appendChild(yearSection);
     });
     
-    // Hide tooltip when moving mouse out of the container
-    container.addEventListener('mouseleave', hideTooltip);
+    // Hide tooltip and details panel when moving mouse out of the container
+    container.addEventListener('mouseleave', () => {
+        hideTooltip();
+        // Don't hide details panel on mouseleave - let it persist until explicitly closed
+    });
+
+    // Add click handler to hide details panel when clicking outside
+    document.addEventListener('click', (e) => {
+        const panel = document.getElementById('details-panel');
+        const isClickInside = panel.contains(e.target);
+        const isClickOnCell = e.target.classList.contains('date-cell');
+        
+        if (!isClickInside && !isClickOnCell) {
+            hideDetailsPanel();
+        }
+    });
 }
 
 // Load the chart when the page loads
