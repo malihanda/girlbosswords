@@ -160,7 +160,7 @@ function processPublications(publications) {
         data[year][dateStr].publications.push(pub);
         // Set color based on publication size
         const hasFullSize = data[year][dateStr].publications.some(
-            (p) => p.size === "full-size"
+            (p) => p.size === "full-size" || p.size === "oversized"
         );
         data[year][dateStr].colorway = hasFullSize
             ? 3
