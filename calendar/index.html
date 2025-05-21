@@ -27,6 +27,7 @@
             grid-auto-columns: var(--cell-size);
             gap: var(--cell-gap);
             margin-bottom: 30px;
+            position: relative;
         }
         
         .month-label {
@@ -46,6 +47,7 @@
             width: var(--cell-size);
             height: var(--cell-size);
             border-radius: 2px;
+            position: relative;
         }
         
         .date-cell:hover {
@@ -77,10 +79,33 @@
             margin-bottom: 10px;
             color: #333;
         }
+
+        .tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 12px;
+            color: #333;
+            z-index: 100;
+            pointer-events: none;
+            white-space: pre-line;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 300px;
+            visibility: hidden;
+        }
+
+        .tooltip-date {
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div id="chart-container"></div>
+    <div id="tooltip" class="tooltip"></div>
     <script src="chart.js"></script>
 </body>
 </html> 

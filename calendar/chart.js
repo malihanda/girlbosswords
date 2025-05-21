@@ -79,6 +79,7 @@ function processPublications(publications) {
 
 function renderChart(data) {
     const container = document.getElementById('chart-container');
+    const tooltip = document.getElementById('tooltip');
     container.innerHTML = ''; // Clear any existing content
     
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -86,6 +87,37 @@ function renderChart(data) {
     const today = new Date();
     const currentYear = today.getFullYear();
     const todayString = today.toISOString().split('T')[0];
+
+    // Function to show tooltip
+    function showTooltip(event, content) {
+        const rect = event.target.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        
+        tooltip.innerHTML = content;
+        tooltip.style.visibility = 'visible';
+        
+        // Position tooltip
+        const tooltipRect = tooltip.getBoundingClientRect();
+        let top = rect.top + scrollTop - tooltipRect.height - 10;
+        let left = rect.left + scrollLeft + rect.width / 2;
+        
+        // Adjust if tooltip would go off screen
+        if (top < scrollTop) {
+            top = rect.bottom + scrollTop + 10;
+        }
+        if (left + tooltipRect.width > window.innerWidth) {
+            left = window.innerWidth - tooltipRect.width - 10;
+        }
+        
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+    }
+
+    // Function to hide tooltip
+    function hideTooltip() {
+        tooltip.style.visibility = 'hidden';
+    }
     
     // Sort years in descending order, only including years with data and current year
     const yearsWithData = Object.keys(data).filter(year => {
@@ -162,14 +194,15 @@ function renderChart(data) {
             } else {
                 cell.className = `date-cell ${date.publications.length > 0 ? 'publication-cell' : ''} color-${date.colorway}`;
                 
-                // Create tooltip content with publication details
+                // Only add tooltip for days with publications
                 if (date.publications.length > 0) {
-                    const tooltipContent = date.publications.map(pub => 
-                        `${pub.publication}: ${pub.title} (${pub.size})`
-                    ).join('\n');
-                    cell.title = `${date.date}\n${tooltipContent}`;
-                } else {
-                    cell.title = date.date;
+                    const tooltipContent = `<span class="tooltip-date">${date.date}</span>` + 
+                        date.publications.map(pub => 
+                            `${pub.publication}: ${pub.title} (${pub.size})`
+                        ).join('\n');
+                    
+                    cell.addEventListener('mouseover', (e) => showTooltip(e, tooltipContent));
+                    cell.addEventListener('mouseout', hideTooltip);
                 }
             }
             
@@ -181,6 +214,9 @@ function renderChart(data) {
         yearSection.appendChild(grid);
         container.appendChild(yearSection);
     });
+    
+    // Hide tooltip when moving mouse out of the container
+    container.addEventListener('mouseleave', hideTooltip);
 }
 
 // Load the chart when the page loads
