@@ -269,19 +269,8 @@ function renderChart(data) {
         tooltip.style.visibility = "hidden";
     }
 
-    // Sort years in descending order, only including years with data and current year
-    const yearsWithData = Object.keys(data).filter((year) => {
-        // Include if it has any non-empty dates or if it's the current year and has any dates
-        const hasData = data[year].some(
-            (date) => date !== null && date.publications.length > 0
-        );
-        return (
-            hasData ||
-            (parseInt(year) === currentYear &&
-                data[year].some((date) => date !== null))
-        );
-    });
-    const sortedYears = yearsWithData.sort((a, b) => b - a);
+    // Sort years in descending order
+    const sortedYears = Object.keys(data).sort((a, b) => b - a);
 
     // Create a section for each year
     sortedYears.forEach((year) => {
@@ -352,7 +341,6 @@ function renderChart(data) {
                     date.publications.length > 0 ? "publication-cell" : ""
                 } color-${date.colorway}`;
 
-                // Only add tooltip for days with publications
                 if (date.publications.length > 0) {
                     const tooltipContent = `<strong>${
                         date.date
@@ -376,9 +364,6 @@ function renderChart(data) {
                     cell.addEventListener("click", () =>
                         showDetailsPanel(date.date, date.publications)
                     );
-                } else {
-                    // Hide panel when clicking on a cell with no publications
-                    cell.addEventListener("click", hideDetailsPanel);
                 }
             }
 
@@ -401,9 +386,9 @@ function renderChart(data) {
     document.addEventListener("click", (e) => {
         const panel = document.getElementById("details-panel");
         const isClickInside = panel.contains(e.target);
-        const isClickOnCell = e.target.classList.contains("date-cell");
+        const isClickOnPublicationCell = e.target.classList.contains("publication-cell");
 
-        if (!isClickInside && !isClickOnCell) {
+        if (!isClickInside && !isClickOnPublicationCell) {
             hideDetailsPanel();
         }
     });
