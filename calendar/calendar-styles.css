@@ -192,4 +192,58 @@ h2 {
 
 .collaborator {
     font-style: italic;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filter-label {
+    color: var(--near-black);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-button {
+    background: var(--color-2);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-button:hover {
+    background: var(--color-3);
+}
+
+.filter-button.active {
+    background: var(--color-3);
+}
+
+.date-cell.filtered {
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile layout adjustments for filters */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
 } 

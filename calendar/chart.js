@@ -1,4 +1,3 @@
-// Move these functions before handleUrlHash
 function showDetailsPanel(date, publications) {
     const panel = document.getElementById("details-panel");
     const header = panel.querySelector(".details-panel-header");
@@ -216,182 +215,268 @@ function processPublications(publications) {
 function renderChart(data) {
     const container = document.getElementById("chart-container");
     const tooltip = document.getElementById("tooltip");
-    container.innerHTML = ""; // Clear any existing content
+    container.innerHTML = "";
 
-    const monthNames = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+    // Create and add filter controls
+    container.appendChild(createFilterControls(data));
+
+    // Sort years in descending order and create year sections
+    Object.keys(data)
+        .sort((a, b) => b - a)
+        .forEach((year) =>
+            container.appendChild(createYearSection(year, data[year]))
+        );
+
+    // Global event handlers
+    container.addEventListener("mouseleave", hideTooltip);
+    document.addEventListener("click", handleOutsideClick);
+}
+
+function createFilterControls(data) {
+    const filters = [
+        {
+            label: "NYT",
+            condition: (pub) => pub.publication === "New York Times",
+        },
+        {
+            label: "Vulture",
+            condition: (pub) => pub.publication === "Vulture",
+        },
+        {
+            label: "Collaborations",
+            condition: (pub) => pub.hasCollaborator,
+        },
+        {
+            label: "Multiple publications",
+            condition: (pub, cell) => parseInt(cell.dataset.pubCount) > 1,
+        },
     ];
-    const dayLabels = ["Su", "M", "T", "W", "Th", "F", "S"];
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const todayString = today.toISOString().split("T")[0];
 
-    // Function to show tooltip
-    function showTooltip(event, content) {
-        const rect = event.target.getBoundingClientRect();
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const scrollLeft =
-            window.scrollX || document.documentElement.scrollLeft;
+    const controls = document.createElement("div");
+    controls.className = "filter-controls";
 
-        tooltip.innerHTML = content;
-        tooltip.style.visibility = "visible";
+    const buttons = document.createElement("div");
+    buttons.className = "filter-buttons";
 
-        // Position tooltip
-        const tooltipRect = tooltip.getBoundingClientRect();
-        let top = rect.top + scrollTop - tooltipRect.height - 10;
-        let left = rect.left + scrollLeft + rect.width / 2;
+    filters.forEach((filter) => {
+        const button = document.createElement("button");
+        button.className = "filter-button";
+        button.textContent = filter.label;
+        button.addEventListener("click", () =>
+            handleFilterClick(button, filter, buttons)
+        );
+        buttons.appendChild(button);
+    });
 
-        // Adjust if tooltip would go off screen
-        if (top < scrollTop) {
-            top = rect.bottom + scrollTop + 10;
-        }
-        if (left + tooltipRect.width > window.innerWidth) {
-            left = window.innerWidth - tooltipRect.width - 10;
-        }
+    controls.append(createLabelElement("Show only:", "filter-label"), buttons);
 
-        tooltip.style.top = `${top}px`;
-        tooltip.style.left = `${left}px`;
+    return controls;
+}
+
+function handleFilterClick(button, filter, buttonGroup) {
+    button.classList.toggle("active");
+
+    if (button.classList.contains("active")) {
+        buttonGroup
+            .querySelectorAll(".filter-button")
+            .forEach((btn) => btn !== button && btn.classList.remove("active"));
     }
 
-    // Function to hide tooltip
-    function hideTooltip() {
-        tooltip.style.visibility = "hidden";
+    applyFilter(filter, button.classList.contains("active"));
+}
+
+function applyFilter(filter, isActive) {
+    document.querySelectorAll(".date-cell").forEach((cell) => {
+        if (!cell.dataset.publications) return;
+
+        const pubs = JSON.parse(cell.dataset.publications);
+        if (isActive) {
+            const matches =
+                filter.label === "Multiple publications"
+                    ? filter.condition(null, cell)
+                    : pubs.some((pub) => filter.condition(pub));
+            cell.classList.toggle("filtered", !matches);
+        } else {
+            cell.classList.remove("filtered");
+        }
+    });
+}
+
+function createYearSection(year, dates) {
+    const section = document.createElement("div");
+    section.className = "year-section";
+    section.appendChild(createLabelElement(year, "h2"));
+    section.appendChild(createYearGrid(year, dates));
+    return section;
+}
+
+function createYearGrid(year, dates) {
+    const grid = document.createElement("div");
+    grid.className = "publication-grid";
+
+    // Add day labels
+    ["Su", "M", "T", "W", "Th", "F", "S"].forEach((day, i) => {
+        const label = createLabelElement(day, "label-cell");
+        label.style.gridRow = (i + 2).toString();
+        label.style.gridColumn = "1";
+        grid.appendChild(label);
+    });
+
+    // Add month labels and calculate positions
+    const monthPositions = calculateMonthPositions(year, dates);
+    monthPositions.forEach((col, month) => {
+        const label = createLabelElement(
+            [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ][month],
+            "month-label"
+        );
+        label.style.gridColumn = col.toString();
+        grid.appendChild(label);
+    });
+
+    // Add date cells
+    dates.forEach((date, index) => {
+        const cell = createDateCell(date, index);
+        grid.appendChild(cell);
+    });
+
+    return grid;
+}
+
+function createDateCell(date, index) {
+    const cell = document.createElement("div");
+    const col = Math.floor(index / 7) + 2;
+    const row = (index % 7) + 2;
+
+    if (date === null) {
+        cell.className = "placeholder-cell";
+    } else {
+        cell.className = `date-cell ${
+            date.publications.length > 0 ? "publication-cell" : ""
+        } color-${date.colorway}`;
+        setDateCellData(cell, date);
+
+        if (date.publications.length > 0) {
+            addDateCellEventListeners(cell, date);
+        }
     }
 
-    // Sort years in descending order
-    const sortedYears = Object.keys(data).sort((a, b) => b - a);
+    cell.style.gridRow = row.toString();
+    cell.style.gridColumn = col.toString();
+    return cell;
+}
 
-    // Create a section for each year
-    sortedYears.forEach((year) => {
-        const dates = data[year];
-        const yearSection = document.createElement("div");
-        yearSection.className = "year-section";
+function setDateCellData(cell, date) {
+    cell.dataset.date = date.date;
+    cell.dataset.pubCount = date.publications.length;
+    cell.dataset.publications = JSON.stringify(
+        date.publications.map((p) => ({
+            publication: p.publication,
+            size: p.size,
+            hasCollaborator: !!p.collaborator,
+        }))
+    );
+}
 
-        // Add year label
-        const yearLabel = document.createElement("h2");
-        yearLabel.textContent = year;
-        yearSection.appendChild(yearLabel);
+function addDateCellEventListeners(cell, date) {
+    const tooltipContent = createTooltipContent(date);
+    cell.addEventListener("mouseover", (e) => showTooltip(e, tooltipContent));
+    cell.addEventListener("mouseout", hideTooltip);
+    cell.addEventListener("click", () =>
+        showDetailsPanel(date.date, date.publications)
+    );
+}
 
-        // Create grid for this year
-        const grid = document.createElement("div");
-        grid.className = "publication-grid";
+function createTooltipContent(date) {
+    return `<strong>${date.date}</strong>\n${date.publications
+        .map(
+            (pub) =>
+                `<strong>${pub.publication}</strong>: ${pub.title}${
+                    pub.collaborator ? ` with ${pub.collaborator}` : ""
+                } (${pub.size}, ${pub.style})`
+        )
+        .join("\n")}`;
+}
 
-        // Add day labels in first column
-        dayLabels.forEach((day, i) => {
-            const labelCell = document.createElement("div");
-            labelCell.className = "label-cell";
-            labelCell.textContent = day;
-            labelCell.style.gridRow = (i + 2).toString();
-            labelCell.style.gridColumn = "1";
-            grid.appendChild(labelCell);
-        });
+function createLabelElement(text, className) {
+    const element =
+        className === "h2"
+            ? document.createElement("h2")
+            : document.createElement("div");
+    element.className = className;
+    element.textContent = text;
+    return element;
+}
 
-        // Calculate month label positions
-        const monthPositions = new Map();
-        let dayCount = 0; // Count of days including the offset
-        const firstDayOffset = new Date(year, 0, 1).getDay();
-        dayCount = firstDayOffset;
+function calculateMonthPositions(year, dates) {
+    const monthPositions = new Map();
+    let dayCount = new Date(year, 0, 1).getDay(); // First day offset
+    const today = new Date().toISOString().split("T")[0];
 
-        for (let month = 0; month < 12; month++) {
-            const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-01`;
-            // Skip months after today for current year
-            if (parseInt(year) === currentYear && dateStr > todayString) {
-                continue;
-            }
+    for (let month = 0; month < 12; month++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-01`;
+        if (dateStr > today) break;
 
-            // Calculate column based on accumulated days
-            const columnIndex = Math.floor(dayCount / 7) + 2; // +2 for day labels column
-            monthPositions.set(month, columnIndex);
+        monthPositions.set(month, Math.floor(dayCount / 7) + 2);
+        dayCount += new Date(year, month + 1, 0).getDate();
+    }
 
-            // Add days in this month to the count
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            dayCount += daysInMonth;
-        }
+    return monthPositions;
+}
 
-        // Add month labels
-        monthPositions.forEach((col, month) => {
-            const monthLabel = document.createElement("div");
-            monthLabel.className = "month-label";
-            monthLabel.textContent = monthNames[month];
-            monthLabel.style.gridColumn = col.toString();
-            grid.appendChild(monthLabel);
-        });
+function handleOutsideClick(e) {
+    const panel = document.getElementById("details-panel");
+    const isClickInside = panel.contains(e.target);
+    const isClickOnPublicationCell =
+        e.target.classList.contains("publication-cell");
 
-        // Add date cells
-        dates.forEach((date, index) => {
-            const col = Math.floor(index / 7) + 2; // +2 for day labels column
-            const row = (index % 7) + 2; // +2 for month labels row
+    if (!isClickInside && !isClickOnPublicationCell) {
+        hideDetailsPanel();
+    }
+}
 
-            const cell = document.createElement("div");
-            if (date === null) {
-                cell.className = "placeholder-cell";
-            } else {
-                cell.className = `date-cell ${
-                    date.publications.length > 0 ? "publication-cell" : ""
-                } color-${date.colorway}`;
+// Tooltip handling functions
+function showTooltip(event, content) {
+    const tooltip = document.getElementById("tooltip");
+    const rect = event.target.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
 
-                if (date.publications.length > 0) {
-                    const tooltipContent = `<strong>${
-                        date.date
-                    }</strong>\n${date.publications
-                        .map(
-                            (pub) =>
-                                `<strong>${pub.publication}</strong>: ${
-                                    pub.title
-                                }${
-                                    pub.collaborator
-                                        ? ` with ${pub.collaborator}`
-                                        : ""
-                                } (${pub.size}, ${pub.style})`
-                        )
-                        .join("\n")}`;
+    tooltip.innerHTML = content;
+    tooltip.style.visibility = "visible";
 
-                    cell.addEventListener("mouseover", (e) =>
-                        showTooltip(e, tooltipContent)
-                    );
-                    cell.addEventListener("mouseout", hideTooltip);
-                    cell.addEventListener("click", () =>
-                        showDetailsPanel(date.date, date.publications)
-                    );
-                }
-            }
+    // Position tooltip
+    const tooltipRect = tooltip.getBoundingClientRect();
+    let top = rect.top + scrollTop - tooltipRect.height - 10;
+    let left = rect.left + scrollLeft + rect.width / 2;
 
-            cell.style.gridRow = row.toString();
-            cell.style.gridColumn = col.toString();
-            grid.appendChild(cell);
-        });
+    // Adjust if tooltip would go off screen
+    if (top < scrollTop) {
+        top = rect.bottom + scrollTop + 10;
+    }
+    if (left + tooltipRect.width > window.innerWidth) {
+        left = window.innerWidth - tooltipRect.width - 10;
+    }
 
-        yearSection.appendChild(grid);
-        container.appendChild(yearSection);
-    });
+    tooltip.style.top = `${top}px`;
+    tooltip.style.left = `${left}px`;
+}
 
-    // Hide tooltip and details panel when moving mouse out of the container
-    container.addEventListener("mouseleave", () => {
-        hideTooltip();
-        // Don't hide details panel on mouseleave - let it persist until explicitly closed
-    });
-
-    // Add click handler to hide details panel when clicking outside
-    document.addEventListener("click", (e) => {
-        const panel = document.getElementById("details-panel");
-        const isClickInside = panel.contains(e.target);
-        const isClickOnPublicationCell = e.target.classList.contains("publication-cell");
-
-        if (!isClickInside && !isClickOnPublicationCell) {
-            hideDetailsPanel();
-        }
-    });
+function hideTooltip() {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.style.visibility = "hidden";
 }
 
 // Load the chart when the page loads
