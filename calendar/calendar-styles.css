@@ -2,8 +2,9 @@
     --cell-size: 15px;
     --cell-gap: 4px;
     --color-1: #e8e8e8;
-    --color-2: #af5ac8;
-    --color-3: #5a0a64;
+    --color-2: #c86edc;
+    --color-3: #460050;
+    --color-4: #820a50;
     --near-black: #333;
 }
 
@@ -62,6 +63,10 @@ body {
 
 .color-3 {
     background-color: var(--color-3);
+}
+
+.color-4 {
+    background-color: var(--color-4);
 }
 
 .year-section {

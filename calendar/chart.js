@@ -1,4 +1,4 @@
-function showDetailsPanel(date, puzzles) {
+function showDetailsPanel(date, misc, puzzles) {
     const panel = document.getElementById("details-panel");
     const header = panel.querySelector(".details-panel-header");
     const content = panel.querySelector(".details-panel-content");
@@ -49,6 +49,23 @@ function showDetailsPanel(date, puzzles) {
     // Clear existing content
     content.innerHTML = "";
 
+    // Add misc details
+    if (misc && misc.length > 0) {
+        misc.forEach((item) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "publication-item";
+
+            itemDiv.innerHTML = `
+                <strong>${item.publication}</strong><br>
+                <a href="${item.url}" target="_blank">${item.title}</a>
+                <div class="publication-meta">
+                    <em>${item.type}</em>
+                </div>
+            `;
+            content.appendChild(itemDiv);
+        });
+    }
+
     // Add puzzle details
     if (puzzles && puzzles.length > 0) {
         puzzles.forEach((puzzle) => {
@@ -72,8 +89,10 @@ function showDetailsPanel(date, puzzles) {
             puzzleDiv.innerHTML = contentHtml;
             content.appendChild(puzzleDiv);
         });
-    } else {
-        content.innerHTML = "<p>No puzzles on this date.</p>";
+    }
+
+    if (!puzzles?.length && !misc?.length) {
+        content.innerHTML = "<p>No content on this date.</p>";
     }
 
     panel.classList.add("visible");
@@ -106,7 +125,7 @@ function handleUrlHash(data) {
 
     const dayData = yearData.find((d) => d && d.date === hash);
     if (dayData && dayData.puzzles) {
-        showDetailsPanel(dayData.date, dayData.puzzles);
+        showDetailsPanel(dayData.date, dayData.misc, dayData.puzzles);
     } else {
         hideDetailsPanel();
     }
@@ -115,19 +134,24 @@ function handleUrlHash(data) {
 async function loadChartData() {
     try {
         const response = await fetch("data.json");
-        const puzzles = await response.json();
+        const rawData = await response.json();
 
-        // Process the data and store globally
-        const data = processPuzzles(puzzles);
-        window.chartData = data;
+        // Store the raw data globally for misc access
+        window.chartData = rawData;
 
-        renderChart(data);
+        // Process the puzzle data
+        const processedData = processPuzzles(rawData.puzzles);
+
+        //might as well show the processed data too
+        window.processedData = processedData;
+
+        renderChart(processedData);
 
         // Set up hash change handling
-        window.addEventListener("popstate", () => handleUrlHash(data));
+        window.addEventListener("popstate", () => handleUrlHash(processedData));
 
         // Check hash on initial load
-        handleUrlHash(data);
+        handleUrlHash(processedData);
     } catch (error) {
         console.error("Error loading chart data:", error);
     }
@@ -139,9 +163,32 @@ function processPuzzles(puzzles) {
     const currentYear = today.getFullYear();
     const todayString = today.toISOString().split("T")[0];
 
+    // Helper function to standardize date format
+    function standardizeDate(dateStr) {
+        // Handle M/D/YYYY format
+        if (dateStr.includes("/")) {
+            const [month, day, year] = dateStr.split("/");
+            return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+        }
+        return dateStr;
+    }
+
+    // Helper function to determine colorway
+    function determineColorway(puzzles, misc) {
+        if (misc.length > 0) return 4;
+        if (
+            puzzles.some(
+                (p) => p.size === "full-size" || p.size === "oversized"
+            )
+        )
+            return 3;
+        if (puzzles.length > 0) return 2;
+        return 1;
+    }
+
     // Group puzzles by year and date
     puzzles.forEach((puzzle) => {
-        const dateStr = puzzle["publish date"];
+        const dateStr = standardizeDate(puzzle["publish date"]);
         const year = parseInt(dateStr.split("-")[0]);
 
         if (!data[year]) {
@@ -152,23 +199,46 @@ function processPuzzles(puzzles) {
             data[year][dateStr] = {
                 date: dateStr,
                 puzzles: [],
+                misc: [],
                 colorway: 1, // default color
             };
         }
 
         data[year][dateStr].puzzles.push(puzzle);
-        // Set color based on puzzle size
-        const hasFullSize = data[year][dateStr].puzzles.some(
-            (p) => p.size === "full-size" || p.size === "oversized"
+        data[year][dateStr].colorway = determineColorway(
+            data[year][dateStr].puzzles,
+            data[year][dateStr].misc
         );
-        data[year][dateStr].colorway = hasFullSize
-            ? 3
-            : data[year][dateStr].puzzles.length > 0
-            ? 2
-            : 1;
     });
 
-    // Get unique years from puzzles and ensure current year is included
+    // Add misc items to their respective dates
+    if (window.chartData?.misc) {
+        window.chartData.misc.forEach((item) => {
+            const dateStr = standardizeDate(item["publish date"]);
+            const year = parseInt(dateStr.split("-")[0]);
+
+            if (!data[year]) {
+                data[year] = {};
+            }
+
+            if (!data[year][dateStr]) {
+                data[year][dateStr] = {
+                    date: dateStr,
+                    puzzles: [],
+                    misc: [],
+                    colorway: 1,
+                };
+            }
+
+            data[year][dateStr].misc.push({ ...item, date: dateStr });
+            data[year][dateStr].colorway = determineColorway(
+                data[year][dateStr].puzzles,
+                data[year][dateStr].misc
+            );
+        });
+    }
+
+    // Get unique years from all content and ensure current year is included
     const years = new Set([...Object.keys(data), currentYear.toString()]);
 
     // Convert to calendar format with placeholders
@@ -179,7 +249,6 @@ function processPuzzles(puzzles) {
 
         // Only create entry if there's data or it's the current year
         if (Object.keys(dates).length > 0 || year === currentYear) {
-            // Calculate first day offset using a Date object
             const firstDayOffset = new Date(year, 0, 1).getDay();
             calendarData[year] = Array(firstDayOffset).fill(null);
 
@@ -201,6 +270,7 @@ function processPuzzles(puzzles) {
                         dates[dateStr] || {
                             date: dateStr,
                             puzzles: [],
+                            misc: [],
                             colorway: 1,
                         }
                     );
@@ -236,19 +306,35 @@ function createFilterControls(data) {
     const filters = [
         {
             label: "NYT",
-            condition: (pub) => pub.publication === "New York Times",
+            condition: (date) => {
+                return (
+                    date.puzzles.some(
+                        (item) => item.publication === "New York Times"
+                    ) ||
+                    date.misc.some(
+                        (item) => item.publication === "New York Times"
+                    )
+                );
+            },
         },
         {
             label: "Vulture",
-            condition: (pub) => pub.publication === "Vulture",
+            condition: (date) => {
+                return (
+                    date.puzzles.some(
+                        (item) => item.publication === "Vulture"
+                    ) ||
+                    date.misc.some((item) => item.publication === "Vulture")
+                );
+            },
         },
         {
             label: "Collaborations",
-            condition: (pub) => pub.hasCollaborator,
-        },
-        {
-            label: "Multiple publications",
-            condition: (pub, cell) => parseInt(cell.dataset.pubCount) > 1,
+            condition: (date) => {
+                return date.puzzles.some(
+                    (item) => item.hasCollaborator || item.collaborator
+                );
+            },
         },
     ];
 
@@ -287,15 +373,15 @@ function handleFilterClick(button, filter, buttonGroup) {
 
 function applyFilter(filter, isActive) {
     document.querySelectorAll(".date-cell").forEach((cell) => {
-        if (!cell.dataset.puzzles) return;
+        if (!cell.dataset.puzzles && !cell.dataset.misc) return;
 
-        const puzzles = JSON.parse(cell.dataset.puzzles);
+        const dateData = {
+            puzzles: JSON.parse(cell.dataset.puzzles || "[]"),
+            misc: JSON.parse(cell.dataset.misc || "[]"),
+        };
+
         if (isActive) {
-            const matches =
-                filter.label === "Multiple publications"
-                    ? filter.condition(null, cell)
-                    : puzzles.some((pub) => filter.condition(pub));
-            cell.classList.toggle("filtered", !matches);
+            cell.classList.toggle("filtered", !filter.condition(dateData));
         } else {
             cell.classList.remove("filtered");
         }
@@ -363,12 +449,14 @@ function createDateCell(date, index) {
     if (date === null) {
         cell.className = "placeholder-cell";
     } else {
+        // A cell is a publication cell if it has either puzzles or misc content
+        const hasContent = date.puzzles.length > 0 || date.misc.length > 0;
         cell.className = `date-cell ${
-            date.puzzles.length > 0 ? "publication-cell" : ""
+            hasContent ? "publication-cell" : ""
         } color-${date.colorway}`;
         setDateCellData(cell, date);
 
-        if (date.puzzles.length > 0) {
+        if (hasContent) {
             addDateCellEventListeners(cell, date);
         }
     }
@@ -388,6 +476,14 @@ function setDateCellData(cell, date) {
             hasCollaborator: !!p.collaborator,
         }))
     );
+    cell.dataset.misc = JSON.stringify(
+        date.misc.map((m) => ({
+            publication: m.publication,
+            type: m.type,
+            title: m.title,
+            url: m.url,
+        }))
+    );
 }
 
 function addDateCellEventListeners(cell, date) {
@@ -395,19 +491,37 @@ function addDateCellEventListeners(cell, date) {
     cell.addEventListener("mouseover", (e) => showTooltip(e, tooltipContent));
     cell.addEventListener("mouseout", hideTooltip);
     cell.addEventListener("click", () =>
-        showDetailsPanel(date.date, date.puzzles)
+        showDetailsPanel(date.date, date.misc, date.puzzles)
     );
 }
 
 function createTooltipContent(date) {
-    return `<strong>${date.date}</strong>\n${date.puzzles
-        .map(
-            (puzzle) =>
-                `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
-                    puzzle.collaborator ? ` with ${puzzle.collaborator}` : ""
-                } (${puzzle.size}, ${puzzle.style})`
-        )
-        .join("\n")}`;
+    let content = `<strong>${date.date}</strong>\n`;
+
+    if (date.misc.length > 0) {
+        content += date.misc
+            .map(
+                (item) =>
+                    `<strong>${item.publication}</strong> [${item.type}]: ${item.title}`
+            )
+            .join("\n");
+    }
+
+    if (date.puzzles.length > 0) {
+        if (date.misc.length > 0) content += "\n\n";
+        content += date.puzzles
+            .map(
+                (puzzle) =>
+                    `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
+                        puzzle.collaborator
+                            ? ` with ${puzzle.collaborator}`
+                            : ""
+                    } (${puzzle.size}, ${puzzle.style})`
+            )
+            .join("\n");
+    }
+
+    return content;
 }
 
 function createLabelElement(text, className) {

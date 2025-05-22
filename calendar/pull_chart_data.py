@@ -16,19 +16,31 @@ def main():
 
     gc = gspread.service_account_from_dict(service_acct)
 
-    sh = gc.open('published crosswords')
-    records = sh.worksheet('all').get_all_records()
+    today = datetime.today()
 
-    for r in records:
-        r['publish date'] = datetime.strptime(r['publish date'], '%m/%d/%Y').date().isoformat()
+    sh = gc.open('published crosswords')
+    puzzles = sh.worksheet('all').get_all_records()
+
+    for r in puzzles:
+        r['date'] = datetime.strptime(r['publish date'], '%m/%d/%Y').date().isoformat()
         r.pop('payment')
         r.pop('accepted')
 
-    today = datetime.today()
-    records = [r for r in records if datetime.fromisoformat(r['publish date']) <= today]
+ 
+    puzzles = [r for r in puzzles if datetime.fromisoformat(r['date']) <= today]
+
+    misc = sh.worksheet('misc').get_all_records()
+
+    for r in misc:
+        r['date'] = datetime.strptime(r['publish date'], '%m/%d/%Y').date().isoformat()
+
+    misc = [r for r in misc if datetime.fromisoformat(r['date']) <= today]
+
+    data = {"puzzles": puzzles,
+            "misc":    misc}
 
     with open('data.json', 'w') as f:
-        json.dump(records, f, indent=4)
+        json.dump(data, f, indent=4)
 
 if __name__ == '__main__':
     main() 
