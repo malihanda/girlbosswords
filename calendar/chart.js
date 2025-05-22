@@ -318,18 +318,28 @@ function createFilterControls(data) {
             },
         },
         {
-            label: "Vulture",
+            label: "Indie",
             condition: (date) => {
-                return (
-                    date.puzzles.some(
-                        (item) => item.publication === "Vulture"
-                    ) ||
-                    date.misc.some((item) => item.publication === "Vulture")
+                return date.puzzles.some(
+                    (item) =>
+                        ![
+                            "Vulture",
+                            "New York Times",
+                            "Puzzmo",
+                            "Los Angeles Times",
+                            "The Defector",
+                            "The Modern Crossword",
+                            "USA Today",
+                            "Apple News+",
+                            "Universal",
+                            "Matt Gaffney's Weekly Crossword Contest",
+                            "The Atlantic",
+                        ].includes(item.publication)
                 );
             },
         },
         {
-            label: "Collaborations",
+            label: "Collabs",
             condition: (date) => {
                 return date.puzzles.some(
                     (item) => item.hasCollaborator || item.collaborator
