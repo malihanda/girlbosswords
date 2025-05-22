@@ -1,4 +1,4 @@
-function showDetailsPanel(date, publications) {
+function showDetailsPanel(date, puzzles) {
     const panel = document.getElementById("details-panel");
     const header = panel.querySelector(".details-panel-header");
     const content = panel.querySelector(".details-panel-content");
@@ -49,31 +49,31 @@ function showDetailsPanel(date, publications) {
     // Clear existing content
     content.innerHTML = "";
 
-    // Add publication details
-    if (publications && publications.length > 0) {
-        publications.forEach((pub) => {
-            const pubDiv = document.createElement("div");
-            pubDiv.className = "publication-item";
+    // Add puzzle details
+    if (puzzles && puzzles.length > 0) {
+        puzzles.forEach((puzzle) => {
+            const puzzleDiv = document.createElement("div");
+            puzzleDiv.className = "publication-item";
 
             // Create title element (as link if URL exists)
-            const titleHtml = pub.url
-                ? `<a href="${pub.url}" target="_blank">${pub.title}</a>`
-                : pub.title;
+            const titleHtml = puzzle.url
+                ? `<a href="${puzzle.url}" target="_blank">${puzzle.title}</a>`
+                : puzzle.title;
 
             // Build the HTML content
             let contentHtml = `
-                <strong>${pub.publication}</strong><br>
+                <strong>${puzzle.publication}</strong><br>
                 ${titleHtml}
-                ${pub.collaborator ? `with ${pub.collaborator}<br>` : ""}
+                ${puzzle.collaborator ? `with ${puzzle.collaborator}<br>` : ""}
                 <div class="publication-meta">
-                    <em>${pub.size}, ${pub.style}</em>
+                    <em>${puzzle.size}, ${puzzle.style}</em>
                 </div>
             `;
-            pubDiv.innerHTML = contentHtml;
-            content.appendChild(pubDiv);
+            puzzleDiv.innerHTML = contentHtml;
+            content.appendChild(puzzleDiv);
         });
     } else {
-        content.innerHTML = "<p>No publications on this date.</p>";
+        content.innerHTML = "<p>No puzzles on this date.</p>";
     }
 
     panel.classList.add("visible");
@@ -105,8 +105,8 @@ function handleUrlHash(data) {
     }
 
     const dayData = yearData.find((d) => d && d.date === hash);
-    if (dayData && dayData.publications) {
-        showDetailsPanel(dayData.date, dayData.publications);
+    if (dayData && dayData.puzzles) {
+        showDetailsPanel(dayData.date, dayData.puzzles);
     } else {
         hideDetailsPanel();
     }
@@ -115,10 +115,10 @@ function handleUrlHash(data) {
 async function loadChartData() {
     try {
         const response = await fetch("data.json");
-        const publications = await response.json();
+        const puzzles = await response.json();
 
         // Process the data and store globally
-        const data = processPublications(publications);
+        const data = processPuzzles(puzzles);
         window.chartData = data;
 
         renderChart(data);
@@ -133,15 +133,15 @@ async function loadChartData() {
     }
 }
 
-function processPublications(publications) {
+function processPuzzles(puzzles) {
     const data = {};
     const today = new Date();
     const currentYear = today.getFullYear();
     const todayString = today.toISOString().split("T")[0];
 
-    // Group publications by year and date
-    publications.forEach((pub) => {
-        const dateStr = pub["publish date"];
+    // Group puzzles by year and date
+    puzzles.forEach((puzzle) => {
+        const dateStr = puzzle["publish date"];
         const year = parseInt(dateStr.split("-")[0]);
 
         if (!data[year]) {
@@ -151,24 +151,24 @@ function processPublications(publications) {
         if (!data[year][dateStr]) {
             data[year][dateStr] = {
                 date: dateStr,
-                publications: [],
+                puzzles: [],
                 colorway: 1, // default color
             };
         }
 
-        data[year][dateStr].publications.push(pub);
-        // Set color based on publication size
-        const hasFullSize = data[year][dateStr].publications.some(
+        data[year][dateStr].puzzles.push(puzzle);
+        // Set color based on puzzle size
+        const hasFullSize = data[year][dateStr].puzzles.some(
             (p) => p.size === "full-size" || p.size === "oversized"
         );
         data[year][dateStr].colorway = hasFullSize
             ? 3
-            : data[year][dateStr].publications.length > 0
+            : data[year][dateStr].puzzles.length > 0
             ? 2
             : 1;
     });
 
-    // Get unique years from publications and ensure current year is included
+    // Get unique years from puzzles and ensure current year is included
     const years = new Set([...Object.keys(data), currentYear.toString()]);
 
     // Convert to calendar format with placeholders
@@ -179,7 +179,7 @@ function processPublications(publications) {
 
         // Only create entry if there's data or it's the current year
         if (Object.keys(dates).length > 0 || year === currentYear) {
-            // Calculate first day offset using a Date object (timezone doesn't matter for day of week)
+            // Calculate first day offset using a Date object
             const firstDayOffset = new Date(year, 0, 1).getDay();
             calendarData[year] = Array(firstDayOffset).fill(null);
 
@@ -200,7 +200,7 @@ function processPublications(publications) {
                     calendarData[year].push(
                         dates[dateStr] || {
                             date: dateStr,
-                            publications: [],
+                            puzzles: [],
                             colorway: 1,
                         }
                     );
@@ -287,14 +287,14 @@ function handleFilterClick(button, filter, buttonGroup) {
 
 function applyFilter(filter, isActive) {
     document.querySelectorAll(".date-cell").forEach((cell) => {
-        if (!cell.dataset.publications) return;
+        if (!cell.dataset.puzzles) return;
 
-        const pubs = JSON.parse(cell.dataset.publications);
+        const puzzles = JSON.parse(cell.dataset.puzzles);
         if (isActive) {
             const matches =
                 filter.label === "Multiple publications"
                     ? filter.condition(null, cell)
-                    : pubs.some((pub) => filter.condition(pub));
+                    : puzzles.some((pub) => filter.condition(pub));
             cell.classList.toggle("filtered", !matches);
         } else {
             cell.classList.remove("filtered");
@@ -364,11 +364,11 @@ function createDateCell(date, index) {
         cell.className = "placeholder-cell";
     } else {
         cell.className = `date-cell ${
-            date.publications.length > 0 ? "publication-cell" : ""
+            date.puzzles.length > 0 ? "publication-cell" : ""
         } color-${date.colorway}`;
         setDateCellData(cell, date);
 
-        if (date.publications.length > 0) {
+        if (date.puzzles.length > 0) {
             addDateCellEventListeners(cell, date);
         }
     }
@@ -380,9 +380,9 @@ function createDateCell(date, index) {
 
 function setDateCellData(cell, date) {
     cell.dataset.date = date.date;
-    cell.dataset.pubCount = date.publications.length;
-    cell.dataset.publications = JSON.stringify(
-        date.publications.map((p) => ({
+    cell.dataset.pubCount = date.puzzles.length;
+    cell.dataset.puzzles = JSON.stringify(
+        date.puzzles.map((p) => ({
             publication: p.publication,
             size: p.size,
             hasCollaborator: !!p.collaborator,
@@ -395,17 +395,17 @@ function addDateCellEventListeners(cell, date) {
     cell.addEventListener("mouseover", (e) => showTooltip(e, tooltipContent));
     cell.addEventListener("mouseout", hideTooltip);
     cell.addEventListener("click", () =>
-        showDetailsPanel(date.date, date.publications)
+        showDetailsPanel(date.date, date.puzzles)
     );
 }
 
 function createTooltipContent(date) {
-    return `<strong>${date.date}</strong>\n${date.publications
+    return `<strong>${date.date}</strong>\n${date.puzzles
         .map(
-            (pub) =>
-                `<strong>${pub.publication}</strong>: ${pub.title}${
-                    pub.collaborator ? ` with ${pub.collaborator}` : ""
-                } (${pub.size}, ${pub.style})`
+            (puzzle) =>
+                `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
+                    puzzle.collaborator ? ` with ${puzzle.collaborator}` : ""
+                } (${puzzle.size}, ${puzzle.style})`
         )
         .join("\n")}`;
 }
