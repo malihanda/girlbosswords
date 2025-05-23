@@ -381,6 +381,16 @@ function handleFilterClick(button, filter, buttonGroup) {
     applyFilter(filter, button.classList.contains("active"));
 }
 
+function resetFilters() {
+    document.querySelectorAll(".filter-button").forEach((button) => {
+        button.classList.remove("active");
+    });
+
+    document.querySelectorAll(".date-cell").forEach((cell) => {
+        cell.classList.remove("filtered");
+    });
+}
+
 function applyFilter(filter, isActive) {
     document.querySelectorAll(".date-cell").forEach((cell) => {
         if (!cell.dataset.puzzles && !cell.dataset.misc) return;
@@ -565,9 +575,12 @@ function handleOutsideClick(e) {
     const isClickInside = panel.contains(e.target);
     const isClickOnPublicationCell =
         e.target.classList.contains("publication-cell");
+    const isClickOnFilterButton =
+        e.target.classList.contains("filter-button");
 
-    if (!isClickInside && !isClickOnPublicationCell) {
+    if (!isClickInside && !isClickOnPublicationCell && !isClickOnFilterButton) {
         hideDetailsPanel();
+        resetFilters();
     }
 }
 
