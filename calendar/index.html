@@ -13,6 +13,122 @@
         <div class="details-panel-header"></div>
         <div class="details-panel-content"></div>
     </div>
-    <script src="chart.js"></script>
+    <script type="module">
+        import { PuzzleChart } from './chart.js';
+        import { 
+            showDetailsPanel, 
+            hideDetailsPanel, 
+            handleUrlHash,
+            gatherPublicationStats,
+            createPublicationButton,
+            createFilterControls,
+            handleOutsideClick
+        } from './filters-and-details.js';
+
+
+        const colorConditions = [
+            {
+                // Misc entries get color-4 (highest priority)
+                condition: (date) => date.records.some(r => r.category === 'misc'),
+                colorClass: 'color-4'
+            },
+            {
+                // Full-size or oversized puzzles get color-3
+                condition: (date) => date.records.some(r => r.category === 'puzzle' && 
+                    (r.size === 'full-size' || r.size === 'oversized')),
+                colorClass: 'color-3'
+            },
+            {
+                // Any records get color-2
+                condition: (date) => date.records.length > 0,
+                colorClass: 'color-2'
+            },
+            {
+                // Default gets color-1 (lowest priority)
+                condition: () => true,
+                colorClass: 'color-1'
+            }
+        ];
+
+        const tooltipTemplate = (date) => 
+            `<strong>${date.date}</strong>\n${
+                date.records
+                    .filter(r => r.category === 'misc')
+                    .map(item => `<strong>${item.publication}</strong> [${item.type}]: ${item.title}`)
+                    .join('\n')
+            }${
+                date.records.filter(r => r.category === 'misc').length > 0 && 
+                date.records.filter(r => r.category === 'puzzle').length > 0 ? '\n\n' : ''
+            }${
+                date.records
+                    .filter(r => r.category === 'puzzle')
+                    .map(puzzle => `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
+                        puzzle.collaborator ? ` with ${puzzle.collaborator}` : ''
+                    } (${puzzle.size}, ${puzzle.style})`)
+                    .join('\n')
+            }`
+        
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Initialize the chart with options
+            const chart = new PuzzleChart("chart-container", {
+                colorConditions: colorConditions,
+                tooltipTemplate: tooltipTemplate
+            });
+            await chart.loadData('data.json');
+            chart.render();
+
+            // Add filters
+            const filterControls = document.createElement("div");
+            filterControls.className = "filter-controls";
+            
+            // Calculate max width from rendered grids
+            const maxWidth = Math.max(
+                ...Array.from(chart.container.querySelectorAll('.publication-grid'))
+                    .map(grid => grid.getBoundingClientRect().width)
+            );
+            
+            filterControls.style.width = `${maxWidth}px`;
+            filterControls.style.maxWidth = `${maxWidth}px`;
+
+            // Create the four columns in 2x2 layout
+            const columnTitles = ['Publications', 'Size', 'Collaborators', 'Puzzle type'];
+            const columns = columnTitles.map(title => {
+                const column = document.createElement("div");
+                column.className = "filter-column";
+                const heading = document.createElement("h2");
+                heading.textContent = title;
+                column.appendChild(heading);
+                return column;
+            });
+
+            // Add publication buttons to first column
+            const pubButtons = document.createElement("div");
+            pubButtons.className = "pub-buttons";
+            gatherPublicationStats(chart.data).forEach(pub => {
+                pubButtons.appendChild(createPublicationButton(pub));
+            });
+            columns[0].appendChild(pubButtons);
+
+            // Add all columns to filter controls in correct order
+            columns.forEach(column => filterControls.appendChild(column));
+            chart.container.insertBefore(filterControls, chart.container.firstChild);
+
+            // Set up details panel handling
+            chart.container.addEventListener('cellClick', (e) => {
+                const { date, records } = e.detail;
+                showDetailsPanel(date, records);
+            });
+
+            // Set up hash change handling
+            window.addEventListener("popstate", () => handleUrlHash(chart.data));
+
+            // Handle outside clicks
+            document.addEventListener("click", handleOutsideClick);
+
+            // Check hash on initial load
+            handleUrlHash(chart.data);
+        });
+    </script>
 </body>
 </html> 

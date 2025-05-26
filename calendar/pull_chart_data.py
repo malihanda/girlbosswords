@@ -25,6 +25,7 @@ def main():
         r['date'] = datetime.strptime(r['publish date'], '%m/%d/%Y').date().isoformat()
         r.pop('payment')
         r.pop('accepted')
+        r['category'] = 'puzzle'
 
  
     puzzles = [r for r in puzzles if datetime.fromisoformat(r['date']) <= today]
@@ -33,11 +34,11 @@ def main():
 
     for r in misc:
         r['date'] = datetime.strptime(r['publish date'], '%m/%d/%Y').date().isoformat()
+        r['category'] = 'misc'
 
     misc = [r for r in misc if datetime.fromisoformat(r['date']) <= today]
 
-    data = {"puzzles": puzzles,
-            "misc":    misc}
+    data = puzzles + misc
 
     with open('data.json', 'w') as f:
         json.dump(data, f, indent=4)
