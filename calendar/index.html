@@ -14,7 +14,6 @@
         <div class="details-panel-content"></div>
     </div>
     <script type="module">
-        import { PuzzleChart } from './chart.js';
         import { 
             showDetailsPanel, 
             hideDetailsPanel, 
@@ -24,7 +23,7 @@
             createFilterControls,
             handleOutsideClick
         } from './filters-and-details.js';
-
+        import { CalendarChart } from './chart.js';
 
         const colorConditions = [
             {
@@ -71,7 +70,7 @@
 
         document.addEventListener("DOMContentLoaded", async () => {
             // Initialize the chart with options
-            const chart = new PuzzleChart("chart-container", {
+            const chart = new CalendarChart("chart-container", {
                 colorConditions: colorConditions,
                 tooltipTemplate: tooltipTemplate
             });
@@ -84,7 +83,7 @@
             
             // Calculate max width from rendered grids
             const maxWidth = Math.max(
-                ...Array.from(chart.container.querySelectorAll('.publication-grid'))
+                ...Array.from(chart.container.querySelectorAll('.calendar-grid'))
                     .map(grid => grid.getBoundingClientRect().width)
             );
             

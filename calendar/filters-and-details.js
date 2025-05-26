@@ -291,13 +291,12 @@ export function createLabelElement(text, className) {
 }
 
 export function handleOutsideClick(e) {
-    const panel = document.getElementById("details-panel");
-    const isClickInside = panel.contains(e.target);
-    const isClickOnPublicationCell = e.target.classList.contains("publication-cell");
-    const isClickOnFilterButton = e.target.classList.contains("filter-button");
+    const detailsPanel = document.getElementById("details-panel");
+    const isClickOnDataCell = e.target.classList.contains("contains-data-cell");
+    const isClickInsidePanel = detailsPanel.contains(e.target);
 
-    if (!isClickInside && !isClickOnPublicationCell && !isClickOnFilterButton) {
+    if (!isClickOnDataCell && !isClickInsidePanel) {
         hideDetailsPanel();
-        resetFilters();
+        window.history.pushState(null, "", window.location.pathname);
     }
 } 

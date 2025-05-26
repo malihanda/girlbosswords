@@ -14,7 +14,7 @@ body {
     padding: 20px;
 }
 
-.publication-grid {
+.calendar-grid {
     display: grid;
     grid-template-rows: 20px repeat(7, var(--cell-size));
     grid-auto-flow: column;
@@ -51,6 +51,10 @@ body {
 .placeholder-cell {
     width: var(--cell-size);
     height: var(--cell-size);
+}
+
+.contains-data-cell {
+    cursor: pointer;
 }
 
 .color-1 {
