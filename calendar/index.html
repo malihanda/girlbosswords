@@ -18,12 +18,10 @@
             showDetailsPanel, 
             hideDetailsPanel, 
             handleUrlHash,
-            gatherPublicationStats,
-            createPublicationButton,
-            createFilterControls,
             handleOutsideClick
         } from './filters-and-details.js';
         import { CalendarChart } from './chart.js';
+        import { FilterSystem, populateFilterControls } from './filter-system.js';
 
         const colorConditions = [
             {
@@ -57,7 +55,7 @@
                     .join('\n')
             }${
                 date.records.filter(r => r.category === 'misc').length > 0 && 
-                date.records.filter(r => r.category === 'puzzle').length > 0 ? '\n\n' : ''
+                date.records.filter(r => r.category === 'puzzle').length > 0 ? '\n' : ''
             }${
                 date.records
                     .filter(r => r.category === 'puzzle')
@@ -65,69 +63,69 @@
                         puzzle.collaborator ? ` with ${puzzle.collaborator}` : ''
                     } (${puzzle.size}, ${puzzle.style})`)
                     .join('\n')
-            }`
-        
+            }`;
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            // Initialize the chart with options
-            const chart = new CalendarChart("chart-container", {
-                colorConditions: colorConditions,
-                tooltipTemplate: tooltipTemplate
-            });
-            await chart.loadData('data.json');
+        // Initialize the chart with options
+        const chart = new CalendarChart("chart-container", {
+            colorConditions: colorConditions,
+            tooltipTemplate: tooltipTemplate
+        });
+        
+        // Load and render initial data
+        await chart.loadData('data.json');
+        chart.render();
+
+        // Initialize filter system
+        const filterSystem = new FilterSystem(chart.data);
+
+        // Create filter controls
+        populateFilterControls(chart.container, filterSystem, () => {
+            // Get filtered data
+            const filteredData = filterSystem.getFilteredData();
+            
+            // Update chart with filtered data
+            chart.data = filteredData;
             chart.render();
 
-            // Add filters
-            const filterControls = document.createElement("div");
-            filterControls.className = "filter-controls";
-            
-            // Calculate max width from rendered grids
-            const maxWidth = Math.max(
-                ...Array.from(chart.container.querySelectorAll('.calendar-grid'))
-                    .map(grid => grid.getBoundingClientRect().width)
-            );
-            
-            filterControls.style.width = `${maxWidth}px`;
-            filterControls.style.maxWidth = `${maxWidth}px`;
+            // Update filter counts
+            const newCounts = filterSystem.getFilterCounts();
 
-            // Create the four columns in 2x2 layout
-            const columnTitles = ['Publications', 'Size', 'Collaborators', 'Puzzle type'];
-            const columns = columnTitles.map(title => {
-                const column = document.createElement("div");
-                column.className = "filter-column";
-                const heading = document.createElement("h2");
-                heading.textContent = title;
-                column.appendChild(heading);
-                return column;
+            // Update the count numbers in dropdowns
+            document.querySelectorAll('.dropdown-option').forEach(option => {
+                const checkbox = option.querySelector('input[type="checkbox"]');
+                if (!checkbox) return;
+
+                // console.log('Checkbox ID:', checkbox.id); // Keep console logs or remove as needed
+                const [category, ...valueParts] = checkbox.id.split('-');
+                const value = valueParts.join('-'); 
+                // console.log('Split into:', { category, value });
+
+                const countForOption = newCounts[category] ? (newCounts[category].get(value) || 0) : 0;
+                // console.log('Count for', value, ':', countForOption);
+
+                const label = option.querySelector('label');
+                if (label) {
+                    label.textContent = `${value} (${countForOption})`;
+                }
+
+                option.classList.toggle('disabled', countForOption === 0);
             });
-
-            // Add publication buttons to first column
-            const pubButtons = document.createElement("div");
-            pubButtons.className = "pub-buttons";
-            gatherPublicationStats(chart.data).forEach(pub => {
-                pubButtons.appendChild(createPublicationButton(pub));
-            });
-            columns[0].appendChild(pubButtons);
-
-            // Add all columns to filter controls in correct order
-            columns.forEach(column => filterControls.appendChild(column));
-            chart.container.insertBefore(filterControls, chart.container.firstChild);
-
-            // Set up details panel handling
-            chart.container.addEventListener('cellClick', (e) => {
-                const { date, records } = e.detail;
-                showDetailsPanel(date, records);
-            });
-
-            // Set up hash change handling
-            window.addEventListener("popstate", () => handleUrlHash(chart.data));
-
-            // Handle outside clicks
-            document.addEventListener("click", handleOutsideClick);
-
-            // Check hash on initial load
-            handleUrlHash(chart.data);
         });
+
+        // Set up details panel handling
+        chart.container.addEventListener('cellClick', (e) => {
+            const { date, records } = e.detail;
+            showDetailsPanel(date, records);
+        });
+
+        // Set up hash change handling
+        window.addEventListener("popstate", () => handleUrlHash(chart.data));
+
+        // Handle outside clicks
+        document.addEventListener("click", handleOutsideClick);
+
+        // Check hash on initial load
+        handleUrlHash(chart.data);
     </script>
 </body>
 </html> 

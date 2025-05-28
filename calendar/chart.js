@@ -6,6 +6,11 @@ export class CalendarChart {
         this.data = null;
         this.colorConditions = options.colorConditions || [];
 
+        // Create a separate container for calendar content
+        this.calendarContainer = document.createElement('div');
+        this.calendarContainer.className = 'calendar-content';
+        this.container.appendChild(this.calendarContainer);
+
         // Default tooltip template if none provided
         this.tooltipTemplate =
             options.tooltipTemplate ||
@@ -178,17 +183,18 @@ export class CalendarChart {
             );
         }
 
-        this.container.innerHTML = "";
+        // Clear only the calendar content
+        this.calendarContainer.innerHTML = "";
 
         Object.keys(this.data)
             .sort((a, b) => b - a)
             .forEach((year) => {
                 const section = this.createYearSection(year, this.data[year]);
-                this.container.appendChild(section);
+                this.calendarContainer.appendChild(section);
             });
 
         // Add tooltip handling
-        this.container.addEventListener("mouseleave", () => this.hideTooltip());
+        this.calendarContainer.addEventListener("mouseleave", () => this.hideTooltip());
     }
 
     createYearSection(year, dates) {
@@ -254,8 +260,7 @@ export class CalendarChart {
 
             // Evaluate color conditions in order (for all cells, not just ones with content)
             if (this.colorConditions) {
-                for (const { condition, colorClass: cls } of this
-                    .colorConditions) {
+                for (const { condition, colorClass: cls } of this.colorConditions) {
                     if (condition(date)) {
                         colorClass = cls;
                         break;
@@ -265,7 +270,8 @@ export class CalendarChart {
 
             cell.className = `date-cell ${
                 hasContent ? "contains-data-cell" : ""
-            } ${colorClass}`;
+            } ${colorClass} ${date.filtered ? "filtered" : ""}`;
+            
             this.setDateCellData(cell, date);
 
             if (hasContent) {
@@ -353,7 +359,7 @@ export class CalendarChart {
             monthPositions.set(month, Math.floor(dayCount / 7) + 2);
             dayCount += new Date(year, month + 1, 0).getDate();
         }
-
+        chartData
         return monthPositions;
     }
 }

@@ -205,70 +205,145 @@ h2 {
 
 .filter-controls {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 20px;
     box-sizing: border-box;
     flex-shrink: 0;
+    width: 1022px; /* todo: calculate this dynamically */
 }
 
 .filter-column {
     min-width: 0;
     display: flex;
     flex-direction: column;
-}
-
-.filter-column h2 {
-    font-size: 16px;
-    margin: 0 0 12px 0;
-    color: var(--near-black);
-    white-space: nowrap;
-}
-
-.filter-label {
-    color: var(--near-black);
-    font-size: 14px;
-    white-space: nowrap;
-}
-
-.filter-buttons {
-    display: flex;
-    flex-wrap: wrap;
     gap: 8px;
 }
 
-.filter-button {
-    background: var(--color-2);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 13px;
-    transition: background-color 0.2s ease, opacity 0.2s ease;
+.filter-column h2 {
+    font-size: 14px;
+    margin: 0;
+    color: var(--near-black);
     white-space: nowrap;
 }
 
-.filter-button:hover {
-    background: var(--color-3);
+.dropdown-container {
+    position: relative;
+    width: 100%;
 }
 
-.filter-button.active {
-    background: var(--color-3);
+.dropdown-button {
+    width: 100%;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--near-black);
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.date-cell.filtered {
-    opacity: 0.2;
-    transition: opacity 0.3s ease;
+.dropdown-button:hover {
+    background: #f5f5f5;
 }
 
-/* Mobile layout adjustments for filters */
+.dropdown-button::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    pointer-events: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dropdown-content.show {
+    display: block !important;
+}
+
+.dropdown-option {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-option:last-child {
+    border-bottom: none;
+}
+
+.dropdown-option:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-option input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.dropdown-option label {
+    flex: 1;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-option.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dropdown-option.disabled label,
+.dropdown-option.disabled input {
+    cursor: not-allowed;
+}
+
+/* Mobile layout adjustments */
 @media (max-width: 768px) {
     .filter-controls {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .dropdown-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 300px;
+        max-height: 80vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-controls {
         grid-template-columns: 1fr;
-        gap: 24px;
-        width: 100% !important;
     }
 }
 
@@ -324,4 +399,25 @@ h2 {
 
 .pub-filter-button:not(.active) .pub-toggle {
     content: "+";
+}
+
+/* Calendar content container */
+.calendar-content {
+    margin-top: 20px;
+}
+
+/* Filter Styles */
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 1022px; /* todo: calculate this dynamically */
+}
+
+.date-cell.filtered {
+    opacity: 0.15;
+    transition: opacity 0.2s ease;
 } 

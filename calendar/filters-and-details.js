@@ -218,7 +218,7 @@ export function createFilterControls() {
             label: "Collabs",
             condition: (date) => {
                 return date.records.some(
-                    (r) => r.category === 'puzzle' && (r.hasCollaborator || r.collaborator)
+                    (r) => r.category === 'puzzle' && r.collaborator
                 );
             },
         },
