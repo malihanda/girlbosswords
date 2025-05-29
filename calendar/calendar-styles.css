@@ -133,6 +133,7 @@ h2 {
 
 /* Mobile layout */
 @media (max-width: 768px) {
+
     .details-panel {
         position: fixed;
         top: auto;
@@ -150,7 +151,6 @@ h2 {
         margin: 0;
         padding: 20px;
         box-sizing: border-box;
-        /* Ensure panel stays fixed to viewport during zoom */
         transform-origin: bottom;
         -webkit-transform-origin: bottom;
     }
@@ -320,25 +320,7 @@ h2 {
 
 .dropdown-option.disabled label,
 .dropdown-option.disabled input {
-    cursor: not-allowed;
-}
-
-/* Mobile layout adjustments */
-@media (max-width: 768px) {
-    .filter-controls {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .dropdown-content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 300px;
-        max-height: 80vh;
-    }
+    /* cursor: not-allowed; was here */
 }
 
 @media (max-width: 480px) {
@@ -347,59 +329,7 @@ h2 {
     }
 }
 
-.pub-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
 
-.pub-filter-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px 6px;
-    border: none;
-    border-radius: 2px;
-    font-family: inherit;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: var(--color-2);
-    color: white;
-    text-align: left;
-    width: auto;
-}
-
-.pub-filter-button:hover {
-    background: var(--color-3);
-}
-
-.pub-filter-button.active {
-    background: var(--color-2);
-}
-
-.pub-filter-button:not(.active) {
-    background: var(--color-1);
-    color: var(--near-black);
-}
-
-.pub-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.pub-divider {
-    margin: 0 4px;
-    opacity: 0.5;
-}
-
-.pub-toggle {
-    font-size: 10px;
-}
-
-.pub-filter-button:not(.active) .pub-toggle {
-    content: "+";
-}
 
 /* Calendar content container */
 .calendar-content {
@@ -420,4 +350,43 @@ h2 {
 .date-cell.filtered {
     opacity: 0.15;
     transition: opacity 0.2s ease;
+}
+
+/* Filter System Styles */
+.filter-wrapper {
+    padding: 1rem;
+    width: 1022px; /* Consider making this dynamic or percentage-based */
+    box-sizing: border-box;
+    /* margin-left: auto; was here */
+    /* margin-right: auto; was here */
+}
+
+.clear-all-container {
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.clear-all-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.clear-all-link:hover {
+    text-decoration: underline;
+}
+
+/* Ensure .filter-controls takes full width of its parent (.filter-wrapper) */
+/* If .filter-controls is already defined, verify its width property. */
+/* It might look something like this, or be adjusted based on existing rules: */
+.filter-controls {
+    display: grid;
+    /* Example: repeat(auto-fit, minmax(200px, 1fr)) for responsiveness */
+    /* or the original repeat(4, 1fr) if fixed columns are desired */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px; /* Or keep existing margin */
+    box-sizing: border-box;
+    width: 100%; /* Important for fitting into filter-wrapper */
 } 
