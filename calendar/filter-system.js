@@ -387,7 +387,8 @@ function createCheckboxOption(
     // Initial label text set here (will be updated with counts by updateFilterOptionCounts)
     label.textContent = labelText;
 
-    checkbox.addEventListener("change", () => {
+    // Create a function to handle the checkbox change logic
+    const handleCheckboxChange = () => {
         const categoryId = categoryConfig.id;
         const isThisAnyCheckbox = value === ANY_FILTER_VALUE;
 
@@ -427,7 +428,19 @@ function createCheckboxOption(
             filterSystem,
             dropdownContentElement.closest(".filter-wrapper")
         );
+    };
+
+    // Add click handler to the entire div
+    optionDiv.addEventListener("click", (e) => {
+        // Don't handle clicks on the checkbox or label - let their native events handle it
+        if (e.target !== checkbox && e.target !== label) {
+            checkbox.checked = !checkbox.checked;
+            handleCheckboxChange();
+        }
     });
+
+    // Handle the checkbox change event
+    checkbox.addEventListener("change", handleCheckboxChange);
 
     optionDiv.appendChild(checkbox);
     optionDiv.appendChild(label);

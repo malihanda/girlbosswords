@@ -10,10 +10,7 @@
     <div id="filter-controls-area"></div>
     <div id="chart-container"></div>
     <div id="tooltip" class="tooltip"></div>
-    <div id="details-panel" class="details-panel">
-        <div class="details-panel-header"></div>
-        <div class="details-panel-content"></div>
-    </div>
+    <div id="details-panel" class="details-panel"></div>
     <script type="module">
 
         import { DetailsPanel } from './details-panel.js';
@@ -81,21 +78,8 @@
         const filterSystem = new FilterSystem(chartData.records, filterConfig);
         populateFilterControls("filter-controls-area", filterSystem);
 
-        // Set up details panel handling
-        chart.container.addEventListener('cellClick', (e) => {
-            const { date, records } = e.detail;
-            showDetailsPanel(date, records);
-        });
-
-
-
-        // --- DETAILS PANEL SETUP --- 
-        // Ensure chart.data is the data structure expected by DetailsPanel for _handleUrlHash
-        // e.g., { "2023": [ {date: "...", records: [...] } ], ... }
-        const detailsPanelManager = new DetailsPanel('details-panel', chart.data);
-        detailsPanelManager.init(chart); // Pass the chart instance to set up its internal listeners
-        // The chart instance (chart.data) might need to be updated in detailsPanelManager if it changes
-        // using detailsPanelManager.updateChartData(newChartData) if your chart supports dynamic data reloading.
+        const detailsPanelManager = new DetailsPanel('details-panel');
+        detailsPanelManager.init(chart);
 
     </script>
 </body>

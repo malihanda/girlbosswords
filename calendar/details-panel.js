@@ -25,7 +25,7 @@ const WEEKDAYS = [
 ];
 
 export class DetailsPanel {
-    constructor(panelId, initialChartData) {
+    constructor(panelId) {
         this.panelElement = document.getElementById(panelId);
         if (!this.panelElement) {
             console.error(
@@ -33,19 +33,18 @@ export class DetailsPanel {
             );
             return; // Prevent errors if panel doesn't exist
         }
-        this.headerElement = this.panelElement.querySelector(
-            ".details-panel-header"
-        );
-        this.contentElement = this.panelElement.querySelector(
-            ".details-panel-content"
-        );
-        this.chartData = initialChartData; // Store initial chart data, might be updated or fetched again by chart
+        this.headerElement = document.createElement("div")
+        this.headerElement.className = "details-panel-header";
+        this.panelElement.appendChild(this.headerElement);
+        this.contentElement = document.createElement("div");
+        this.contentElement.className = "details-panel-content";
+        this.panelElement.appendChild(this.contentElement);
 
         // Bind methods to ensure 'this' context is correct when used as event handlers
         this._handleUrlHash = this._handleUrlHash.bind(this);
         this._handleOutsideClick = this._handleOutsideClick.bind(this);
-        this.showDetails = this.showDetails.bind(this); // Renaming showDetailsPanel for instance method clarity
-        this.hideDetails = this.hideDetails.bind(this); // Renaming hideDetailsPanel
+        this.showDetails = this.showDetails.bind(this);
+        this.hideDetails = this.hideDetails.bind(this);
     }
 
     // chartInstance is the instance of CalendarChart
@@ -61,18 +60,13 @@ export class DetailsPanel {
         }
 
         // Event listener for hash changes
-        window.addEventListener("popstate", this._handleUrlHash);
+        window.addEventListener("hashchange", this._handleUrlHash);
 
         // Event listener for clicks outside the panel
         document.addEventListener("click", this._handleOutsideClick);
 
         // Check hash on initial load
-        this._handleUrlHash(); // Uses this.chartData
-    }
-
-    // Call this if the chart data changes after initialization if _handleUrlHash needs updated data
-    updateChartData(newData) {
-        this.chartData = newData;
+        this._handleUrlHash();
     }
 
     showDetails(date, records) {
@@ -172,11 +166,10 @@ export class DetailsPanel {
         }
 
         const year = hash.slice(0, 4);
-        // Ensure this.chartData is in the format { year: [dateEntry, ...] }
-        const yearData =
-            this.chartData && this.chartData[year]
-                ? this.chartData[year]
-                : null;
+        // Use the global processedData variable
+        const yearData = window.processedData && window.processedData[year]
+            ? window.processedData[year]
+            : null;
 
         if (!yearData || !Array.isArray(yearData)) {
             this.hideDetails();
