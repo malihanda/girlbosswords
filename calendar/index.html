@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="calendar-styles.css">
 </head>
 <body>
+    <div id="filter-controls-area"></div>
     <div id="chart-container"></div>
     <div id="tooltip" class="tooltip"></div>
     <div id="details-panel" class="details-panel">
@@ -75,42 +76,14 @@
         await chart.loadData('data.json');
         chart.render();
 
-        // Initialize filter system
-        const filterSystem = new FilterSystem(chart.data);
+        const filterConfig = [
+            {'id': 'publication', 'label': 'Publication'},
+            {'id': 'collaborator', 'label': 'Collaborator', includeAny: true},
+            {'id': 'type', 'label': 'Type'}
+        ];
 
-        // Create filter controls
-        populateFilterControls(chart.container, filterSystem, () => {
-            // Get filtered data
-            const filteredData = filterSystem.getFilteredData();
-            
-            // Update chart with filtered data
-            chart.data = filteredData;
-            chart.render();
-
-            // Update filter counts
-            const newCounts = filterSystem.getFilterCounts();
-
-            // Update the count numbers in dropdowns
-            document.querySelectorAll('.dropdown-option').forEach(option => {
-                const checkbox = option.querySelector('input[type="checkbox"]');
-                if (!checkbox) return;
-
-                // console.log('Checkbox ID:', checkbox.id); // Keep console logs or remove as needed
-                const [category, ...valueParts] = checkbox.id.split('-');
-                const value = valueParts.join('-'); 
-                // console.log('Split into:', { category, value });
-
-                const countForOption = newCounts[category] ? (newCounts[category].get(value) || 0) : 0;
-                // console.log('Count for', value, ':', countForOption);
-
-                const label = option.querySelector('label');
-                if (label) {
-                    label.textContent = `${value} (${countForOption})`;
-                }
-
-                option.classList.toggle('disabled', countForOption === 0);
-            });
-        });
+        const filterSystem = new FilterSystem(chartData.records, filterConfig);
+        populateFilterControls("filter-controls-area", filterSystem);
 
         // Set up details panel handling
         chart.container.addEventListener('cellClick', (e) => {

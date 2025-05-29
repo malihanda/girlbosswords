@@ -118,6 +118,74 @@ class FilterSystem {
             return recordValue === filterValue;
         });
     }
+
+    /**
+     * Calculates the counts for all filter options.
+     * For each category, counts are based on items that pass
+     * all *other* active filters (i.e., filters from other categories).
+     */
+    getFilterCounts() {
+        const allCategoryCounts = {};
+
+        this.filterConfig.forEach((categoryConfig) => {
+            const currentCategoryId = categoryConfig.id;
+            const countsForThisCategory = {};
+            const recordsContributingToAny = new Set(); // To count unique records for "Any"
+
+            const activeFiltersExcludingCurrentCategory =
+                this.activeFilters.filter(
+                    (f) => f.categoryId !== currentCategoryId
+                );
+
+            this.allRecordsData.forEach((record) => {
+                let passesOtherFilters = true;
+                if (activeFiltersExcludingCurrentCategory.length > 0) {
+                    const groupedOtherFilters =
+                        activeFiltersExcludingCurrentCategory.reduce(
+                            (acc, f) => {
+                                if (!acc[f.categoryId]) {
+                                    acc[f.categoryId] = [];
+                                }
+                                acc[f.categoryId].push(f.value);
+                                return acc;
+                            },
+                            {}
+                        );
+                    for (const otherCatId in groupedOtherFilters) {
+                        if (
+                            !this.recordPassesCategoryFilters(
+                                record,
+                                otherCatId,
+                                groupedOtherFilters[otherCatId]
+                            )
+                        ) {
+                            passesOtherFilters = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (passesOtherFilters) {
+                    const recordValue = record[currentCategoryId];
+                    if (recordValue) {
+                        countsForThisCategory[recordValue] =
+                            (countsForThisCategory[recordValue] || 0) + 1;
+                        // If this record has a value for the current category, it contributes to "Any"
+                        recordsContributingToAny.add(record);
+                    }
+                }
+            });
+
+            // Store the count for the "Any" option if the category includes it
+            if (categoryConfig.includeAny) {
+                countsForThisCategory[ANY_FILTER_VALUE] =
+                    recordsContributingToAny.size;
+            }
+
+            allCategoryCounts[currentCategoryId] = countsForThisCategory;
+        });
+        return allCategoryCounts;
+    }
 }
 
 /**
@@ -125,7 +193,8 @@ class FilterSystem {
  * @param {HTMLElement} containerElement - The DOM element to append the filter UI to.
  * @param {FilterSystem} filterSystem - The initialized FilterSystem instance.
  */
-function populateFilterControls(containerElement, filterSystem) {
+function populateFilterControls(containerElementId, filterSystem) {
+    const containerElement = document.getElementById(containerElementId);
     containerElement.innerHTML = ""; // Clear previous controls
 
     const filterWrapper = document.createElement("div");
@@ -141,8 +210,6 @@ function populateFilterControls(containerElement, filterSystem) {
     clearAllLink.addEventListener("click", (e) => {
         e.preventDefault();
         filterSystem.clearAllFilters();
-        filterSystem.applyFilters();
-        // Uncheck all checkboxes and update dropdown buttons
         const allCheckboxes = filterWrapper.querySelectorAll(
             'input[type="checkbox"]'
         );
@@ -155,6 +222,8 @@ function populateFilterControls(containerElement, filterSystem) {
                 updateDropdownButtonText(button, catConfig, filterSystem);
             }
         });
+        filterSystem.applyFilters(); // Apply filters first
+        updateFilterOptionCounts(filterSystem, filterWrapper); // Then update counts for all
     });
     clearAllContainer.appendChild(clearAllLink);
     filterWrapper.appendChild(clearAllContainer);
@@ -201,6 +270,9 @@ function populateFilterControls(containerElement, filterSystem) {
         "click",
         populateFilterControls.clickOutsideListener
     );
+
+    // Initial count update after all controls are populated
+    updateFilterOptionCounts(filterSystem, filterWrapper);
 }
 
 /**
@@ -260,7 +332,7 @@ function createFilterDropdown(categoryConfig, filterSystem, filterWrapper) {
     }
 
     // Unique value options
-    const values = filterSystem.uniqueFilterValues[categoryConfig.id]
+    const values = filterSystem.uniqueFilterValues[categoryConfig.id];
     values.forEach((value) => {
         const optionDiv = createCheckboxOption(
             value,
@@ -308,8 +380,12 @@ function createCheckboxOption(
         (f) => f.categoryId === categoryConfig.id && f.value === value
     );
 
+    // Store the original label text without count for reconstruction
+    checkbox.dataset.originalLabelText = labelText;
+
     const label = document.createElement("label");
     label.htmlFor = checkbox.id;
+    // Initial label text set here (will be updated with counts by updateFilterOptionCounts)
     label.textContent = labelText;
 
     checkbox.addEventListener("change", () => {
@@ -318,7 +394,6 @@ function createCheckboxOption(
 
         if (checkbox.checked) {
             if (isThisAnyCheckbox) {
-                // Uncheck all other specific checkboxes in this dropdown
                 dropdownContentElement
                     .querySelectorAll('input[type="checkbox"]')
                     .forEach((cb) => {
@@ -326,33 +401,33 @@ function createCheckboxOption(
                             cb.checked = false;
                         }
                     });
-                // Remove all existing filters for this category first
                 filterSystem.activeFilters = filterSystem.activeFilters.filter(
                     (f) => f.categoryId !== categoryId
                 );
-                // Add the "Any" filter
                 filterSystem.addFilter(categoryId, ANY_FILTER_VALUE);
             } else {
-                // This is a specific value checkbox being checked
-                // Uncheck the "Any" checkbox in this dropdown if it exists and is checked
                 if (categoryConfig.includeAny) {
                     const anyCheckbox = dropdownContentElement.querySelector(
                         `input[type="checkbox"][value="${ANY_FILTER_VALUE}"]`
                     );
                     if (anyCheckbox && anyCheckbox.checked) {
                         anyCheckbox.checked = false;
-                        filterSystem.removeFilter(categoryId, ANY_FILTER_VALUE); // Remove "Any" from active filters
+                        filterSystem.removeFilter(categoryId, ANY_FILTER_VALUE);
                     }
                 }
-                filterSystem.addFilter(categoryId, value); // Add the specific filter
+                filterSystem.addFilter(categoryId, value);
             }
         } else {
-            // Checkbox is being unchecked, just remove its filter
             filterSystem.removeFilter(categoryId, value);
         }
 
-        filterSystem.applyFilters();
-        updateDropdownButtonText(dropdownButton, categoryConfig, filterSystem);
+        filterSystem.applyFilters(); // Apply filters to the calendar/DOM
+        updateDropdownButtonText(dropdownButton, categoryConfig, filterSystem); // Update the main button text
+        // Update counts for all categories. Pass the main filterWrapper.
+        updateFilterOptionCounts(
+            filterSystem,
+            dropdownContentElement.closest(".filter-wrapper")
+        );
     });
 
     optionDiv.appendChild(checkbox);
@@ -385,6 +460,57 @@ function updateDropdownButtonText(button, categoryConfig, filterSystem) {
             }`;
         }
     }
+}
+
+/**
+ * Updates the count display on all filter option labels.
+ * @param {FilterSystem} filterSystem
+ * @param {HTMLElement} filterWrapperElement - The top-level element containing all filter controls.
+ */
+function updateFilterOptionCounts(filterSystem, filterWrapperElement) {
+    const allCounts = filterSystem.getFilterCounts();
+
+    filterSystem.filterConfig.forEach((categoryConfig) => {
+        const categoryId = categoryConfig.id;
+        const countsForThisCategory = allCounts[categoryId] || {};
+
+        // Find the specific dropdown content for this category
+        const dropdownButton = filterWrapperElement.querySelector(
+            `#dropdown-button-${categoryId}`
+        );
+        const dropdownContentElement = dropdownButton
+            ?.closest(".dropdown-container")
+            ?.querySelector(".dropdown-content");
+
+        if (!dropdownContentElement) return;
+
+        dropdownContentElement
+            .querySelectorAll(".dropdown-option")
+            .forEach((optionDiv) => {
+                const checkbox = optionDiv.querySelector(
+                    'input[type="checkbox"]'
+                );
+                const label = optionDiv.querySelector("label");
+                if (!checkbox || !label) return;
+
+                const value = checkbox.value;
+                const count = countsForThisCategory[value] || 0;
+
+                // Use the stored original label text
+                const originalLabelText =
+                    checkbox.dataset.originalLabelText ||
+                    (value === ANY_FILTER_VALUE
+                        ? `Any ${categoryConfig.label.toLowerCase()}`
+                        : String(value));
+
+                label.textContent = `${originalLabelText} (${count})`;
+                // Disable if count is 0 and not currently checked (to allow unchecking)
+                optionDiv.classList.toggle(
+                    "disabled",
+                    count === 0 && !checkbox.checked
+                );
+            });
+    });
 }
 
 export { FilterSystem, populateFilterControls };
