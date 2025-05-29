@@ -22,7 +22,6 @@ class FilterSystem {
         const allValues = {}; // Changed back to allValues
 
         this.allRecordsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-        console.log(this.allRecordsData.slice(0, 10));
         this.filterConfig.forEach((cat) => {
             const categoryId = cat.id;
             let catValuesArray = [
