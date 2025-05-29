@@ -15,12 +15,8 @@
         <div class="details-panel-content"></div>
     </div>
     <script type="module">
-        import { 
-            showDetailsPanel, 
-            hideDetailsPanel, 
-            handleUrlHash,
-            handleOutsideClick
-        } from './details-panel.js';
+
+        import { DetailsPanel } from './details-panel.js';
         import { CalendarChart } from './chart.js';
         import { FilterSystem, populateFilterControls } from './filter-system.js';
 
@@ -62,7 +58,7 @@
                     .filter(r => r.category === 'puzzle')
                     .map(puzzle => `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
                         puzzle.collaborator ? ` with ${puzzle.collaborator}` : ''
-                    } (${puzzle.size}, ${puzzle.style})`)
+                    } (${puzzle.size}, ${puzzle.type})`)
                     .join('\n')
             }`;
 
@@ -91,14 +87,16 @@
             showDetailsPanel(date, records);
         });
 
-        // Set up hash change handling
-        window.addEventListener("popstate", () => handleUrlHash(chart.data));
 
-        // Handle outside clicks
-        document.addEventListener("click", handleOutsideClick);
 
-        // Check hash on initial load
-        handleUrlHash(chart.data);
+        // --- DETAILS PANEL SETUP --- 
+        // Ensure chart.data is the data structure expected by DetailsPanel for _handleUrlHash
+        // e.g., { "2023": [ {date: "...", records: [...] } ], ... }
+        const detailsPanelManager = new DetailsPanel('details-panel', chart.data);
+        detailsPanelManager.init(chart); // Pass the chart instance to set up its internal listeners
+        // The chart instance (chart.data) might need to be updated in detailsPanelManager if it changes
+        // using detailsPanelManager.updateChartData(newChartData) if your chart supports dynamic data reloading.
+
     </script>
 </body>
 </html> 
