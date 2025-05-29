@@ -361,12 +361,15 @@ h2 {
 }
 
 .clear-all-container {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .clear-all-link {
-    color: #666;
+    color: var(--near-black);
     text-decoration: none;
     font-size: 0.9rem;
     cursor: pointer;

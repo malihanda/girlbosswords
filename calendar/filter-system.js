@@ -225,7 +225,6 @@ function populateFilterControls(containerElementId, filterSystem) {
         updateFilterOptionCounts(filterSystem, filterWrapper); // Then update counts for all
     });
     clearAllContainer.appendChild(clearAllLink);
-    filterWrapper.appendChild(clearAllContainer);
 
     // --- Filter Dropdowns ---
     const filterControls = document.createElement("div");
@@ -239,6 +238,9 @@ function populateFilterControls(containerElementId, filterSystem) {
         );
         filterControls.appendChild(filterColumn);
     });
+
+    filterControls.appendChild(clearAllContainer);
+
     filterWrapper.appendChild(filterControls);
     containerElement.appendChild(filterWrapper);
 
