@@ -130,6 +130,22 @@ export class DetailsPanel {
                             <em>${record.size}, ${record.type}</em>
                         </div>
                     `;
+                    if (record.puz || record.pdf) {
+                        itemDiv.innerHTML += `
+                            <div class="download-links">
+                                Download: ${
+                                    record.puz
+                                        ? `<a href="${record.puz}" target="_blank">puz</a>`
+                                        : ""
+                                }
+                                ${
+                                    record.pdf
+                                        ? `<a href="${record.pdf}" target="_blank">pdf</a>`
+                                        : ""
+                                }
+                            </div>
+                        `;
+                    }
                 }
                 this.contentElement.appendChild(itemDiv);
             });

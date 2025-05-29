@@ -199,6 +199,11 @@ h2 {
     margin-top: 4px;
 }
 
+.download-links {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
 .collaborator {
     font-style: italic;
 }
@@ -315,12 +320,6 @@ h2 {
 
 .dropdown-option.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.dropdown-option.disabled label,
-.dropdown-option.disabled input {
-    /* cursor: not-allowed; was here */
 }
 
 @media (max-width: 480px) {
@@ -339,7 +338,7 @@ h2 {
 /* Filter Styles */
 .filter-controls {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     margin-bottom: 20px;
     box-sizing: border-box;
