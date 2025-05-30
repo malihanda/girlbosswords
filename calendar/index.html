@@ -19,14 +19,14 @@
 
         const colorConditions = [
             {
-                // Misc entries get color-4 (highest priority)
-                condition: (date) => date.records.some(r => r.category === 'misc'),
+                // Full-size or oversized puzzles get color-4
+                condition: (date) => date.records.some(r => r.category === 'puzzle' &&
+                    (r.size === 'full-size' || r.size === 'oversized')),
                 colorClass: 'color-4'
             },
             {
-                // Full-size or oversized puzzles get color-3
-                condition: (date) => date.records.some(r => r.category === 'puzzle' && 
-                    (r.size === 'full-size' || r.size === 'oversized')),
+                // Misc entries get color-3
+                condition: (date) => date.records.some(r => r.category === 'misc'),
                 colorClass: 'color-3'
             },
             {
