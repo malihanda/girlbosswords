@@ -33,7 +33,7 @@ export class DetailsPanel {
             );
             return; // Prevent errors if panel doesn't exist
         }
-        this.headerElement = document.createElement("div")
+        this.headerElement = document.createElement("div");
         this.headerElement.className = "details-panel-header";
         this.panelElement.appendChild(this.headerElement);
         this.contentElement = document.createElement("div");
@@ -45,6 +45,7 @@ export class DetailsPanel {
         this._handleOutsideClick = this._handleOutsideClick.bind(this);
         this.showDetails = this.showDetails.bind(this);
         this.hideDetails = this.hideDetails.bind(this);
+        this.makeNarrowIfNecessary = this.makeNarrowIfNecessary.bind(this);
     }
 
     // chartInstance is the instance of CalendarChart
@@ -65,13 +66,33 @@ export class DetailsPanel {
         // Event listener for clicks outside the panel
         document.addEventListener("click", this._handleOutsideClick);
 
+        this.makeNarrowIfNecessary();
+        window.addEventListener("resize", this.makeNarrowIfNecessary);
+
         // Check hash on initial load
         this._handleUrlHash();
     }
 
+    makeNarrowIfNecessary() {
+        if (!this.panelElement) return;
+        const chartContainer = document.getElementById("chart-container");
+        if (!chartContainer) return;
+        const chartContainerRightBound =
+            chartContainer.getBoundingClientRect().right;
+        const shouldBeNarrow =
+            chartContainerRightBound > window.innerWidth - 300;
+        this.panelElement.classList.toggle("narrow", shouldBeNarrow);
+        if (shouldBeNarrow && this.panelElement.classList.contains("visible")) {
+            const panelHeight =
+                this.panelElement.getBoundingClientRect().height;
+            chartContainer.style.paddingBottom = `${panelHeight}px`;
+        } else {
+            chartContainer.style.paddingBottom = "0";
+        }
+    };
+
     showDetails(date, records) {
-        if (!this.panelElement || !this.headerElement || !this.contentElement)
-            return;
+        if (!this.panelElement || !this.headerElement || !this.contentElement) return;
 
         if (window.location.hash !== `#${date}`) {
             window.history.pushState(null, "", `#${date}`);
@@ -147,6 +168,16 @@ export class DetailsPanel {
             this.contentElement.innerHTML = "<p>No content on this date.</p>";
         }
         this.panelElement.classList.add("visible");
+
+        // Only set padding if panel is visible and narrow
+        const chartContainer = document.getElementById("chart-container");
+        if (this.panelElement.classList.contains("narrow")) {
+            const panelHeight =
+                this.panelElement.getBoundingClientRect().height;
+            chartContainer.style.paddingBottom = `${panelHeight}px`;
+        } else {
+            chartContainer.style.paddingBottom = "0";
+        }
     }
 
     hideDetails() {
@@ -167,9 +198,10 @@ export class DetailsPanel {
 
         const year = hash.slice(0, 4);
         // Use the global processedData variable
-        const yearData = window.processedData && window.processedData[year]
-            ? window.processedData[year]
-            : null;
+        const yearData =
+            window.processedData && window.processedData[year]
+                ? window.processedData[year]
+                : null;
 
         if (!yearData || !Array.isArray(yearData)) {
             this.hideDetails();
