@@ -67,7 +67,11 @@ export class CalendarChart {
         const data = {};
         const today = new Date();
         const currentYear = today.getFullYear();
-        const todayString = today.toISOString().split("T")[0];
+        const todayString = today.toLocaleDateString("en-CA", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
 
         function standardizeDate(dateStr) {
             if (dateStr.includes("/")) {
@@ -353,7 +357,11 @@ export class CalendarChart {
     calculateMonthPositions(year) {
         const monthPositions = new Map();
         let dayCount = new Date(year, 0, 1).getDay();
-        const today = new Date().toISOString().split("T")[0];
+        const today = new Date().toLocaleDateString("en-CA", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
 
         for (let month = 0; month < 12; month++) {
             const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-01`;
