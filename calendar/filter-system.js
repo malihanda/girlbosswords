@@ -27,13 +27,6 @@ class FilterSystem {
             let catValuesArray = [
                 ...new Set(this.allRecordsData.map((r) => r[categoryId])),
             ].filter((r) => r);
-            catValuesArray.sort(
-                (a, b) =>
-                    this.allRecordsData.filter((r) => r[categoryId] === b)
-                        .length -
-                    this.allRecordsData.filter((r) => r[categoryId] === a)
-                        .length
-            );
             allValues[categoryId] = catValuesArray;
         });
 
@@ -126,41 +119,38 @@ class FilterSystem {
     getFilterCounts() {
         const allCategoryCounts = {};
 
+        // Pre-group all active filters by category (do this once)
+        const groupedActiveFilters = this.activeFilters.reduce((acc, f) => {
+            if (!acc[f.categoryId]) {
+                acc[f.categoryId] = [];
+            }
+            acc[f.categoryId].push(f.value);
+            return acc;
+        }, {});
+
         this.filterConfig.forEach((categoryConfig) => {
             const currentCategoryId = categoryConfig.id;
             const countsForThisCategory = {};
-            const recordsContributingToAny = new Set(); // To count unique records for "Any"
+            let anyCount = 0;
 
-            const activeFiltersExcludingCurrentCategory =
-                this.activeFilters.filter(
-                    (f) => f.categoryId !== currentCategoryId
-                );
+            // Get the active filters for all OTHER categories
+            const otherCategoryFilters = { ...groupedActiveFilters };
+            delete otherCategoryFilters[currentCategoryId];
 
             this.allRecordsData.forEach((record) => {
                 let passesOtherFilters = true;
-                if (activeFiltersExcludingCurrentCategory.length > 0) {
-                    const groupedOtherFilters =
-                        activeFiltersExcludingCurrentCategory.reduce(
-                            (acc, f) => {
-                                if (!acc[f.categoryId]) {
-                                    acc[f.categoryId] = [];
-                                }
-                                acc[f.categoryId].push(f.value);
-                                return acc;
-                            },
-                            {}
-                        );
-                    for (const otherCatId in groupedOtherFilters) {
-                        if (
-                            !this.recordPassesCategoryFilters(
-                                record,
-                                otherCatId,
-                                groupedOtherFilters[otherCatId]
-                            )
-                        ) {
-                            passesOtherFilters = false;
-                            break;
-                        }
+
+                // Check if record passes filters from other categories
+                for (const otherCatId in otherCategoryFilters) {
+                    if (
+                        !this.recordPassesCategoryFilters(
+                            record,
+                            otherCatId,
+                            otherCategoryFilters[otherCatId]
+                        )
+                    ) {
+                        passesOtherFilters = false;
+                        break;
                     }
                 }
 
@@ -169,20 +159,19 @@ class FilterSystem {
                     if (recordValue) {
                         countsForThisCategory[recordValue] =
                             (countsForThisCategory[recordValue] || 0) + 1;
-                        // If this record has a value for the current category, it contributes to "Any"
-                        recordsContributingToAny.add(record);
+                        anyCount++; // Simple counter instead of Set
                     }
                 }
             });
 
             // Store the count for the "Any" option if the category includes it
             if (categoryConfig.includeAny) {
-                countsForThisCategory[ANY_FILTER_VALUE] =
-                    recordsContributingToAny.size;
+                countsForThisCategory[ANY_FILTER_VALUE] = anyCount;
             }
 
             allCategoryCounts[currentCategoryId] = countsForThisCategory;
         });
+
         return allCategoryCounts;
     }
 }
