@@ -281,9 +281,7 @@ export class CalendarChart {
 
             this.setDateCellData(cell, date);
 
-            if (hasContent) {
-                this.addDateCellEventListeners(cell, date);
-            }
+            this.addDateCellEventListeners(cell, date);
         }
 
         cell.style.gridRow = row.toString();
