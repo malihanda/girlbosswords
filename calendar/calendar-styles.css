@@ -358,8 +358,37 @@ h2 {
     padding: 1rem;
     width: 1022px; /* Consider making this dynamic or percentage-based */
     box-sizing: border-box;
-    /* margin-left: auto; was here */
-    /* margin-right: auto; was here */
+}
+
+.filter-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    background: white;
+}
+
+.filter-checkbox:checked {
+    background-color: var(--color-4);
+    border-color: var(--color-4);
+}
+
+.filter-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .clear-all-container {

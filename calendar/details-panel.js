@@ -89,10 +89,11 @@ export class DetailsPanel {
         } else {
             chartContainer.style.paddingBottom = "0";
         }
-    };
+    }
 
     showDetails(date, records) {
-        if (!this.panelElement || !this.headerElement || !this.contentElement) return;
+        if (!this.panelElement || !this.headerElement || !this.contentElement)
+            return;
 
         if (window.location.hash !== `#${date}`) {
             window.history.pushState(null, "", `#${date}`);
@@ -167,6 +168,7 @@ export class DetailsPanel {
         } else {
             this.contentElement.innerHTML = "<p>No content on this date.</p>";
         }
+        this.makeNarrowIfNecessary();
         this.panelElement.classList.add("visible");
 
         // Only set padding if panel is visible and narrow

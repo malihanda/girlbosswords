@@ -195,6 +195,7 @@ function populateFilterControls(containerElementId, filterSystem) {
     clearAllLink.className = "clear-all-link";
     clearAllLink.href = "#";
     clearAllLink.textContent = "Clear all filters";
+    clearAllLink.style.textDecoration = "underline";
     clearAllLink.addEventListener("click", (e) => {
         e.preventDefault();
         filterSystem.clearAllFilters();
@@ -276,9 +277,45 @@ function createFilterDropdown(categoryConfig, filterSystem, filterWrapper) {
     const column = document.createElement("div");
     column.className = "filter-column"; // Assumes CSS
 
+    // Create header container to hold both heading and clear link
+    const headerContainer = document.createElement("div");
+    headerContainer.className = "filter-header";
+    headerContainer.style.display = "flex";
+    headerContainer.style.alignItems = "center";
+    headerContainer.style.gap = "8px";
+
     const heading = document.createElement("h2");
     heading.textContent = categoryConfig.label;
-    column.appendChild(heading);
+    headerContainer.appendChild(heading);
+
+    // Add clear link
+    const clearLink = document.createElement("a");
+    clearLink.className = "category-clear-link";
+    clearLink.href = "#";
+    clearLink.textContent = "(clear filters)";
+    clearLink.style.fontSize = "12px";
+    clearLink.style.color = "var(--near-black)";
+    clearLink.style.textDecoration = "underline";
+    clearLink.style.display = "none"; // Initially hidden
+
+    clearLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Remove all filters for this category
+        filterSystem.activeFilters = filterSystem.activeFilters.filter(
+            f => f.categoryId !== categoryConfig.id
+        );
+        // Uncheck all checkboxes in this dropdown
+        const checkboxes = dropdownContent.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => cb.checked = false);
+        // Update UI
+        filterSystem.applyFilters();
+        updateDropdownButtonText(dropdownButton, categoryConfig, filterSystem);
+        updateFilterOptionCounts(filterSystem, filterWrapper);
+        clearLink.style.display = "none";
+    });
+
+    headerContainer.appendChild(clearLink);
+    column.appendChild(headerContainer);
 
     const dropdownContainer = document.createElement("div");
     dropdownContainer.className = "dropdown-container";
@@ -287,6 +324,15 @@ function createFilterDropdown(categoryConfig, filterSystem, filterWrapper) {
     dropdownButton.className = "dropdown-button";
     dropdownButton.id = `dropdown-button-${categoryConfig.id}`; // For updating text
     updateDropdownButtonText(dropdownButton, categoryConfig, filterSystem); // Initial text
+
+    // Update clear link visibility based on active filters
+    const updateClearLinkVisibility = () => {
+        const hasActiveFilters = filterSystem.activeFilters.some(
+            f => f.categoryId === categoryConfig.id
+        );
+        clearLink.style.display = hasActiveFilters ? "block" : "none";
+    };
+    updateClearLinkVisibility(); // Initial state
 
     dropdownButton.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -316,7 +362,8 @@ function createFilterDropdown(categoryConfig, filterSystem, filterWrapper) {
             categoryConfig,
             filterSystem,
             dropdownButton,
-            dropdownContent // Pass dropdownContent
+            dropdownContent,
+            updateClearLinkVisibility // Pass the update function
         );
         dropdownContent.appendChild(anyOptionDiv);
     }
@@ -330,7 +377,8 @@ function createFilterDropdown(categoryConfig, filterSystem, filterWrapper) {
             categoryConfig,
             filterSystem,
             dropdownButton,
-            dropdownContent // Pass dropdownContent
+            dropdownContent,
+            updateClearLinkVisibility // Pass the update function
         );
         dropdownContent.appendChild(optionDiv);
     });
@@ -355,7 +403,8 @@ function createCheckboxOption(
     categoryConfig,
     filterSystem,
     dropdownButton,
-    dropdownContentElement
+    dropdownContentElement,
+    updateClearLinkVisibility
 ) {
     const optionDiv = document.createElement("div");
     optionDiv.className = "dropdown-option";
@@ -369,6 +418,44 @@ function createCheckboxOption(
     checkbox.checked = filterSystem.activeFilters.some(
         (f) => f.categoryId === categoryConfig.id && f.value === value
     );
+    checkbox.className = "filter-checkbox";
+    
+    // Add custom checkbox styles to ensure cross-browser compatibility
+    const style = document.createElement('style');
+    if (!document.querySelector('#filter-checkbox-styles')) {
+        style.id = 'filter-checkbox-styles';
+        style.textContent = `
+            .filter-checkbox {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                width: 16px;
+                height: 16px;
+                border: 2px solid #ccc;
+                border-radius: 3px;
+                outline: none;
+                cursor: pointer;
+                position: relative;
+                background: white;
+            }
+            .filter-checkbox:checked {
+                background-color: var(--color-4);
+                border-color: var(--color-4);
+            }
+            .filter-checkbox:checked::after {
+                content: '';
+                position: absolute;
+                left: 3px;
+                top: 0px;
+                width: 4px;
+                height: 8px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        `;
+        document.head.appendChild(style);
+    }
 
     // Store the original label text without count for reconstruction
     checkbox.dataset.originalLabelText = labelText;
@@ -419,6 +506,7 @@ function createCheckboxOption(
             filterSystem,
             dropdownContentElement.closest(".filter-wrapper")
         );
+        updateClearLinkVisibility(); // Update clear link visibility
     };
 
     // Add click handler to the entire div
