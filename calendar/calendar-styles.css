@@ -1,0 +1,425 @@
+:root {
+    --cell-size: 15px;
+    --cell-gap: 4px;
+    --color-1: #e8e8e8;
+    --color-2: #dd95ed;
+    --color-3: #b01c72;
+    --color-4: #460050;
+    --near-black: #333;
+}
+
+body {
+    font-family: monospace;
+    background: #b3b3b3;
+    padding: 20px;
+}
+
+#chart-container {
+    width: calc(54 * var(--cell-size) + 53 * var(--cell-gap));
+    padding-right: 30px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-rows: 20px repeat(7, var(--cell-size));
+    grid-template-columns: repeat(53, var(--cell-size));
+    width: 100%;
+    gap: var(--cell-gap);
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.month-label {
+    font-size: 12px;
+    color: var(--near-black);
+    grid-row: 1;
+    text-align: center;
+}
+
+.label-cell {
+    font-size: 12px;
+    color: var(--near-black);
+    text-align: center;
+}
+
+.date-cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 2px;
+    position: relative;
+}
+
+.date-cell:hover {
+    outline: 2px solid var(--near-black);
+}
+
+.placeholder-cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+
+.contains-data-cell {
+    cursor: pointer;
+}
+
+.color-1 {
+    background-color: var(--color-1);
+}
+
+.color-2 {
+    background-color: var(--color-2);
+}
+
+.color-3 {
+    background-color: var(--color-3);
+}
+
+.color-4 {
+    background-color: var(--color-4);
+}
+
+.year-section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: var(--near-black);
+}
+
+.tooltip {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 12px;
+    color: var(--near-black);
+    z-index: 100;
+    pointer-events: none;
+    white-space: pre-line;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 300px;
+    visibility: hidden;
+}
+
+/* Hide tooltips on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .tooltip {
+        display: none;
+    }
+}
+
+.tooltip-date {
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.details-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background: white;
+    border-left: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.details-panel.visible {
+    transform: translateX(0);
+}
+
+/* Mobile layout */
+.details-panel.narrow {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    max-height: 85vh;
+    border-left: none;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    transform: translateY(100%);
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    transform-origin: bottom;
+    -webkit-transform-origin: bottom;
+}
+
+.details-panel.narrow.visible {
+    transform: translateY(0);
+}
+
+.details-panel-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    color: #333;
+}
+
+.details-panel-content {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.publication-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.publication-item:last-child {
+    border-bottom: none;
+}
+
+.publication-item a {
+    color: #af5ac8;
+    text-decoration: none;
+}
+
+.publication-item a:hover {
+    text-decoration: underline;
+}
+
+.publication-meta {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.download-links {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.collaborator {
+    font-style: italic;
+}
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 1022px; /* todo: calculate this dynamically */
+}
+
+.filter-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-column h2 {
+    font-size: 14px;
+    margin: 0;
+    color: var(--near-black);
+    white-space: nowrap;
+}
+
+.dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-button {
+    width: 100%;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--near-black);
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-button:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-button::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    pointer-events: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dropdown-content.show {
+    display: block !important;
+}
+
+.dropdown-option {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-option:last-child {
+    border-bottom: none;
+}
+
+.dropdown-option:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-option input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.dropdown-option label {
+    flex: 1;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-option.disabled {
+    opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+    .filter-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* Calendar content container */
+.calendar-content {
+    margin-top: 20px;
+}
+
+/* Filter Styles */
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 1022px; /* todo: calculate this dynamically */
+}
+
+.date-cell.filtered {
+    opacity: 0.15;
+    transition: opacity 0.2s ease;
+}
+
+/* Filter System Styles */
+.filter-wrapper {
+    padding: 1rem;
+    width: 1022px; /* Consider making this dynamic or percentage-based */
+    box-sizing: border-box;
+}
+
+.filter-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    background: white;
+}
+
+.filter-checkbox:checked {
+    background-color: var(--color-4);
+    border-color: var(--color-4);
+}
+
+.filter-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.clear-all-container {
+    margin-bottom: 0.5rem;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.clear-all-link {
+    color: var(--near-black);
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.clear-all-link:hover {
+    text-decoration: underline;
+}
+
+/* Ensure .filter-controls takes full width of its parent (.filter-wrapper) */
+/* If .filter-controls is already defined, verify its width property. */
+/* It might look something like this, or be adjusted based on existing rules: */
+.filter-controls {
+    display: grid;
+    /* Example: repeat(auto-fit, minmax(200px, 1fr)) for responsiveness */
+    /* or the original repeat(4, 1fr) if fixed columns are desired */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px; /* Or keep existing margin */
+    box-sizing: border-box;
+    width: 100%; /* Important for fitting into filter-wrapper */
+} 
