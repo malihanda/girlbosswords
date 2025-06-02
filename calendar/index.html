@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="calendar-styles.css">
+</head>
+<body>
+    <div id="filter-controls-area"></div>
+    <div id="chart-container"></div>
+    <div id="tooltip" class="tooltip"></div>
+    <div id="details-panel" class="details-panel"></div>
+    <script type="module">
+
+        import { DetailsPanel } from './details-panel.js';
+        import { CalendarChart } from './chart.js';
+        import { FilterSystem, populateFilterControls } from './filter-system.js';
+
+        const colorConditions = [
+            {
+                // Full-size or oversized puzzles get color-4
+                condition: (date) => date.records.some(r => r.category === 'puzzle' &&
+                    (r.size === 'full-size' || r.size === 'oversized')),
+                colorClass: 'color-4'
+            },
+            {
+                // Misc entries get color-3
+                condition: (date) => date.records.some(r => r.category === 'misc'),
+                colorClass: 'color-3'
+            },
+            {
+                // Any records get color-2
+                condition: (date) => date.records.length > 0,
+                colorClass: 'color-2'
+            },
+            {
+                // Default gets color-1 (lowest priority)
+                condition: () => true,
+                colorClass: 'color-1'
+            }
+        ];
+
+        const tooltipTemplate = (date) => 
+            `<strong>${date.date}</strong>\n${
+                date.records
+                    .filter(r => r.category === 'misc')
+                    .map(item => `<strong>${item.publication}</strong> [${item.type}]: ${item.title}`)
+                    .join('\n')
+            }${
+                date.records.filter(r => r.category === 'misc').length > 0 && 
+                date.records.filter(r => r.category === 'puzzle').length > 0 ? '\n' : ''
+            }${
+                date.records
+                    .filter(r => r.category === 'puzzle')
+                    .map(puzzle => `<strong>${puzzle.publication}</strong>: ${puzzle.title}${
+                        puzzle.collaborator ? ` with ${puzzle.collaborator}` : ''
+                    } (${puzzle.size}, ${puzzle.type})`)
+                    .join('\n')
+            }`;
+
+        // Initialize the chart with options
+        const chart = new CalendarChart("chart-container", {
+            colorConditions: colorConditions,
+            tooltipTemplate: tooltipTemplate
+        });
+        
+        // Load and render initial data
+        await chart.loadData('data.json');
+        chart.render();
+
+        const filterConfig = [
+            {'id': 'publication', 'label': 'Publication'},
+            {'id': 'collaborator', 'label': 'Collaborator', includeAny: true},
+            {'id': 'type', 'label': 'Type'}
+        ];
+
+        const filterSystem = new FilterSystem(chartData.records, filterConfig);
+        populateFilterControls("filter-controls-area", filterSystem);
+
+        const detailsPanelManager = new DetailsPanel('details-panel');
+        detailsPanelManager.init(chart);
+
+    </script>
+</body>
+</html> 
