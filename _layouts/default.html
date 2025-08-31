@@ -2,7 +2,7 @@
 
 <head>
 
-<title>{{ page.title }}</title>
+<title>{{ page.title }}{% if page.title != site.title %} - {{ site.title }}{% endif %}</title>
 
 <link rel="icon" href="/data/favicon.png">
 <link rel="stylesheet" href="/styles/styles.css?v={{ site.time | date: '%s' }}">

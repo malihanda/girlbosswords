@@ -7,7 +7,7 @@ body {
   text-align: left;
   margin: 0;
   padding: 0;
-  font-family: monospace;
+  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
   font-size: 1rem;
 }
 
@@ -64,6 +64,10 @@ nav.header {
 
     span {
       display: inline;
+    }
+
+    span.nav-item {
+      white-space: nowrap;
     }
   }
 
@@ -130,8 +134,8 @@ article.puzzle-card {
   bottom: 0;
   left: 0;
   right: 0;
-  max-height: 160px;
   width: 100%;
+  aspect-ratio: 1/1;
   opacity: 0;
   background-color: white;
   display: flex;
@@ -172,5 +176,14 @@ article.puzzle-card {
     .text {
       font-size: 0.75rem;
     }
+  }
+
+  main {
+    padding: 0 1rem;
+  }
+
+  section.solver {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
   }
 }
