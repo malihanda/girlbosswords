@@ -1,42 +1,12 @@
-<!doctype html>
+---
+title: Head First
+crosshare_embed_url: https://crosshare.org/embed/TzdpX2w8d3BpE1jhqhrY/6GZEUgttSaMcNGI8CIiXptC8S1E3
+image: /data/puzzle_images/head-first.png
+size: 15x15
+---
 
-<head>
-
-<title>girlbosswords</title>
-
-<link rel="icon" href="../data/favicon.png">
-<link rel="stylesheet" href="../styles/page-styles.css">
-<link rel="stylesheet" href="../styles/home-styles.css">
-
-<meta content="width=device-width, initial-scale=1" name="viewport" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@malisolves" />
-<meta name="twitter:title" content="Head First" />
-<meta name="twitter:image" content="https://www.girlbosswords.com/data/puzzle_images/head-first.png" />
-
-</head>
-
-<body style="background-color:#B3B3B3;">
-
-<div class="header">
-  February 14, 2023: Head First
-  <button class="button" onclick="location.href='../index.html'">puzzles</button>
-</div>
-
-<div class="body">
-  This is a silly little puzzle for a silly little holiday. Sorry, sorry. I hope it's easy and I hope you like it.
-</div>
+This is a silly little puzzle for a silly little holiday. Sorry, sorry. I hope it's easy and I hope you like it.
 
 <div class="body">
   <a href="../data/puz_files/head-first.puz" download>.puz file</a> / <a href="../data/pdfs/head-first.pdf" download>pdf</a> / <a href="../data/solutions/head-first.png" download>solution</a>
 </div>
-
-<div class ="body">
-<iframe style="height: 90vh; width: 100%;"
-src="https://crosshare.org/embed/TzdpX2w8d3BpE1jhqhrY/6GZEUgttSaMcNGI8CIiXptC8S1E3"
-frameborder="0" allowfullscreen="true" allowtransparency="true">
-</iframe>
-</div>
-
-</body>
