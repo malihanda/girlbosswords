@@ -2,12 +2,14 @@
 layout: default
 ---
 
+<div class="row">
 {% for post in site.posts %}
 <div class="container">
-  <img src="{{ post.image }}">
-  <a href="{{ post.url }}" target="_blank">
+<img src="{{ post.image }}">
+<a href="{{ post.url }}" target="_blank">
     <div class="overlay">
-      <div class="text">{{post.title}}{% if post.size %}({{ post.size }}){% endif %}</div>
+    <div class="text">{{post.title}}{% if post.size %}({{ post.size }}){% endif %}</div>
     </div>
-  </a>
+</a>
 </div>{% endfor %}
+</div>
