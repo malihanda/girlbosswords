@@ -168,5 +168,9 @@ article.puzzle-card {
 
   article.puzzle-card {
     max-width: 30%;
+
+    .text {
+      font-size: 0.75rem;
+    }
   }
 }
