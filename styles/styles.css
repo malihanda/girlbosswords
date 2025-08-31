@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color:#B3B3B3;
+  background-color: #B3B3B3;
   text-align: left;
   margin: 0;
   padding: 2rem;
@@ -17,10 +17,12 @@ nav.header {
   background-color: #460050;
   margin-bottom: 2rem;
   color: white;
+
   a {
     color: white;
     font-weight: bold;
   }
+
   .site-title a {
     color: white;
     font-weight: bold;
@@ -29,19 +31,22 @@ nav.header {
     text-decoration-thickness: 5px;
     text-underline-offset: 10px;
   }
+
   a:hover {
     color: #B3B3B3;
   }
+
   .site-title {
     font-size: 2rem;
     padding-bottom: 2rem;
   }
+
   .site-subtitle {
     margin: 0;
     padding: 0;
     font-size: 1rem;
     font-weight: normal;
-    
+
     @media screen and (max-width: 700px) {
       font-size: 0.8rem;
     }
@@ -55,7 +60,7 @@ nav.header {
       display: inline;
     }
   }
-  
+
   .site-subtitle span.tagline {
     padding: 0;
     margin: 0;
@@ -63,11 +68,39 @@ nav.header {
 }
 
 main {
-  padding: 0 10px;
+  padding: 0 1rem;
 }
 
 .post-body .post-text {
   padding-bottom: 2rem;
+}
+
+.link-list {
+  padding: 0;
+  margin: 0 0 1rem 0;
+
+  li::before {
+    content: '/';
+    padding: 0 1rem;
+  }
+  
+  li::after {
+    content: '';
+    padding: 0;
+    margin: 0;
+  }
+
+  li:first-child::before {
+    content: '';
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 0;
+    margin: 0;
+    display: inline;
+  }
 }
 
 .button {
@@ -93,30 +126,32 @@ main {
 
 a {
   color: #610d0d;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 a:hover {
   color: #941919;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 img {
-    height: 160px;
-    width: 160px;
-    outline: #333 solid 2px;
-    opacity: 0.7;
+  height: 160px;
+  width: 160px;
+  outline: #333 solid 2px;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 480px) {
   .header {
     font-size: 25px;
   }
+
   .button {
     font-size: 12px;
     padding: 4px;
     margin-bottom: 2px;
   }
+
   .body {
     font-size: 13px;
     margin-top: 15px;
@@ -128,10 +163,12 @@ img {
   .header {
     font-size: 20px;
   }
+
   .button {
     font-size: 11px;
     padding: 3px;
   }
+
   .body {
     font-size: 12px;
     margin-top: 15px;
@@ -216,10 +253,10 @@ article.puzzle-card {
 }
 
 .puzzle-card img {
-    height: 160px;
-    width: 160px;
-    outline: #333 solid 2px;
-    opacity: 0.7;
+  height: 160px;
+  width: 160px;
+  outline: #333 solid 2px;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 980px) {
@@ -227,14 +264,17 @@ article.puzzle-card {
     width: 140px;
     height: 140px;
   }
+
   .container {
     width: 140px;
     height: 140px;
   }
+
   .overlay {
     width: 140px;
     height: 140px;
   }
+
   .text {
     font-size: 15px;
   }
@@ -244,6 +284,7 @@ article.puzzle-card {
   .header {
     font-size: 30px;
   }
+
   .button {
     font-size: 12px;
   }
@@ -254,20 +295,25 @@ article.puzzle-card {
     width: 110px;
     height: 110px;
   }
+
   .container {
     width: 110px;
     height: 110px;
   }
+
   .overlay {
     width: 110px;
     height: 110px;
   }
+
   .text {
     font-size: 12px;
   }
+
   .header {
     font-size: 25px;
   }
+
   .button {
     font-size: 12px;
     padding: 4px;
@@ -280,20 +326,25 @@ article.puzzle-card {
     width: 100px;
     height: 100px;
   }
+
   .container {
     width: 100px;
     height: 100px;
   }
+
   .overlay {
     width: 100px;
     height: 100px;
   }
+
   .text {
     font-size: 12px;
   }
+
   .header {
     font-size: 25px;
   }
+
   .button {
     font-size: 12px;
     padding: 4px;
@@ -306,20 +357,25 @@ article.puzzle-card {
     width: 140px;
     height: 140px;
   }
+
   .container {
     width: 140px;
     height: 140px;
   }
+
   .overlay {
     width: 140px;
     height: 140px;
   }
+
   .text {
     font-size: 15px;
   }
+
   .header {
     font-size: 25px;
   }
+
   .button {
     font-size: 12px;
     padding: 4px;
@@ -331,6 +387,7 @@ article.puzzle-card {
   .header {
     font-size: 20px;
   }
+
   .button {
     font-size: 11px;
     padding: 3px;
@@ -342,20 +399,25 @@ article.puzzle-card {
     width: 200px;
     height: 200px;
   }
+
   .container {
     width: 200px;
     height: 200px;
   }
+
   .overlay {
     width: 200px;
     height: 200px;
   }
+
   .text {
     font-size: 18px;
   }
+
   .header {
     font-size: 20px;
   }
+
   .button {
     font-size: 11px;
     padding: 3px;
