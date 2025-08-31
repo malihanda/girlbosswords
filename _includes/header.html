@@ -1,4 +1,7 @@
-<div class="header">girlbosswords by malaika handa
-<button class="button" onclick="location.href='https://groups.google.com/g/girlbosswords'">email notifs</button>
-  <button class="button" onclick="location.href='/about'">about me</button>
-</div>
+<nav class="header">
+  <div class="site-title"><a href="/">girlbosswords</a></div>
+  <div class="site-subtitle">
+  <span class="tagline">a crossword blog by <a href="https://malaikahanda.com">malaika handa</a></span>
+  {% for link in site.nav_items %}<span class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></span>{% endfor %}
+  </div>
+</nav>

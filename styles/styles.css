@@ -1,22 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color:#B3B3B3;
   text-align: left;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0;
+  padding: 2rem;
   font-family: monospace;
-  font-size: 15px;
-  vertical-align: middle;
-  padding: 10px;
+  font-size: 1rem;
 }
 
-.header {
-  text-align: left;
-  font-family: monospace;
-  font-size: 30px;
-  font-weight: bold;
-  vertical-align: middle;
+nav.header {
+  width: 100%;
+  padding: 1rem;
+  background-color: #460050;
+  margin-bottom: 2rem;
+  color: white;
+  a {
+    color: white;
+    font-weight: bold;
+  }
+  .site-title a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 5px;
+    text-underline-offset: 10px;
+  }
+  a:hover {
+    color: #B3B3B3;
+  }
+  .site-title {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  .site-subtitle {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    
+    @media screen and (max-width: 700px) {
+      font-size: 0.8rem;
+    }
+
+    span.nav-item::before {
+      content: '/';
+      padding: 0 1rem;
+    }
+
+    span {
+      display: inline;
+    }
+  }
+  
+  .site-subtitle span.tagline {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+main {
+  padding: 0 10px;
+}
+
+.post-body .post-text {
+  padding-bottom: 2rem;
 }
 
 .button {
@@ -88,9 +139,7 @@ img {
   }
 }
 
-* {
-  box-sizing: border-box;
-}
+
 
 .header {
   text-align: left;
@@ -121,22 +170,23 @@ img {
   color: white;
 }
 
-.row {
+/* Homepage specific styles */
+
+main.home-container {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 0 10px;
 }
 
-.container {
+article.puzzle-card {
   position: relative;
   height: 160px;
   width: 160px;
   margin: 6px;
 }
 
-.overlay {
+.puzzle-card .overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -146,29 +196,26 @@ img {
   width: 160px;
   opacity: 0;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.container:hover .overlay {
+.puzzle-card:hover .overlay {
   outline: #941919 solid 4px;
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.7)
 }
 
-.text {
+.puzzle-card .text {
   color: #941919;
   font-size: 18px;
   font-family: monospace;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: inherit;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  font-weight: normal;
   text-align: center;
 }
 
-img {
+.puzzle-card img {
     height: 160px;
     width: 160px;
     outline: #333 solid 2px;
