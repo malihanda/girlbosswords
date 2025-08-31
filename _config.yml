@@ -1,14 +1,21 @@
 title: girlbosswords
-description: >- 
-  a crossword blog by malaika handa
+tagline: a crossword blog by malaika handa
+description: a crossword blog by malaika handa
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: malisolves
+
+nav_items:
+  - title: about
+    url: /about
+  - title: email notifs
+    url: https://groups.google.com/g/girlbosswords
 
 # Build settings
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-target-blank
 
 permalink: '/puzzle/:title/'
 
@@ -27,14 +34,15 @@ defaults:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - data/draw_puzzle.py
