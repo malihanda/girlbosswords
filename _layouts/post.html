@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<div class="header">{{ page.date | date: "%B %e, %Y"}}: {{ page.title }}</div><button class="button" onclick="location.href='../index.html'">puzzles</button>
+<div class="header">{%if page.display_date %}{{page.display_date}}{% else %}{{ page.date | date: "%B %e, %Y"}}{% endif %}: {{ page.title }}<button class="button" onclick="location.href='/'">puzzles</button></div>
 
 {{content}}
 
