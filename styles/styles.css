@@ -6,9 +6,19 @@ body {
   background-color: #B3B3B3;
   text-align: left;
   margin: 0;
-  padding: 2rem;
+  padding: 0;
   font-family: monospace;
   font-size: 1rem;
+}
+
+a {
+  color: #610d0d;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #941919;
+  font-weight: bold;
 }
 
 nav.header {
@@ -47,10 +57,6 @@ nav.header {
     font-size: 1rem;
     font-weight: normal;
 
-    @media screen and (max-width: 700px) {
-      font-size: 0.8rem;
-    }
-
     span.nav-item::before {
       content: '/';
       padding: 0 1rem;
@@ -68,7 +74,7 @@ nav.header {
 }
 
 main {
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .post-body .post-text {
@@ -103,110 +109,6 @@ main {
   }
 }
 
-.button {
-  background-color: #CCCCCC;
-  border: none;
-  color: white;
-  padding: 6px;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  font-family: monospace;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 5px;
-}
-
-.button:hover {
-  background-color: #941919;
-  color: white;
-}
-
-a {
-  color: #610d0d;
-  font-weight: bold;
-}
-
-a:hover {
-  color: #941919;
-  font-weight: bold;
-}
-
-img {
-  height: 160px;
-  width: 160px;
-  outline: #333 solid 2px;
-  opacity: 0.7;
-}
-
-@media screen and (max-width: 480px) {
-  .header {
-    font-size: 25px;
-  }
-
-  .button {
-    font-size: 12px;
-    padding: 4px;
-    margin-bottom: 2px;
-  }
-
-  .body {
-    font-size: 13px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .header {
-    font-size: 20px;
-  }
-
-  .button {
-    font-size: 11px;
-    padding: 3px;
-  }
-
-  .body {
-    font-size: 12px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-}
-
-
-
-.header {
-  text-align: left;
-  font-family: monospace;
-  font-size: 30px;
-  font-weight: bold;
-  vertical-align: middle;
-}
-
-.button {
-  background-color: #CCCCCC;
-  border: none;
-  color: white;
-  padding: 6px;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  font-family: monospace;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 5px;
-}
-
-.button:hover {
-  background-color: #941919;
-  color: white;
-}
-
 /* Homepage specific styles */
 
 main.home-container {
@@ -214,13 +116,12 @@ main.home-container {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 article.puzzle-card {
   position: relative;
-  height: 160px;
   width: 160px;
-  margin: 6px;
 }
 
 .puzzle-card .overlay {
@@ -229,11 +130,12 @@ article.puzzle-card {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 160px;
-  width: 160px;
+  max-height: 160px;
+  width: 100%;
   opacity: 0;
   background-color: white;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-around;
 }
@@ -246,180 +148,25 @@ article.puzzle-card {
 
 .puzzle-card .text {
   color: #941919;
-  font-size: 18px;
-  font-family: monospace;
-  font-weight: normal;
   text-align: center;
+  font-weight: normal;
+  font-size: 1.2rem;
+  width: 100%;
 }
 
 .puzzle-card img {
-  height: 160px;
-  width: 160px;
+  width: 100%;
   outline: #333 solid 2px;
   opacity: 0.7;
 }
 
-@media screen and (max-width: 980px) {
-  img {
-    width: 140px;
-    height: 140px;
+
+@media screen and (max-width: 700px) {
+  nav.header .site-subtitle {
+    font-size: 0.8rem;
   }
 
-  .container {
-    width: 140px;
-    height: 140px;
-  }
-
-  .overlay {
-    width: 140px;
-    height: 140px;
-  }
-
-  .text {
-    font-size: 15px;
-  }
-}
-
-@media screen and (max-width: 736px) {
-  .header {
-    font-size: 30px;
-  }
-
-  .button {
-    font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 493px) {
-  img {
-    width: 110px;
-    height: 110px;
-  }
-
-  .container {
-    width: 110px;
-    height: 110px;
-  }
-
-  .overlay {
-    width: 110px;
-    height: 110px;
-  }
-
-  .text {
-    font-size: 12px;
-  }
-
-  .header {
-    font-size: 25px;
-  }
-
-  .button {
-    font-size: 12px;
-    padding: 4px;
-    margin-bottom: 2px;
-  }
-}
-
-@media screen and (max-width: 402px) {
-  img {
-    width: 100px;
-    height: 100px;
-  }
-
-  .container {
-    width: 100px;
-    height: 100px;
-  }
-
-  .overlay {
-    width: 100px;
-    height: 100px;
-  }
-
-  .text {
-    font-size: 12px;
-  }
-
-  .header {
-    font-size: 25px;
-  }
-
-  .button {
-    font-size: 12px;
-    padding: 4px;
-    margin-bottom: 2px;
-  }
-}
-
-@media screen and (max-width: 376px) {
-  img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .container {
-    width: 140px;
-    height: 140px;
-  }
-
-  .overlay {
-    width: 140px;
-    height: 140px;
-  }
-
-  .text {
-    font-size: 15px;
-  }
-
-  .header {
-    font-size: 25px;
-  }
-
-  .button {
-    font-size: 12px;
-    padding: 4px;
-    margin-bottom: 2px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .header {
-    font-size: 20px;
-  }
-
-  .button {
-    font-size: 11px;
-    padding: 3px;
-  }
-}
-
-@media screen and (max-width: 340px) {
-  img {
-    width: 200px;
-    height: 200px;
-  }
-
-  .container {
-    width: 200px;
-    height: 200px;
-  }
-
-  .overlay {
-    width: 200px;
-    height: 200px;
-  }
-
-  .text {
-    font-size: 18px;
-  }
-
-  .header {
-    font-size: 20px;
-  }
-
-  .button {
-    font-size: 11px;
-    padding: 3px;
+  article.puzzle-card {
+    max-width: 30%;
   }
 }
