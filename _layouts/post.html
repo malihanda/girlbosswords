@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<div class="header">{{ page.date | date: "%B %e, %Y"}}: {{ page.title }}</div><button class="button" onclick="location.href='../index.html'">puzzles</button>
+
+{{content}}
+
+{% if page.crosshare_embed_url %}
+<div class ="body">
+<iframe style="height: 90vh; width: 100%;"
+src="{{page.crosshare_embed_url}}"
+frameborder="0" allowfullscreen="true" allowtransparency="true">
+</iframe>
+</div>{% endif %}
