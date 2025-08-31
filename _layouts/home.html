@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<main class="home-container">
+    {% for post in site.posts %}
+    <article class="puzzle-card">
+        <img src="{{ post.image }}">
+        <a href="{{ post.url }}">
+            <div class="overlay">
+                <div class="text">{{post.title}}{% if post.size %} ({{ post.size }}){% endif %}</div>
+            </div>
+        </a>
+    </article>{% endfor %}
+</main>

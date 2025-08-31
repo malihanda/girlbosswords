@@ -1,0 +1,219 @@
+:root {
+  --list-delimiter: ' /'; /* for stupid reasons, this should start with a space */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #B3B3B3;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  font-family: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
+  font-size: 1rem;
+
+  ::selection {
+    background-color: #610d0d;
+    color: white;
+  }
+
+  a {
+    color: #610d0d;
+    font-weight: bold;
+
+    &:hover {
+      color: #941919;
+    }
+  }
+}
+
+nav.header {
+  width: 100%;
+  padding: 1rem;
+  background-color: #460050;
+  margin-bottom: 2rem;
+  color: white;
+
+  a {
+    color: white;
+    font-weight: bold;
+  }
+
+  .site-title a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 5px;
+    text-underline-offset: 10px;
+  }
+
+  a:hover {
+    color: #B3B3B3;
+  }
+
+  .site-title {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .site-subtitle {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    white-space: nowrap;
+
+    ul.nav-list, div.tagline {
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }
+
+    li.nav-item {
+      display: inline;
+      white-space: nowrap;
+    }
+
+    li.nav-item::after, div.tagline::after {
+      content: var(--list-delimiter);
+    }
+
+    li.nav-item:last-child::after {
+      content: '';
+    }
+
+  }
+
+  .site-subtitle div.tagline {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+main {
+  padding: 0 2rem;
+}
+
+.post-body {
+  h1 {
+    font-size: 2rem; /* should be default but normalized to match the superscription */
+    display: inline;
+  }
+
+  div.superscription {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline;
+  }
+
+  .post-text {
+    padding-bottom: 2rem;
+  }
+}
+
+div.link-list {
+  padding: 0;
+  margin: 0 0 1rem 0;
+
+  span.link-list-item {
+    padding: 0;
+    margin: 0;
+    display: inline;
+
+    &::after {
+    content: var(--list-delimiter);
+    }
+
+    &:last-child::after {
+    content: '';
+    }
+  }
+}
+
+/* Homepage specific styles */
+
+main.home-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+article.puzzle-card {
+  position: relative;
+  width: 160px;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    aspect-ratio: 1/1;
+    opacity: 0;
+    background-color: white;
+    align-content: center;
+  }
+
+  &:hover .overlay {
+    outline: #941919 solid 4px;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.7)
+  }
+
+  .text {
+    color: #941919;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  img {
+    width: 100%;
+    outline: #333 solid 2px;
+    opacity: 0.7;
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+  nav.header .site-title {
+    padding-bottom: 1rem;
+  }
+
+  nav.header .site-subtitle {
+    font-size: 0.8rem;
+
+    div.tagline::after {
+      content: '';
+    }
+
+    ul.nav-list {
+      display: block;
+      padding-top: 0.5rem;
+    }
+  }
+
+  article.puzzle-card {
+    max-width: 30%;
+
+    .text {
+      font-size: 0.75rem;
+    }
+  }
+
+  main {
+    padding: 0 1rem;
+  }
+
+  section.solver {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+}

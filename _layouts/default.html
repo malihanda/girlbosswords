@@ -1,0 +1,21 @@
+<!doctype html>
+
+<head>
+
+<title>{{ page.title }}{% if page.title != site.title %} - {{ site.title }}{% endif %}</title>
+
+<link rel="icon" href="/data/favicon.png">
+<link rel="stylesheet" href="/styles/styles.css?v={{ site.time | date: '%s' }}">
+
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+{% seo title=false %}
+{% feed_meta %}
+
+</head>
+
+<body>
+    {% include header.html %}
+    {{ content }}
+</body>
+</html>
