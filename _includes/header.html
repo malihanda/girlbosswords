@@ -1,7 +1,7 @@
 <nav class="header">
   <div class="site-title"><a href="/">girlbosswords</a></div>
   <div class="site-subtitle">
-  <span class="tagline">a crossword blog by <a href="https://malaikahanda.com">malaika handa</a></span>
-  {% for link in site.nav_items %}<span class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></span>{% endfor %}
+  <div class="tagline">a crossword blog by <a href="https://malaikahanda.com">malaika handa</a></div>
+  <ul class="nav-list">{% for link in site.nav_items %}<li class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul>
   </div>
 </nav>
