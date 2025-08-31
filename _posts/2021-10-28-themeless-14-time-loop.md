@@ -10,5 +10,5 @@ I deleted two blocks and moved two blocks, and got this pretty little 72-word la
 
 One last thing: When I started solving indie puzzles a year ago, I was frustrated that everyone insisted on making themeless puzzles hard. Now of course, I do the exact same thing-- harder clues are more fun to write, I think. But as a gift to Past Malaika, this puzzle is clued at what I will call an "Easy Peasy Lemon Squeezy" level. I hope it's a breeze!
 
-Shout out to <a href="https://www.norahsharpe.com/" target="_blank">Norah</a> for a lightning fast test solve!
+Shout out to [Norah](https://www.norahsharpe.com/) for a lightning fast test solve!
 

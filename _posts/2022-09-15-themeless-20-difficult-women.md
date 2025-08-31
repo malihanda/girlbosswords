@@ -2,6 +2,7 @@
 title: 'themeless 20, difficult women, with brooke'
 image: /data/puzzle_images/themeless-20-difficult-women.png
 crosshare_embed_url: https://crosshare.org/embed/M0X6jGMJlAFgENz5k9mx/6GZEUgttSaMcNGI8CIiXptC8S1E3
+size: 15x15
 ---
 
 Shoutout to [Brooke](https://twitter.com/xandraladee) for sticking with me through this puzzle, which we started working on in \*\*August of 2021\*\*. Phew!! This is what it's like to collab with me, y'all. But I am so pleased with the end result, particularly with the spanners' clues and how fun we made the eight-stacks. I think this puzzle is hard, but not very hard. Idk-- you tell me.

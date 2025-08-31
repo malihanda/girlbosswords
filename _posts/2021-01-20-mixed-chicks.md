@@ -4,7 +4,7 @@ crosshare_embed_url: https://crosshare.org/embed/eG66njDN9b1WR3Fvdnvl/6GZEUgttSa
 image: /data/puzzle_images/mixed-chicks.png
 ---
 
-This post is sponsored by <a href="https://mixedchicks.net/" target="blank_">my favorite conditioner</a>!!
+This post is sponsored by [my favorite conditioner](https://mixedchicks.net/)!!
 
 jkjk, 1) It is most certainly not sponsored, 2) I am a Cantu gal mostly. (Although if I respect your hair, I will try any conditioner you recommend me that is under $15.) Anyway, I was worried that people wouldn't understand that the title of this puzzle is a reference, so now I have gotten that out of the way.
 

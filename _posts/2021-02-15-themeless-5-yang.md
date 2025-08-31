@@ -6,5 +6,5 @@ image: /data/puzzle_images/themeless-5-yang.png
 
 This is a "try to hack away at my ever-growing list of 15 seeds" kinda puzzle. Hope you enjoy!
 
-Many, many, MANY thanks to <a href="https://twitter.com/ckstern" target="_blank">Ken</a>, <a href="https://twitter.com/gpaolopasco" target="_blank">Paolo</a>, and <a href="https://twitter.com/faBioethics" target="_blank">Rachel</a> for test solving this one! The puzzle you're seeing is so much tighter than the first draft.
+Many, many, MANY thanks to [Ken](https://twitter.com/ckstern), [Paolo](https://twitter.com/gpaolopasco), and [Rachel](https://twitter.com/faBioethics) for test solving this one! The puzzle you're seeing is so much tighter than the first draft.
 

@@ -6,5 +6,5 @@ image: /data/puzzle_images/themeless-11-check.png
 
 Quick lil themeless today! Kinda leaned into the "The Whole Point Of Indie Puzzles Is I Can Write Whatever Clues I Want" situation so I hope you enjoy that, or learn something. There's unchecked squares in this... not for any reason! Just kinda felt like ignoring crossword conventions / idk was feeling nihilistic or whatever.
 
-Many thanks to <a href="https://twitter.com/WoutervD" target="_blank">Wouter</a> for a super quick test solve!
+Many thanks to [Wouter](https://twitter.com/WoutervD) for a super quick test solve!
 

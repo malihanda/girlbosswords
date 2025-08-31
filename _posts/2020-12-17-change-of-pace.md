@@ -4,7 +4,7 @@ crosshare_embed_url: https://crosshare.org/embed/DY0ObDDaRXb4uSRiIzy7/6GZEUgttSa
 image: /data/puzzle_images/change-of-pace.png
 ---
 
-Many thanks to <a href="https://twitter.com/madxwords" target="_blank">Maddie</a> for test solving this one!
+Many thanks to [Maddie](https://twitter.com/madxwords) for test solving this one!
 
 <div class="body">
   <a href="../data/puz_files/change-of-pace.puz" download>.puz file</a> / <a href="../data/pdfs/change-of-pace.pdf" download>pdf</a> / <a href="../data/solutions/change-of-pace.png" download>solution</a>

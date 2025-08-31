@@ -2,6 +2,7 @@
 title: "Boswords Themeless (Malaika's Version)"
 crosshare_embed_url: https://crosshare.org/embed/TzdpX2w8d3BpE1jhqhrY/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/boswords-themeless.png
+size: 15x15
 ---
 
 I was a constructor for the lovely Boswords fall themeless league, which involves writing three sets of clues for a themeless puzzle. Like all published puzzles, then an editor goes through and updates things for consistency and precision.
