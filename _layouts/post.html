@@ -2,14 +2,22 @@
 layout: default
 ---
 
-<div class="header">{%if page.display_date %}{{page.display_date}}{% else %}{{ page.date | date: "%B %e, %Y"}}{% endif %}: {{ page.title }}<button class="button" onclick="location.href='/'">puzzles</button></div>
+<main class="post-body">
+
+<section class="post-text">
+<h1>{%if page.display_date %}{{page.display_date}}{% else %}{{ page.date | date: "%B %e, %Y"}}{% endif %}: {{ page.title }}</h1>
 
 {{content}}
 
+</section>
+
 {% if page.crosshare_embed_url %}
-<div class ="body">
+<section class="solver">
 <iframe style="height: 90vh; width: 100%;"
 src="{{page.crosshare_embed_url}}"
 frameborder="0" allowfullscreen="true" allowtransparency="true">
 </iframe>
-</div>{% endif %}
+</section>
+{% endif %}
+
+</main>

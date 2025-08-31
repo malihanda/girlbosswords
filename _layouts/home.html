@@ -2,14 +2,14 @@
 layout: default
 ---
 
-<div class="row">
-{% for post in site.posts %}
-<div class="container">
-<img src="{{ post.image }}">
-<a href="{{ post.url }}" target="_blank">
-    <div class="overlay">
-    <div class="text">{{post.title}}{% if post.size %}({{ post.size }}){% endif %}</div>
-    </div>
-</a>
-</div>{% endfor %}
-</div>
+<main class="home-container">
+    {% for post in site.posts %}
+    <article class="puzzle-card">
+        <img src="{{ post.image }}">
+        <a href="{{ post.url }}">
+            <div class="overlay">
+                <div class="text">{{post.title}}{% if post.size %}({{ post.size }}){% endif %}</div>
+            </div>
+        </a>
+    </article>{% endfor %}
+</main>
