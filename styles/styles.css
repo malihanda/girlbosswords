@@ -95,6 +95,16 @@ main {
 
 .post-body .post-text {
   padding-bottom: 2rem;
+
+  div.superscription {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline;
+  }
+
+  h1 {
+    display: inline;
+  }
 }
 
 ul.link-list {
