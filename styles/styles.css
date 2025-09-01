@@ -143,42 +143,39 @@ main.home-container {
 article.puzzle-card {
   position: relative;
   width: 160px;
-}
 
-.puzzle-card .overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  aspect-ratio: 1/1;
-  opacity: 0;
-  background-color: white;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-around;
-}
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    aspect-ratio: 1/1;
+    opacity: 0;
+    background-color: white;
+    align-content: center;
+  }
 
-.puzzle-card:hover .overlay {
-  outline: #941919 solid 4px;
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 0.7)
-}
+  &:hover .overlay {
+    outline: #941919 solid 4px;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.7)
+  }
 
-.puzzle-card .text {
-  color: #941919;
-  text-align: center;
-  font-weight: normal;
-  font-size: 1.2rem;
-  width: 100%;
-}
+  .text {
+    color: #941919;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.2rem;
+    width: 100%;
+  }
 
-.puzzle-card img {
-  width: 100%;
-  outline: #333 solid 2px;
-  opacity: 0.7;
+  img {
+    width: 100%;
+    outline: #333 solid 2px;
+    opacity: 0.7;
+  }
 }
 
 
@@ -186,6 +183,7 @@ article.puzzle-card {
   nav.header .site-title {
     padding-bottom: 1rem;
   }
+
   nav.header .site-subtitle {
     font-size: 0.8rem;
 
