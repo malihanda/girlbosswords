@@ -1,3 +1,7 @@
+:root {
+  --list-delimiter: ' /'; /* for stupid reasons, this should start with a space */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -69,9 +73,12 @@ nav.header {
       white-space: nowrap;
     }
 
-    li.nav-item::before {
-      content: '/';
-      padding: 0 1rem;
+    li.nav-item::after, div.tagline::after {
+      content: var(--list-delimiter);
+    }
+
+    li.nav-item:last-child::after {
+      content: '';
     }
 
   }
@@ -90,31 +97,22 @@ main {
   padding-bottom: 2rem;
 }
 
-.link-list {
+ul.link-list {
   padding: 0;
   margin: 0 0 1rem 0;
-
-  li::before {
-    content: '/';
-    padding: 0 1rem;
-  }
-  
-  li::after {
-    content: '';
-    padding: 0;
-    margin: 0;
-  }
-
-  li:first-child::before {
-    content: '';
-    padding: 0;
-    margin: 0;
-  }
 
   li {
     padding: 0;
     margin: 0;
     display: inline;
+  }
+
+  li::after {
+    content: var(--list-delimiter);
+  }
+
+  li:last-child::after {
+    content: '';
   }
 }
 
@@ -177,19 +175,13 @@ article.puzzle-card {
   nav.header .site-subtitle {
     font-size: 0.8rem;
 
+    div.tagline::after {
+      content: '';
+    }
+
     ul.nav-list {
       display: block;
       padding-top: 0.5rem;
-
-      li::before {
-        padding: 0.5rem;
-      }
-
-      li:first-child::before {
-        content: '';
-        padding: 0;
-        margin: 0;
-      }
     }
   }
 
