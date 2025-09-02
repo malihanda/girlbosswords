@@ -100,6 +100,10 @@ main {
 .post-body .post-text {
   padding-bottom: 2rem;
 
+  h1 {
+    font-size: 2rem; /* default in some browsers, normalized to match the superscription */
+  }
+
   div.superscription {
     font-size: 2rem;
     font-weight: bold;
