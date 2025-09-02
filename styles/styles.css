@@ -97,11 +97,10 @@ main {
   padding: 0 2rem;
 }
 
-.post-body .post-text {
-  padding-bottom: 2rem;
-
+.post-body {
   h1 {
-    font-size: 2rem; /* default in some browsers, normalized to match the superscription */
+    font-size: 2rem; /* should be default but normalized to match the superscription */
+    display: inline;
   }
 
   div.superscription {
@@ -110,8 +109,8 @@ main {
     display: inline;
   }
 
-  h1 {
-    display: inline;
+  .post-text {
+    padding-bottom: 2rem;
   }
 }
 
