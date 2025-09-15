@@ -1,0 +1,2 @@
+<div class="link-list">{{ include.label }} {% for link in include.links %}<span class="link-list-item"><a href="{{ link.url }}"{% unless link.no_download %} download{% endunless %}>{{- link.text -}}</a></span>
+{% endfor -%}</div>
