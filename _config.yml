@@ -3,7 +3,14 @@ tagline: a crossword blog by malaika handa
 description: a crossword blog by malaika handa
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: malisolves
+
+author:
+  name: Malaika Handa
+  url: "https://malaikahanda.com"
+  twitter: malisolves
+
+twitter:
+  username: malisolves
 
 nav_items:
   - title: about
