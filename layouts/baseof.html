@@ -9,7 +9,14 @@
 
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-{{ partial "opengraph.html" .}}
+{{- with or .Title .Site.Title}}
+<meta name="title" content="{{ . }}" />
+{{- end }}
+{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
+<meta name="description" content="{{ trim . "\n\r\t " }}" />
+{{- end }}
+{{ partial "opengraph.html" . -}}
+{{- partial "twitter_cards.html" . -}}
 
 <!-- {% seo title=false %}
 {% feed_meta %} -->

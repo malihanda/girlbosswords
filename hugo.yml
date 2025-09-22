@@ -1,12 +1,17 @@
+title: girlbosswords
+baseURL: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
+
 params:
-  title: girlbosswords
   tagline: a crossword blog by malaika handa
   description: a crossword blog by malaika handa
-  baseURL: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
+  image: data/favicon.png
 
   author:
     name: Malaika Handa
     url: "https://malaikahanda.com"
+    twitter: malisolves
+
+  social:
     twitter: malisolves
 
   nav_items:
@@ -21,4 +26,4 @@ disableKinds:
   - section
 
 frontmatter:
-  date: [":filename", "date", "publishDate"] 
+  date: [":filename", "date", "publishDate"]
