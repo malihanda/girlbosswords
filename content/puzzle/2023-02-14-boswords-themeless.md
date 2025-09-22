@@ -2,6 +2,7 @@
 title: "Boswords Themeless (Malaika's Version)"
 crosshare_embed_url: https://crosshare.org/embed/TzdpX2w8d3BpE1jhqhrY/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/boswords-themeless.png
+display_date: ""
 size: 15x15
 links:
   - text: .puz file

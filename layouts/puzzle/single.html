@@ -1,8 +1,11 @@
-{{ define "main" }}
-
+{{- define "main" }}
+{{- $date := .Date }}
+{{- $formatted_date := $date.Format "January 2, 2006" }}
+{{- if isset .Params "display_date" }}
+    {{- $formatted_date = .Params.display_date }}
+{{- end }}
 <main class="post-body">
-    <div class="superscription"><time datetime='{{ .Date.Format "2006-01-02" }}'>
-        {{ if .Params.display_date }}{{ .Params.display_date }}{{ else }}{{ .Date.Format "January 2, 2006"}}{{ end }}</time>: </div><h1>{{ .Title }}</h1>
+    <div class="superscription">{{ with $formatted_date }}<time datetime='{{ $date.Format "2006-01-02" }}'>{{ $formatted_date }}</time>: {{ end }}</div><h1>{{ .Title }}</h1>
 <section class="post-text">
 
 {{ .Content }}
