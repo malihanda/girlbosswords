@@ -1,0 +1,3 @@
+{{- $ctx := dict "links" ( index .Page.Params ( .Get "links" )) }}
+{{- with ( .Get "label" ) }}{{ $ctx = merge $ctx ( dict "label" .)}}{{end}}
+{{- partial "link-list" (dict "ctx" $ctx) }}

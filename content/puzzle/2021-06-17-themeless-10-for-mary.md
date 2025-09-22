@@ -23,5 +23,5 @@ This puzzle has two sets of clues, easier and harder. I'm not good enough at jud
 
 Many thanks to Alex and [Neville](https://twitter.com/flyingelevator) for test solving!
 
-{% include link-list.html label="easier clues:" links=page.easier_links %}
-{% include link-list.html label="harder clues:" links=page.harder_links %}
+{{< link-list label="easier clues:" links="easier_links" >}}
+{{< link-list label="harder clues:" links="harder_links" >}}
