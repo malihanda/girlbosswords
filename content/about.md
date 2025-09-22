@@ -1,5 +1,7 @@
 ---
 title: about me
+aliases:
+  - /about.html
 ---
 
 hi, i'm malaika.

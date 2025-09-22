@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/please-look-after-this.pdf
   - text: solution
     url: /data/solutions/please-look-after-this.png
+aliases:
+  - /puzzle/please-look-after-this.html
 ---
 
 Is this a themed puzzle or a themeless? What is a "theme"??? Perhaps the theme is just "cute."

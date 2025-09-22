@@ -10,6 +10,8 @@ links:
   - text: solution
     url: /data/solutions/themeless-18-turn-up.png
     
+aliases:
+  - /puzzle/themeless-18-turn-up.html
 ---
 
 happy NYT rejection to all those who celebrate <3

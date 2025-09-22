@@ -15,6 +15,8 @@ harder_links:
     url: https://www.girlbosswords.com/data/puz_files/themeless-10-harder.puz
   - text: pdf
     url: https://www.girlbosswords.com/data/pdfs/themeless-10-harder.pdf
+aliases:
+  - /puzzle/themeless-10-for-mary.html
 ---
 
 My friend Mary used the word at 21-across and I told her I'd put it in a crossword puzzle. I'm pretty sure she thought I was joking. Hi Mary! I wasn't joking!

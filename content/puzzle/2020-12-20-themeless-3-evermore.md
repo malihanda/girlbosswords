@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/themeless-3-evermore.pdf
   - text: solution
     url: /data/solutions/themeless-3-evermore.png
+aliases:
+  - /puzzle/themeless-3-evermore.html
 ---
 
 This puzzle is the latest in my series of "what if I made the grid look pretty instead of just flinging around black squares at random."

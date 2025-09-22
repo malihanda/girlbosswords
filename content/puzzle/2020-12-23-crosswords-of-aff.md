@@ -2,6 +2,8 @@
 title: Crosswords of Affirmation
 crosshare_embed_url: https://crosshare.org/embed/XYb5m4tiCsum1JClU1x5/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/crosswords-of-aff.png
+aliases:
+  - /puzzle/crosswords-of-aff.html
 ---
 
 I'm really excited to share this puzzle with you! This is a big boi, the largest grid I've filled to date!! [Matthew](https://www.happylittlepuzzles.com/about) suggested I make this a 17x and I'm so glad he did because the fill ended up much smoother. But let me tell ya, this grid looked sprawling when I first started.

@@ -2,6 +2,8 @@
 title: 'themeless 13: stackd'
 crosshare_embed_url: https://crosshare.org/embed/V27YuMRJ2TsQY6RgPwz6/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/themeless-13-stackd.png
+aliases:
+  - /puzzle/themeless-13-stackd.html
 ---
 
 today's puzzle is a collab with [the one-and-only brian thomas](https://twitter.com/malisolves/status/1421345972383358979), who is now an honorary girlboss i guess. (congrats brian!!) he's got indie puzzles on [his blog](https://puzzlesthatneedahome.blogspot.com/), including [this one](https://puzzlesthatneedahome.blogspot.com/2021/06/puzzle-70.html) which made me put down my laptop and run circles around my apartment out of excitement.

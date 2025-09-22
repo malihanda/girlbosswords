@@ -2,6 +2,8 @@
 title: 'themeless 9: lines'
 crosshare_embed_url: https://crosshare.org/embed/fY1q7NwMeqjPkUBp3I9i/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/themeless-9-lines.png
+aliases:
+  - /puzzle/themeless-9-lines.html
 ---
 
 What's it called when you have a stack but it's vertical entries? To me, stack implies one on top of the other, rather than side-by-side entries. Can we call these pillars? While we're talking about crossword terminology, I'll be using ["themie"](https://twitter.com/JulianaTringali/status/1395047490303369219) moving forward (rather than "themer") and encourage y'all to do the same.

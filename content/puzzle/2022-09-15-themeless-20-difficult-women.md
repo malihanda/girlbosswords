@@ -10,6 +10,8 @@ links:
     text: pdf
   - url: /data/solutions/themeless-20-difficult-women.png
     text: solution
+aliases:
+  - /puzzle/themeless-20-difficult-women.html
 ---
 
 Shoutout to [Brooke](https://twitter.com/xandraladee) for sticking with me through this puzzle, which we started working on in \*\*August of 2021\*\*. Phew!! This is what it's like to collab with me, y'all. But I am so pleased with the end result, particularly with the spanners' clues and how fun we made the eight-stacks. I think this puzzle is hard, but not very hard. Idk-- you tell me.

@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/themeless-2-spikes.pdf
   - text: solution
     url: /data/solutions/themeless-2-spikes.png
+aliases:
+  - /puzzle/themeless-2-spikes.html
 ---
 
 Almost put a golfer in this puzzle but don't worry!! I dodged that bullet!!!! I would never do that to y'all. This is a golf-free zone.

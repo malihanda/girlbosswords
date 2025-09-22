@@ -11,6 +11,8 @@ links:
   - text: solution
     url: /data/solutions/head-first.png
 
+aliases:
+  - /puzzle/head-first.html
 ---
 
 This is a silly little puzzle for a silly little holiday. Sorry, sorry. I hope it's easy and I hope you like it.

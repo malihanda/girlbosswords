@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/change-of-pace.pdf
   - text: solution
     url: /data/solutions/change-of-pace.png
+aliases:
+  - /puzzle/change-of-pace.html
 ---
 
 Many thanks to [Maddie](https://twitter.com/madxwords) for test solving this one!

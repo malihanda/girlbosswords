@@ -2,6 +2,8 @@
 title: Mixed Chicks
 crosshare_embed_url: https://crosshare.org/embed/eG66njDN9b1WR3Fvdnvl/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/mixed-chicks.png
+aliases:
+  - /puzzle/mixed-chicks.html
 ---
 
 This post is sponsored by [my favorite conditioner](https://mixedchicks.net/)!!

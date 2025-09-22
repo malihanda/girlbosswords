@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/themeless-1-fad-bracelet.pdf
   - text: solution
     url: /data/solutions/themeless-1-fad-bracelet.png
+aliases:
+  - /puzzle/themeless-1-fad-bracelet.html
 ---
 
 This is the first full-sized puzzle that I made on my own! My main thoughts are "Frankly, this could have been a lot worse."

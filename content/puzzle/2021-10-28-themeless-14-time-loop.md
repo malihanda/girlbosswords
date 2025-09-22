@@ -2,6 +2,8 @@
 title: 'themeless 14: time loop'
 crosshare_embed_url: https://crosshare.org/embed/O3TSf7bQ5fGTgTOuXuOi/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/themeless-14-time-loop.png
+aliases:
+  - /puzzle/themeless-14-time-loop.html
 ---
 
 A year ago today, I posted the first 15x puzzle I had ever made! I really did not know what I was doing-- it was a 78 word themeless puzzle that only had four entries that were longer than eight letters. Also... questionable partials, questionable plurals, the whole shebang. (I am conspicuously not going to link to it.)

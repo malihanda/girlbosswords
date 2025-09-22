@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/peggy-ann-freeman.pdf
   - text: solution
     url: /data/solutions/peggy-ann-freeman.png
+aliases:
+  - /puzzle/peggy-ann-freeman.html
 ---
 
 Puzzle inspired by [this](https://people.com/style/zendaya-channels-60s-supermodel-donyale-luna-on-the-cover-of-essence/) insane photoshoot (spoilers!!)

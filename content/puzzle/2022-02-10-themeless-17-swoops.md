@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/themeless-17-swoops.pdf
   - text: solution
     url: /data/solutions/themeless-17-swoops.png
+aliases:
+  - /puzzle/themeless-17-swoops.html
 ---
 
 If you don't know crossword editor Mollie Cowger by now, you are about to go on the most wonderful journey: [here is her twitter](https://twitter.com/molliecowger); [here are her puzzles](https://crosswordsfromouterspace.blogspot.com/)

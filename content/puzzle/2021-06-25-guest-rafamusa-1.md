@@ -2,6 +2,8 @@
 title: themeless (rafa musa)
 crosshare_embed_url: https://crosshare.org/embed/GzC3ykd0r4oCWlqQbdrr/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/guest-rafamusa-1.png
+aliases:
+  - /puzzle/guest-rafamusa-1.html
 ---
 
 Hey folks!! We've got a guest puzzle today from [Rafa](https://twitter.com/rafaxword)!! Brief interlude here so we can appreciate his greatest hits on Twitter: [this](https://twitter.com/rafaxword/status/1368989072652345344), [this](https://twitter.com/rafaxword/status/1385712767164850178), [this](https://twitter.com/rafaxword/status/1407754415822446593). Okay cool, back to puzzling. This themeless is super fresh! So many great phrases in here. Happy solving!

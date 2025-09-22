@@ -2,6 +2,8 @@
 title: 'themeless 8: sparkles'
 crosshare_embed_url: https://crosshare.org/embed/b33xdJagm5PWkJlF24eR/6GZEUgttSaMcNGI8CIiXptC8S1E3
 image: /data/puzzle_images/themeless-8-sparkles.png
+aliases:
+  - /puzzle/themeless-8-sparkles.html
 ---
 
 This is another one of those "can u guess the seed? u have one (1) guess" puzzles, and this one in particular is dedicated to the boy I met this weekend who said he had never heard of Megan thee Stallion. I weep for him.

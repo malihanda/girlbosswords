@@ -9,6 +9,8 @@ links:
     url: /data/pdfs/rhyme-time.pdf
   - text: solution
     url: /data/solutions/rhyme-time.png
+aliases:
+  - /puzzle/rhyme-time.html
 ---
 
 Alternate clue for 14A: Very very cute and good superhero movie

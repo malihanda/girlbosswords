@@ -11,6 +11,8 @@ links:
     url: /data/pdfs/boswords-themeless.pdf
   - text: solution
     url: /data/solutions/boswords-themeless.png
+aliases:
+  - /puzzle/boswords-themeless.html
 ---
 
 I was a constructor for the lovely Boswords fall themeless league, which involves writing three sets of clues for a themeless puzzle. Like all published puzzles, then an editor goes through and updates things for consistency and precision.
