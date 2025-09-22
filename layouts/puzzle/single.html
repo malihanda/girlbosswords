@@ -5,24 +5,33 @@
     {{- $formatted_date = .Params.display_date }}
 {{- end }}
 <main class="post-body">
-    <div class="superscription">{{ with $formatted_date }}<time datetime='{{ $date.Format "2006-01-02" }}'>{{ $formatted_date }}</time>: {{ end }}</div><h1>{{ .Title }}</h1>
+<div class="superscription">{{ with $formatted_date }}<time datetime='{{ $date.Format "2006-01-02" }}'>{{ $formatted_date }}</time>: {{ end }}</div><h1>{{ .Title }}</h1>
+{{ $pages := .CurrentSection.Pages.ByDate.Reverse }}
+<div class="forward-and-back">
+{{- with $pages.Next . }}
+  <span class="next">next: <a href="{{ .RelPermalink }}">{{ .Title }}</a></span>
+{{- end }}
+{{- with $pages.Prev . }}
+  <span class="previous">previous: <a href="{{ .RelPermalink }}">{{ .Title }}</a></span>
+{{- end }}
+</div>
+
 <section class="post-text">
+{{- .Content }}
 
-{{ .Content }}
-
-{{ with .Params.links }}
-    {{ partial "link-list" (dict "ctx" (dict "links" .)) }}
-{{ end }}
+{{- with .Params.links }}
+    {{- partial "link-list" (dict "ctx" (dict "links" .)) }}
+{{- end }}
 </section>
 
-{{ with .Params.crosshare_embed_url }}
+{{- with .Params.crosshare_embed_url }}
 <section class="solver">
 <iframe style="height: 90vh; width: 100%;"
 src="{{ . }}"
 frameborder="0" allowfullscreen="true" allowtransparency="true">
 </iframe>
 </section>
-{{ end }}
+{{- end }}
 
 </main>
 
