@@ -40,6 +40,11 @@ nav.header {
   margin-bottom: 2rem;
   color: white;
 
+  ::selection {
+    color: #610d0d;
+    background-color: white;
+  }
+
   a {
     color: white;
     font-weight: bold;
