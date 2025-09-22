@@ -5,7 +5,7 @@
         <img src="{{ .Params.image }}">
         <a href="{{ .RelPermalink }}">
             <div class="overlay">
-                <div class="text">{{ .Title }}{{ with.Params.size }}({{ . }}){{ end }}</div>
+                <div class="text">{{ .Title }}{{ with.Params.size }} ({{ . }}){{ end }}</div>
             </div>
         </a>
     </article>
