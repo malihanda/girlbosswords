@@ -1,6 +1,5 @@
 ---
 title: about me
-layout: page
 ---
 
 hi, i'm malaika.
