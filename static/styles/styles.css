@@ -27,6 +27,10 @@ body {
       color: #941919;
     }
   }
+
+  details {
+    padding-bottom: 1rem;
+  }
 }
 
 nav.header {
