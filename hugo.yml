@@ -1,0 +1,24 @@
+params:
+  title: girlbosswords
+  tagline: a crossword blog by malaika handa
+  description: a crossword blog by malaika handa
+  baseURL: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+  author:
+    name: Malaika Handa
+    url: "https://malaikahanda.com"
+    twitter: malisolves
+
+  nav_items:
+    - title: about
+      url: /about
+    - title: email notifs
+      url: https://groups.google.com/g/girlbosswords
+
+disableKinds:
+  - taxonomy
+  - term
+  - section
+
+frontmatter:
+  date: [":filename", "date", "publishDate"] 

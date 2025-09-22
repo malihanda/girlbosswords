@@ -2,6 +2,7 @@
   <div class="site-title"><a href="/">girlbosswords</a></div>
   <div class="site-subtitle">
   <div class="tagline">a crossword blog by <a href="https://malaikahanda.com">malaika handa</a></div>
-  <ul class="nav-list">{% for link in site.nav_items %}<li class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul>
+  <ul class="nav-list">{{ range .Site.Params.nav_items }}
+    <li class="nav-item"><a href="{{ .url }}">{{ .title }}</a></li>{{ end }}</ul>
   </div>
 </nav>

@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+<main class="post-body">
+    <div class="superscription"><time datetime='{{ .Date.Format "2006-01-02" }}'>
+        {{ if .Params.display_date }}{{ .Params.display_date }}{{ else }}{{ .Date.Format "January 2, 2006"}}{{ end }}</time>: </div><h1>{{ .Title }}</h1>
+<section class="post-text">
+
+{{ .Content }}
+
+{{ with .Params.links }}
+    {{ partial "link-list" (dict "ctx" (dict "links" .)) }}
+{{ end }}
+</section>
+
+{{ with .Params.crosshare_embed_url }}
+<section class="solver">
+<iframe style="height: 90vh; width: 100%;"
+src="{{ . }}"
+frameborder="0" allowfullscreen="true" allowtransparency="true">
+</iframe>
+</section>
+{{ end }}
+
+</main>
+
+{{ end }}

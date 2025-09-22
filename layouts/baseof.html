@@ -1,0 +1,24 @@
+<!doctype html>
+
+<head>
+
+<title>{{ .Title }}{{ if ne .Title .Site.Title }} - {{ .Site.Title }}{{ end }}</title>
+
+<link rel="icon" href="/data/favicon.png">
+<link rel="stylesheet" href="/styles/styles.css?v={{ now.Unix }}">
+
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+{{ partial "opengraph.html" .}}
+
+<!-- {% seo title=false %}
+{% feed_meta %} -->
+
+</head>
+
+<body>
+    {{ partial "header.html" . }}
+    {{ block "main" . }}
+    {{ end }}
+</body>
+</html>

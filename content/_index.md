@@ -1,4 +1,3 @@
 ---
 title: girlbosswords
-layout: home
 ---

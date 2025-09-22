@@ -1,0 +1,9 @@
+{{ $ctx := .ctx }}
+
+{{ $label := $ctx.label | default "" }}
+<div class="link-list">{{ $label }}
+{{- range $ctx.links }}
+{{- $url := .url | default "#" }}
+{{- $text := .text | default "link" }}
+<span class="link-list-item"><a href="{{ $url }}">{{ $text }}</a></span>
+{{- end }}</div>
