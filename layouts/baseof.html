@@ -16,11 +16,10 @@
 <meta name="description" content="{{ trim . "\n\r\t " }}" />
 {{- end }}
 {{ partial "opengraph.html" . -}}
-{{- partial "twitter_cards.html" . -}}
-
-<!-- {% seo title=false %}
-{% feed_meta %} -->
-
+{{- partial "twitter_cards.html" . }}
+{{- with .Site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }} feed">
+{{- end }}
 </head>
 
 <body>

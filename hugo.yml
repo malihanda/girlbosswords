@@ -25,5 +25,14 @@ disableKinds:
   - term
   - section
 
+outputFormats:
+  rss:
+    basename: "feed"
+
+outputs:
+  home:
+    - html
+    - rss
+
 frontmatter:
   date: [":filename", "date", "publishDate"]
