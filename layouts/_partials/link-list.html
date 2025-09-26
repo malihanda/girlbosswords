@@ -5,5 +5,5 @@
 {{- range $ctx.links }}
 {{- $url := .url | default "#" }}
 {{- $text := .text | default "link" }}
-<span class="link-list-item"><a href="{{ $url }}" target="_blank">{{ $text }}</a></span>
+<span class="link-list-item">{{ printf "[%s](%s)" $text $url | markdownify }}</span>
 {{- end }}</div>
