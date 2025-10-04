@@ -1,6 +1,6 @@
 ---
 title: guest themeless! (brian thomas)
-image: https://www.girlbosswords.com/data/puzzle_images/guest-brianthomas-1.png
+image: data/puzzle_images/guest-brianthomas-1.png
 crosshare_embed_url: https://crosshare.org/embed/TBhlj1Wc0ONvfUx9M8Lc/6GZEUgttSaMcNGI8CIiXptC8S1E3
 links:
   - text: .puz file
