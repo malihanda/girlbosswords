@@ -1,0 +1,8 @@
+<nav class="header">
+  <div class="site-title"><a href="/">girlbosswords</a></div>
+  <div class="site-subtitle">
+  <div class="tagline">a crossword blog by {{ printf "[%s](%s)" "malaika handa" "https://malaikahanda.com" | markdownify }}</a></div>
+  <ul class="nav-list">{{ range .Site.Params.nav_items }}
+    <li class="nav-item">{{ printf "[%s](%s)" .title .url | markdownify }}</li>{{ end }}</ul>
+  </div>
+</nav>

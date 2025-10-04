@@ -1,0 +1,14 @@
+{{ define "main" }}
+<main class="home-container">
+    {{ range where .Site.RegularPages.ByDate.Reverse "Section" "puzzle" }}
+    <article class="puzzle-card">
+        <img src="{{ .Params.image }}">
+        <a href="{{ .RelPermalink }}">
+            <div class="overlay">
+                <div class="text">{{ .Title }}{{ with.Params.size }} ({{ . }}){{ end }}</div>
+            </div>
+        </a>
+    </article>
+    {{ end }}
+</main>
+{{ end }}

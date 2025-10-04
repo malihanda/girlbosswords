@@ -1,0 +1,38 @@
+title: girlbosswords
+baseURL: "https://www.girlbosswords.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+params:
+  tagline: a crossword blog by malaika handa
+  description: a crossword blog by malaika handa
+  image: data/favicon.png
+
+  author:
+    name: Malaika Handa
+    url: "https://malaikahanda.com"
+    twitter: malisolves
+
+  social:
+    twitter: malisolves
+
+  nav_items:
+    - title: about
+      url: /about
+    - title: email notifs
+      url: https://groups.google.com/g/girlbosswords
+
+disableKinds:
+  - taxonomy
+  - term
+  - section
+
+outputFormats:
+  rss:
+    basename: "feed"
+
+outputs:
+  home:
+    - html
+    - rss
+
+frontmatter:
+  date: [":filename", "date", "publishDate"]

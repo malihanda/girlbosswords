@@ -1,0 +1,30 @@
+<!doctype html>
+
+<head>
+
+<title>{{ .Title }}{{ if ne .Title .Site.Title }} - {{ .Site.Title }}{{ end }}</title>
+
+<link rel="icon" href="/data/favicon.png">
+<link rel="stylesheet" href="/styles/styles.css?v={{ now.Unix }}">
+
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+{{- with or .Title .Site.Title}}
+<meta name="title" content="{{ . }}" />
+{{- end }}
+{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
+<meta name="description" content="{{ trim . "\n\r\t " }}" />
+{{- end }}
+{{ partial "opengraph.html" . -}}
+{{- partial "twitter_cards.html" . }}
+{{- with .Site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }} feed">
+{{- end }}
+</head>
+
+<body>
+    {{ partial "header.html" . }}
+    {{ block "main" . }}
+    {{ end }}
+</body>
+</html>
